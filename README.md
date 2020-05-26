@@ -1,1 +1,1 @@
-# Moto-G7-Plus
+# Moto-G7-Plus magisk module
