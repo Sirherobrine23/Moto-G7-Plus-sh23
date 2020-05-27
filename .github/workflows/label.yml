@@ -1,0 +1,50 @@
+name: Magisk release
+
+on:
+  push:
+    branches:
+      - master
+#  schedule:
+#    - cron: 0 12/4 1/1 * *
+#  watch:
+#    types: started
+
+env:
+  UPLOAD_RELEASE: true
+  TZ: America/Sao_Paulo
+
+jobs:
+  Release:
+    runs-on: ubuntu-latest
+    if: github.event.repository.owner.id == github.event.sender.id
+
+    steps:
+    - name: Checando
+      uses: actions/checkout@master
+
+    - name: clone
+      run: |
+        git clone https://github.com/Sirherobrine23/Moto-G6-play-Magisk.git
+    
+    - name: Compactando
+      run: |
+        cd Moto-G6-play-Magisk
+        zip g6play.zip -r *
+
+    - name: Generate tag
+      id: tag
+      if: env.UPLOAD_RELEASE == 'true' && !cancelled()
+      run: |
+        echo ::set-env name=RELEASE_TAG::"$(TZ=UTC-8 date +"%Y.%m.%d-%H")"
+        echo "Compactados pelo Actions" >> release.txt
+        echo "© Sirherobrine23" >> release.txt
+        echo "::set-output name=status::success"
+    - name: Upload firmware to release
+      uses: softprops/action-gh-release@v1
+      if: steps.tag.outputs.status == 'success' && !cancelled()
+      env:
+        GITHUB_TOKEN: ${{ secrets.TOKEN }}
+      with:
+        tag_name: ${{ env.RELEASE_TAG }}
+        body_path: release.txt
+        files: Moto-G6-play-Magisk/g6play.zip
