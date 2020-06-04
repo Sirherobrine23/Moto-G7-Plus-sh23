@@ -2,8 +2,6 @@ name: Zip magisk
 
 on:
   push:
-    branches:
-      - magisk
     paths:
       - '*'
 env:
