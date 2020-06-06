@@ -44,6 +44,7 @@ jobs:
         echo "©Sirherobrine23" >> release.txt
         echo "${{ env.EVENTO	}}" >> release.txt
         echo "${{ env.EVENTO	}}"
+        ${{ env.DATE }}="$(TZ=UTC+3 date +"%d-%m-%Y-%H-%M-%S")"
         echo "::set-output name=status::success"
     
     - name: Upload do zip para o Release
@@ -52,6 +53,6 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.TOKEN }}
       with:
-        tag_name: echo ::set-env name=RELEASE_TAG::""
+        tag_name: ${{ env.DATE }}
         body_path: release.txt
         files: files/*
