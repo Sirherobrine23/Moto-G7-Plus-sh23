@@ -1,0 +1,156 @@
+#!/sbin/sh
+export OPENGAZIP="$3"
+export OUTFD="/proc/self/fd/$2"
+export TMP="/tmp"
+l="$TMP/bin"
+ui_print() {
+  echo "ui_print $1
+    ui_print" >> $OUTFD
+}
+#setenforce 0
+unzip -o "$OPENGAZIP" -d "$TMP"
+set_progress() { echo "set_progress $1" >> $OUTFD; }
+#Agora vem o script
+#chmoad
+set_perm() {
+  chown "$1:$2" "$4"
+  chmod "$3" "$4"
+}
+ch_con() {
+  chcon -h u:object_r:system_file:s0 "$1"
+}
+#-/-/-/--//-/-/-/--/-/--/-/-/-/--/-/-/--/-/-
+ui_print " "
+ui_print " "
+ui_print " "
+ui_print " "
+ui_print " "
+ui_print " "
+ui_print " "
+ui_print " "
+ui_print " "
+ui_print " "
+ui_print " "
+ui_print " "
+ui_print " "
+ui_print " "
+ui_print " "
+ui_print " "
+ui_print " "
+ui_print " "
+ui_print " "
+ui_print " "
+ui_print " "
+ui_print " "
+ui_print " "
+ui_print " "
+ui_print " "
+ui_print " "
+ui_print " "
+ui_print " "
+ui_print " "
+ui_print " "
+# script2
+ui_print "Mountando a partição do sistema e product "
+ui_print " "
+mount system
+mount data
+mount product
+
+if [ -d /system/system ];then
+    ui_print "Seu sistema é system_as_root"
+    SYSTEM=/system/system
+else
+    ui_print "Seu sistema não é system_as_root"
+    SYSTEM=/system
+fi
+
+if [ -d $SYSTEM/app/Youtube ];then
+ui_print "Removendo o YouTube"
+ui_print " "
+rm -rf $SYSTEM/app/YouTube/
+ui_print "Vamos instalar o YouTube Vanced"
+else
+ui_print "YouTube não está instalado"
+ui_print " "
+ui_print "Vamos instalar o YouTube Vanced"
+fi
+ui_print "movendo os arquivos"
+ui_print " "
+cp -rf $TMP/data/* /data
+cp -rf $TMP/system/* $SYSTEM
+cp -rf $TMP/product/* /product
+#logo
+ui_print " "
+ui_print "Backup do logo na pasta /data/backup/"
+mkdir /data/backup
+#logo_a
+cp -rf /dev/block/by-name/logo_a /data/backup/logo_a.bin
+rm -rf /dev/block/by-name/logo_a
+#logo_b
+cp -rf /dev/block/by-name/logo_b /data/backup/logo_b.bin
+rm -rf /dev/block/by-name/logo_b
+ui_print "Logo Google para Moto G7 Plus (+)"
+#logos
+cp -rf $TMP/logo.bin /dev/block/by-name/logo_a
+cp -rf $TMP/logo.bin /dev/block/by-name/logo_b
+#_______________________________________________________________________________________________________________
+#                                                  Fix Permissions
+set_progress 0.85
+find /system/vendor/pittpatt -type d -exec chown 0:2000 '{}' \; 2>/dev/null # Change pittpatt folders to root:shell per Google Factory Settings
+
+set_perm 0 0 755 "/system/addon.d/70-gapps.sh"
+ch_con "/system/addon.d/70-gapps.sh"
+
+set_perm 0 0 644 "$g_prop"
+ch_con "$g_prop"
+
+set_progress 0.92
+quit
+
+ui_print "- Completo!"
+ui_print " "
+
+if ( contains "$gapps_list" "dialergoogle" ); then
+  ui_print "You installed Google Dialer."
+  ui_print "Please set it as default Phone"
+  ui_print "application to prevent calls"
+  ui_print "from rebooting your device."
+  ui_print "See https://goo.gl/LTIJ0o"
+
+  # set Google Dialer as default; based on the work of osm0sis @ xda-developers
+  setver="122"  # lowest version in MM, tagged at 6.0.0
+  setsec="/data/system/users/0/settings_secure.xml"
+  if [ -f "$setsec" ]; then
+    if grep -q 'dialer_default_application' "$setsec"; then
+      if ! grep -q 'dialer_default_application" value="com.google.android.dialer' "$setsec"; then
+        curentry="$(grep -o 'dialer_default_application" value=.*$' "$setsec")"
+        newentry='dialer_default_application" value="com.google.android.dialer" package="android" />\r'
+        sed -i "s;${curentry};${newentry};" "$setsec"
+      fi
+    else
+      max="0"
+      for i in $(grep -o 'id=.*$' "$setsec" | cut -d '"' -f 2); do
+        test "$i" -gt "$max" && max="$i"
+      done
+      entry='<setting id="'"$((max + 1))"'" name="dialer_default_application" value="com.google.android.dialer" package="android" />\r'
+      sed -i "/<settings version=\"/a\ \ ${entry}" "$setsec"
+    fi
+  else
+    if [ ! -d "/data/system/users/0" ]; then
+      install -d "/data/system/users/0"
+      chown -R 1000:1000 "/data/system"
+      chmod -R 775 "/data/system"
+      chmod 700 "/data/system/users/0"
+    fi
+    { echo -e "<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>\r"
+    echo -e '<settings version="'$setver'">\r'
+    echo -e '  <setting id="1" name="dialer_default_application" value="com.google.android.dialer" package="android" />\r'
+    echo -e '</settings>'; } > "$setsec"
+  fi
+  chown 1000:1000 "$setsec"
+  chmod 600 "$setsec"
+fi
+#não me apague
+
+exit
