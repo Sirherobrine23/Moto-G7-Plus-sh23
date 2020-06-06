@@ -28,7 +28,7 @@ jobs:
     - name: Clonando
       run: git clone --depth 1 $REPO_URL -b $REPO_BRANCH zip-sh
 
-    - name: Atualizando os Feeds
+    - name: Criando o Arquivo
       run: |
        sudo mkdir files/
        cd zip-sh
@@ -37,13 +37,13 @@ jobs:
        sudo zip "$(TZ=UTC+3 date +"%d-%m-%Y-%H-%M-%S").zip" -r * 
        sudo mv *-*.zip ../files/
     
-    - name: Gerando Tag
+    - name: Gerando o body
       id: tag
       run: |
-        echo ::set-env name=RELEASE_TAG::"$(TZ=UTC+3 date +"%d/%m/%Y-%H-%M-%S")-TWRP-ZIP"
         echo "Zip Actions" >> release.txt
         echo "Twrp for Moto g7 Plus lake" >> release.txt
         echo "©Sirherobrine23" >> release.txt
+        echo "${{ create }}"
         echo "::set-output name=status::success"
     
     - name: Upload do zip para o Release
@@ -52,6 +52,6 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.TOKEN }}
       with:
-        tag_name: ${{ env.RELEASE_TAG }}
+        tag_name: echo ::set-env name=RELEASE_TAG::""
         body_path: release.txt
         files: files/*
