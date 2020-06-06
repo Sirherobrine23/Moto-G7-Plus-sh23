@@ -6,6 +6,7 @@ env:
   REPO_URL: https://github.com/Sirherobrine23/Moto-G7-Plus-sh23.git
   REPO_BRANCH: TWRP
   UPLOAD_RELEASE: true
+  DATE: "$(TZ=UTC+3 date +"%d-%m-%Y-%H-%M-%S")"
   EVENTO: "${{ github.event_path }}"
   TZ: America/Sao_Paulo
 
@@ -44,7 +45,6 @@ jobs:
         echo "©Sirherobrine23" >> release.txt
         echo "${{ env.EVENTO	}}" >> release.txt
         echo "${{ env.EVENTO	}}"
-        ${{ env.DATE }}= "$(TZ=UTC+3 date +"%d-%m-%Y-%H-%M-%S")"
         echo "::set-output name=status::success"
     
     - name: Upload do zip para o Release
