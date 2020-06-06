@@ -41,7 +41,7 @@ jobs:
       id: tag
       run: |
         echo "©Sirherobrine23" >> release.txt
-        echo "${{ on.create }}" >> release.txt
+        echo "${{ github.event_name	}}" >> release.txt
         echo "::set-output name=status::success"
     
     - name: Upload do zip para o Release
