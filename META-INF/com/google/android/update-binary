@@ -19,9 +19,9 @@ set_perm() {
 ch_con() {
   chcon -h u:object_r:system_file:s0 "$1"
 }
-mount system
-mount system
 #-/-/-/--//-/-/-/--/-/--/-/-/-/--/-/-/--/-/-
+ui_print " "
+ui_print " "
 ui_print " "
 ui_print " "
 ui_print " "
@@ -65,30 +65,27 @@ ui_print " "
 ui_print "Mountando a partição do sistema "
 ui_print " "
 set_progress 0.10
-mount system
-mount system
-mount -a
+mount system && mount -a
 ui_print "a partição do sistema foi montada"
-
+sleep 4
 if [ -d /system/system ];then
     export SYSTEM=/system/system
+    export AS_ROOT="A/B"
 else
     export SYSTEM=/system
+    export AS_ROOT="A Only"
 fi
 
-ui_print "$SYSTEM primeiro dectado"
+for i in uname -a do
+case $cpu in
+    *aarch* ) export $CPU-A="aarch64" ;;
+    *arm* ) export $CPU-A="arm7l";;
+esac
 
-mount -a
 
-if ( -d /system/system );then
-    ui_print "Seu sistema é A/B"
-    export SYSTEM=/system/system
-else
-    ui_print "Seu sistema é A Only"
-    export SYSTEM=/system
-fi
-
+ui_print "Seu sistema tem a partição: $AS_ROOT"
 ui_print "diretorio do seu sistema: $SYSTEM"
+ui_print "Sua arquitetura do processador é: $CPU-A"
 
 if [ -e $SYSTEM/app/Youtube/YouTube/*.apk && -d $SYSTEM/app/youtube ];then
     ui_print "Removendo o YouTube"
@@ -106,7 +103,7 @@ else
     ui_print "não foi detectado a Camera2 AOSP"
 fi
 
-if ( -d $TMP/system );then
+if [ -d $TMP/system ];then
     ui_print "movendo os arquivos"
     ui_print " "
     cp -rf $TMP/system/* $SYSTEM
@@ -114,7 +111,7 @@ else
     ui_print "alguns arquivos não foi extraidos. por favor execute de novo.
 fi
 
-if ( -e $TMP/logo.bin );then
+if [ -e $TMP/logo.bin ];then
     #logo
     ui_print " "
     ui_print "Backup do logo na pasta /data/backup/"
