@@ -2,14 +2,11 @@
 export OPENGAZIP="$3"
 export OUTFD="/proc/self/fd/$2"
 export TMP="/tmp"
-l="$TMP/bin"
 ui_print() {
   echo "ui_print $1
     ui_print" >> $OUTFD
 }
 unzip -o "$OPENGAZIP" -d "$TMP"
-#Agora vem o script
-#chmoad
 set_perm() {
   chown "$1:$2" "$4"
   chmod "$3" "$4"
@@ -32,39 +29,13 @@ ui_print " "
 ui_print " "
 ui_print " "
 ui_print " "
-ui_print " "
-ui_print " "
-ui_print " "
-ui_print " "
-ui_print " "
-ui_print " "
-ui_print " "
-ui_print " "
-ui_print " "
-ui_print " "
-ui_print " "
-ui_print " "
-ui_print " "
-ui_print " "
-ui_print " "
-ui_print " "
-ui_print " "
-ui_print " "
-ui_print " "
-ui_print " "
-ui_print " "
-ui_print " "
-ui_print " "
-ui_print " "
-ui_print " "
-ui_print " "
-ui_print " "
 # script2
-ui_print "Mountando a partição do sistema "
-ui_print " "
+ui_print "Mountando algumas partiçoes"
 mount system
 mount -a
-ui_print "a partição do sistema foi montada"
+ui_print "Partição montadas"
+ui_print " "
+ui_print " "
 if [ -d /system/system ];then
     export SYSTEM=/system/system
     export AS_ROOT="A/B"
@@ -73,32 +44,42 @@ else
     export AS_ROOT="A Only"
 fi
 if [ -d $SYSTEM/product ];then
-    ui_print "temos uma pasta product"
+    ui_print "Indentificamos a pasta product"
+    export PROD="$SYSTEM/product"
 else
-    ui_print "nao temos uma pasta product"
+    ui_print "Não temos uma pasta product"
 fi
-sleep 5
-ui_print "Seu sistema tem a partição: $AS_ROOT"
-ui_print "diretorio do seu sistema: $SYSTEM"
+sleep 2
+    ui_print "Seu sistema tem a partição: $AS_ROOT"
 sleep 2
 if [ -d $SYSTEM/app/YouTube ];then
-    ui_print "Removendo o YouTube"
+    ui_print "Removendo o YouTube do $SYSTEM/app"
     rm -rf $SYSTEM/app/YouTube
     ui_print "Vamos instalar o YouTube Vanced"
 else
-    ui_print "YouTube não está instalado"
+    ui_print "YouTube não está instalado no $SYSTEM/app/"
+    ui_print "Vamos instalar o YouTube Vanced"
+fi
+sleep 1
+if [ -d $SYSTEM/priv-app/YouTube ];then
+    ui_print "Removendo o YouTube do $SYSTEM/priv-app"
+    rm -rf $SYSTEM/priv-app/YouTube
+    ui_print "Vamos instalar o YouTube Vanced"
+else
+    ui_print "YouTube não está instalado no $SYSTEM/priv-app/"
     ui_print "Vamos instalar o YouTube Vanced"
 fi
 sleep 2
-if [ -d $SYSTEM/product/priv-app/Camera2 ];then
-    ui_print "Android camera2 AOSP detectado. removendo"
-    rm -rf "$SYSTEM/product/priv-app/Camera2"
+if [ -d $PROD/priv-app/Camera2 ];then
+    ui_print "Android Camera2 AOSP detectado. removendo"
+    rm -rf "$PROD/priv-app/Camera2"
 else
     ui_print "não foi detectado a Camera2 AOSP"
+    ui_print "Continuando ..."
 fi
 sleep 2
 if [ -d $TMP/system ];then
-    ui_print "movendo os arquivos"
+    ui_print "Instalando alguns aplicativos e o novo Youtube"
     ui_print " "
     cp -rf $TMP/system/* $SYSTEM
 else
@@ -106,6 +87,22 @@ else
     exit
 fi
 sleep 2
+if [ -d $TMP/product ];then
+    ui_print "Novos arquivos no Product"
+    cp -rf $TMP/product $PROD
+else
+    ui_print "Não temos arquivos product"
+fi
+sleep 3
+
+if [ -d $TMP/dsplus ];then
+    ui_print "Instalando o Dolby Digital Plus"
+    cp -rf $TMP/dsplus/* $SYSTEM
+else
+    ui_print "Dolby Digital Plus não sera instalado"
+fi
+sleep 10
+ui_print "boot-logo"
 if [ -e $TMP/logo.bin ];then
     #logo
     ui_print " "
@@ -117,7 +114,7 @@ if [ -e $TMP/logo.bin ];then
     #logo_b
     cp -rf /dev/block/by-name/logo_b /data/backup/logo_b.bin
     rm -rf /dev/block/by-name/logo_b
-    ui_print "Logo Google para Moto G7 Plus (+)"
+    ui_print "Logo para o novo BootAnimation /-\ Moto G7 Plus"
     #logos
     cp -rf $TMP/logo.bin /dev/block/by-name/logo_a
     cp -rf $TMP/logo.bin /dev/block/by-name/logo_b
@@ -125,8 +122,12 @@ else
     ui_print "arquivo do logo não encontrado."
     exit
 fi
+ui_print " "
 ui_print "- Completo!"
 ui_print "- © Sirherobrine23"
 ui_print " "
+ui_print " "
+ui_print " "
+sleep 10
 #não me apague
 exit
