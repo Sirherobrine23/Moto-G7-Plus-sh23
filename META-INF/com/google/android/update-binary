@@ -75,11 +75,16 @@ else
     export SYSTEM=/system
     export AS_ROOT="A Only"
 fi
-
+sleep 5
+for CXPU in $(uname -a) do
+case $CXPU in
+    *aarch* ) export $CPU_A="aarch64" ;;
+    *arm* ) export $CPU_A="arm7l";;
+esac
 ui_print "Seu sistema tem a partição: $AS_ROOT"
 ui_print "diretorio do seu sistema: $SYSTEM"
-ui_print "Sua arquitetura do processador é: $CPU-A"
-
+ui_print "Sua arquitetura do processador é: $CPU_A"
+sleep 2
 if [ -e $SYSTEM/app/Youtube/YouTube/*.apk && -d $SYSTEM/app/youtube ];then
     ui_print "Removendo o YouTube"
     rm -rf $SYSTEM/app/YouTube/
@@ -88,22 +93,23 @@ else
     ui_print "YouTube não está instalado"
     ui_print "Vamos instalar o YouTube Vanced"
 fi
-
+sleep 2
 if [ -d $SYSTEM/product/priv-app/Camera2 ];then
     ui_print "Android camera2 AOSP detectado. removendo"
     rm -rf "$SYSTEM/product/priv-app/Camera2"
 else
     ui_print "não foi detectado a Camera2 AOSP"
 fi
-
+sleep 2
 if [ -d $TMP/system ];then
     ui_print "movendo os arquivos"
     ui_print " "
     cp -rf $TMP/system/* $SYSTEM
 else
     ui_print "alguns arquivos não foi extraidos. por favor execute de novo.
+    exit
 fi
-
+sleep 2
 if [ -e $TMP/logo.bin ];then
     #logo
     ui_print " "
@@ -121,14 +127,13 @@ if [ -e $TMP/logo.bin ];then
     cp -rf $TMP/logo.bin /dev/block/by-name/logo_b
 else
     ui_print "arquivo do logo não encontrado."
+    exit
 fi
 
 set_progress 0.92
-
+sleep 10
 ui_print "- Completo!"
-ui_print " - © Sirherobrine23
+ui_print "- © Sirherobrine23
 ui_print " "
-
 #não me apague
-quit
 exit
