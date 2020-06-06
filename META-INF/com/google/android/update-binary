@@ -64,7 +64,6 @@ ui_print " "
 # script2
 ui_print "Mountando a partição do sistema "
 ui_print " "
-set_progress 0.10
 mount system
 mount -a
 ui_print "a partição do sistema foi montada"
@@ -75,17 +74,16 @@ else
     export SYSTEM=/system
     export AS_ROOT="A Only"
 fi
+if [ -d $SYSTEM/product ];then
+    ui_print "temos uma pasta product"
+else
+    ui_print "nao temos uma pasta product"
+fi
 sleep 5
-for CXPU in $(uname -a) do
-case $CXPU in
-    *aarch* ) export $CPU_A="aarch64" ;;
-    *arm* ) export $CPU_A="arm7l";;
-esac
 ui_print "Seu sistema tem a partição: $AS_ROOT"
 ui_print "diretorio do seu sistema: $SYSTEM"
-ui_print "Sua arquitetura do processador é: $CPU_A"
 sleep 2
-if [ -e $SYSTEM/app/Youtube/YouTube/*.apk && -d $SYSTEM/app/youtube ];then
+if [ -d $SYSTEM/app/Youtube/YouTube:$SYSTEM/app/youtube ];then
     ui_print "Removendo o YouTube"
     rm -rf $SYSTEM/app/YouTube/
     ui_print "Vamos instalar o YouTube Vanced"
@@ -129,9 +127,6 @@ else
     ui_print "arquivo do logo não encontrado."
     exit
 fi
-
-set_progress 0.92
-sleep 10
 ui_print "- Completo!"
 ui_print "- © Sirherobrine23
 ui_print " "
