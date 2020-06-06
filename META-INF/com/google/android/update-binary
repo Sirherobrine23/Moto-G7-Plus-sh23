@@ -76,8 +76,8 @@ else
     export AS_ROOT="A Only"
 fi
 
-for i in uname -a do
-case $cpu in
+for CXPU in $(uname -a) do
+case $CXPU in
     *aarch* ) export $CPU-A="aarch64" ;;
     *arm* ) export $CPU-A="arm7l";;
 esac
