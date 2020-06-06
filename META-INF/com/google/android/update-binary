@@ -2,6 +2,7 @@
 export OPENGAZIP="$3"
 export OUTFD="/proc/self/fd/$2"
 export TMP="/tmp"
+export VENDOR=/vendor
 ui_print() {
   echo "ui_print $1
     ui_print" >> $OUTFD
@@ -97,8 +98,11 @@ sleep 3
 
 if [ -e $TMP/dolby.zip ];then
     ui_print "Instalando o Dolby Digital Plus"
-    unzip $TMP/dolby.zip -d "$TMP/dsplus"
+    mkdir "$TMP/dsplus"
+    unzip "$TMP/dolby.zip" -d "$TMP/dsplus"
+    mv $TMP/dsplus/vendor $TMP
     cp -rf $TMP/dsplus/* $SYSTEM
+    cp -rf $TMP/vendor/* $VENDOR
 else
     ui_print "Dolby Digital Plus não sera instalado"
 fi
