@@ -1,0 +1,1106 @@
+/** @deprecated since v6.3.0 - use constants property exposed by the relevant module instead. */
+declare module "constants" {
+    /** @deprecated since v6.3.0 - use `os.constants.errno.E2BIG` instead. */
+    const E2BIG: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.EACCES` instead. */
+    const EACCES: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.EADDRINUSE` instead. */
+    const EADDRINUSE: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.EADDRNOTAVAIL` instead. */
+    const EADDRNOTAVAIL: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.EAFNOSUPPORT` instead. */
+    const EAFNOSUPPORT: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.EAGAIN` instead. */
+    const EAGAIN: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.EALREADY` instead. */
+    const EALREADY: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.EBADF` instead. */
+    const EBADF: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.EBADMSG` instead. */
+    const EBADMSG: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.EBUSY` instead. */
+    const EBUSY: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.ECANCELED` instead. */
+    const ECANCELED: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.ECHILD` instead. */
+    const ECHILD: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.ECONNABORTED` instead. */
+    const ECONNABORTED: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.ECONNREFUSED` instead. */
+    const ECONNREFUSED: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.ECONNRESET` instead. */
+    const ECONNRESET: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.EDEADLK` instead. */
+    const EDEADLK: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.EDESTADDRREQ` instead. */
+    const EDESTADDRREQ: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.EDOM` instead. */
+    const EDOM: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.EEXIST` instead. */
+    const EEXIST: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.EFAULT` instead. */
+    const EFAULT: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.EFBIG` instead. */
+    const EFBIG: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.EHOSTUNREACH` instead. */
+    const EHOSTUNREACH: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.EIDRM` instead. */
+    const EIDRM: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.EILSEQ` instead. */
+    const EILSEQ: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.EINPROGRESS` instead. */
+    const EINPROGRESS: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.EINTR` instead. */
+    const EINTR: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.EINVAL` instead. */
+    const EINVAL: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.EIO` instead. */
+    const EIO: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.EISCONN` instead. */
+    const EISCONN: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.EISDIR` instead. */
+    const EISDIR: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.ELOOP` instead. */
+    const ELOOP: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.EMFILE` instead. */
+    const EMFILE: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.EMLINK` instead. */
+    const EMLINK: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.EMSGSIZE` instead. */
+    const EMSGSIZE: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.ENAMETOOLONG` instead. */
+    const ENAMETOOLONG: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.ENETDOWN` instead. */
+    const ENETDOWN: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.ENETRESET` instead. */
+    const ENETRESET: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.ENETUNREACH` instead. */
+    const ENETUNREACH: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.ENFILE` instead. */
+    const ENFILE: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.ENOBUFS` instead. */
+    const ENOBUFS: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.ENODATA` instead. */
+    const ENODATA: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.ENODEV` instead. */
+    const ENODEV: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.ENOENT` instead. */
+    const ENOENT: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.ENOEXEC` instead. */
+    const ENOEXEC: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.ENOLCK` instead. */
+    const ENOLCK: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.ENOLINK` instead. */
+    const ENOLINK: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.ENOMEM` instead. */
+    const ENOMEM: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.ENOMSG` instead. */
+    const ENOMSG: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.ENOPROTOOPT` instead. */
+    const ENOPROTOOPT: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.ENOSPC` instead. */
+    const ENOSPC: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.ENOSR` instead. */
+    const ENOSR: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.ENOSTR` instead. */
+    const ENOSTR: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.ENOSYS` instead. */
+    const ENOSYS: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.ENOTCONN` instead. */
+    const ENOTCONN: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.ENOTDIR` instead. */
+    const ENOTDIR: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.ENOTEMPTY` instead. */
+    const ENOTEMPTY: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.ENOTSOCK` instead. */
+    const ENOTSOCK: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.ENOTSUP` instead. */
+    const ENOTSUP: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.ENOTTY` instead. */
+    const ENOTTY: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.ENXIO` instead. */
+    const ENXIO: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.EOPNOTSUPP` instead. */
+    const EOPNOTSUPP: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.EOVERFLOW` instead. */
+    const EOVERFLOW: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.EPERM` instead. */
+    const EPERM: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.EPIPE` instead. */
+    const EPIPE: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.EPROTO` instead. */
+    const EPROTO: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.EPROTONOSUPPORT` instead. */
+    const EPROTONOSUPPORT: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.EPROTOTYPE` instead. */
+    const EPROTOTYPE: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.ERANGE` instead. */
+    const ERANGE: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.EROFS` instead. */
+    const EROFS: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.ESPIPE` instead. */
+    const ESPIPE: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.ESRCH` instead. */
+    const ESRCH: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.ETIME` instead. */
+    const ETIME: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.ETIMEDOUT` instead. */
+    const ETIMEDOUT: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.ETXTBSY` instead. */
+    const ETXTBSY: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.EWOULDBLOCK` instead. */
+    const EWOULDBLOCK: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.EXDEV` instead. */
+    const EXDEV: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.WSAEINTR` instead. */
+    const WSAEINTR: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.WSAEBADF` instead. */
+    const WSAEBADF: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.WSAEACCES` instead. */
+    const WSAEACCES: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.WSAEFAULT` instead. */
+    const WSAEFAULT: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.WSAEINVAL` instead. */
+    const WSAEINVAL: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.WSAEMFILE` instead. */
+    const WSAEMFILE: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.WSAEWOULDBLOCK` instead. */
+    const WSAEWOULDBLOCK: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.WSAEINPROGRESS` instead. */
+    const WSAEINPROGRESS: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.WSAEALREADY` instead. */
+    const WSAEALREADY: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.WSAENOTSOCK` instead. */
+    const WSAENOTSOCK: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.WSAEDESTADDRREQ` instead. */
+    const WSAEDESTADDRREQ: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.WSAEMSGSIZE` instead. */
+    const WSAEMSGSIZE: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.WSAEPROTOTYPE` instead. */
+    const WSAEPROTOTYPE: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.WSAENOPROTOOPT` instead. */
+    const WSAENOPROTOOPT: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.WSAEPROTONOSUPPORT` instead. */
+    const WSAEPROTONOSUPPORT: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.WSAESOCKTNOSUPPORT` instead. */
+    const WSAESOCKTNOSUPPORT: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.WSAEOPNOTSUPP` instead. */
+    const WSAEOPNOTSUPP: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.WSAEPFNOSUPPORT` instead. */
+    const WSAEPFNOSUPPORT: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.WSAEAFNOSUPPORT` instead. */
+    const WSAEAFNOSUPPORT: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.WSAEADDRINUSE` instead. */
+    const WSAEADDRINUSE: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.WSAEADDRNOTAVAIL` instead. */
+    const WSAEADDRNOTAVAIL: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.WSAENETDOWN` instead. */
+    const WSAENETDOWN: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.WSAENETUNREACH` instead. */
+    const WSAENETUNREACH: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.WSAENETRESET` instead. */
+    const WSAENETRESET: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.WSAECONNABORTED` instead. */
+    const WSAECONNABORTED: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.WSAECONNRESET` instead. */
+    const WSAECONNRESET: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.WSAENOBUFS` instead. */
+    const WSAENOBUFS: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.WSAEISCONN` instead. */
+    const WSAEISCONN: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.WSAENOTCONN` instead. */
+    const WSAENOTCONN: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.WSAESHUTDOWN` instead. */
+    const WSAESHUTDOWN: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.WSAETOOMANYREFS` instead. */
+    const WSAETOOMANYREFS: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.WSAETIMEDOUT` instead. */
+    const WSAETIMEDOUT: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.WSAECONNREFUSED` instead. */
+    const WSAECONNREFUSED: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.WSAELOOP` instead. */
+    const WSAELOOP: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.WSAENAMETOOLONG` instead. */
+    const WSAENAMETOOLONG: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.WSAEHOSTDOWN` instead. */
+    const WSAEHOSTDOWN: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.WSAEHOSTUNREACH` instead. */
+    const WSAEHOSTUNREACH: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.WSAENOTEMPTY` instead. */
+    const WSAENOTEMPTY: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.WSAEPROCLIM` instead. */
+    const WSAEPROCLIM: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.WSAEUSERS` instead. */
+    const WSAEUSERS: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.WSAEDQUOT` instead. */
+    const WSAEDQUOT: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.WSAESTALE` instead. */
+    const WSAESTALE: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.WSAEREMOTE` instead. */
+    const WSAEREMOTE: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.WSASYSNOTREADY` instead. */
+    const WSASYSNOTREADY: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.WSAVERNOTSUPPORTED` instead. */
+    const WSAVERNOTSUPPORTED: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.WSANOTINITIALISED` instead. */
+    const WSANOTINITIALISED: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.WSAEDISCON` instead. */
+    const WSAEDISCON: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.WSAENOMORE` instead. */
+    const WSAENOMORE: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.WSAECANCELLED` instead. */
+    const WSAECANCELLED: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.WSAEINVALIDPROCTABLE` instead. */
+    const WSAEINVALIDPROCTABLE: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.WSAEINVALIDPROVIDER` instead. */
+    const WSAEINVALIDPROVIDER: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.WSAEPROVIDERFAILEDINIT` instead. */
+    const WSAEPROVIDERFAILEDINIT: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.WSASYSCALLFAILURE` instead. */
+    const WSASYSCALLFAILURE: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.WSASERVICE_NOT_FOUND` instead. */
+    const WSASERVICE_NOT_FOUND: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.WSATYPE_NOT_FOUND` instead. */
+    const WSATYPE_NOT_FOUND: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.WSA_E_NO_MORE` instead. */
+    const WSA_E_NO_MORE: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.WSA_E_CANCELLED` instead. */
+    const WSA_E_CANCELLED: number;
+    /** @deprecated since v6.3.0 - use `os.constants.errno.WSAEREFUSED` instead. */
+    const WSAEREFUSED: number;
+    /** @deprecated since v6.3.0 - use `os.constants.signals.SIGHUP` instead. */
+    const SIGHUP: number;
+    /** @deprecated since v6.3.0 - use `os.constants.signals.SIGINT` instead. */
+    const SIGINT: number;
+    /** @deprecated since v6.3.0 - use `os.constants.signals.SIGILL` instead. */
+    const SIGILL: number;
+    /** @deprecated since v6.3.0 - use `os.constants.signals.SIGABRT` instead. */
+    const SIGABRT: number;
+    /** @deprecated since v6.3.0 - use `os.constants.signals.SIGFPE` instead. */
+    const SIGFPE: number;
+    /** @deprecated since v6.3.0 - use `os.constants.signals.SIGKILL` instead. */
+    const SIGKILL: number;
+    /** @deprecated since v6.3.0 - use `os.constants.signals.SIGSEGV` instead. */
+    const SIGSEGV: number;
+    /** @deprecated since v6.3.0 - use `os.constants.signals.SIGTERM` instead. */
+    const SIGTERM: number;
+    /** @deprecated since v6.3.0 - use `os.constants.signals.SIGBREAK` instead. */
+    const SIGBREAK: number;
+    /** @deprecated since v6.3.0 - use `os.constants.signals.SIGWINCH` instead. */
+    const SIGWINCH: number;
+    const SSL_OP_ALL: number;
+    const SSL_OP_ALLOW_UNSAFE_LEGACY_RENEGOTIATION: number;
+    const SSL_OP_CIPHER_SERVER_PREFERENCE: number;
+    const SSL_OP_CISCO_ANYCONNECT: number;
+    const SSL_OP_COOKIE_EXCHANGE: number;
+    const SSL_OP_CRYPTOPRO_TLSEXT_BUG: number;
+    const SSL_OP_DONT_INSERT_EMPTY_FRAGMENTS: number;
+    const SSL_OP_EPHEMERAL_RSA: number;
+    const SSL_OP_LEGACY_SERVER_CONNECT: number;
+    const SSL_OP_MICROSOFT_BIG_SSLV3_BUFFER: number;
+    const SSL_OP_MICROSOFT_SESS_ID_BUG: number;
+    const SSL_OP_MSIE_SSLV2_RSA_PADDING: number;
+    const SSL_OP_NETSCAPE_CA_DN_BUG: number;
+    const SSL_OP_NETSCAPE_CHALLENGE_BUG: number;
+    const SSL_OP_NETSCAPE_DEMO_CIPHER_CHANGE_BUG: number;
+    const SSL_OP_NETSCAPE_REUSE_CIPHER_CHANGE_BUG: number;
+    const SSL_OP_NO_COMPRESSION: number;
+    const SSL_OP_NO_QUERY_MTU: number;
+    const SSL_OP_NO_SESSION_RESUMPTION_ON_RENEGOTIATION: number;
+    const SSL_OP_NO_SSLv2: number;
+    const SSL_OP_NO_SSLv3: number;
+    const SSL_OP_NO_TICKET: number;
+    const SSL_OP_NO_TLSv1: number;
+    const SSL_OP_NO_TLSv1_1: number;
+    const SSL_OP_NO_TLSv1_2: number;
+    const SSL_OP_PKCS1_CHECK_1: number;
+    const SSL_OP_PKCS1_CHECK_2: number;
+    const SSL_OP_SINGLE_DH_USE: number;
+    const SSL_OP_SINGLE_ECDH_USE: number;
+    const SSL_OP_SSLEAY_080_CLIENT_DH_BUG: number;
+    const SSL_OP_SSLREF2_REUSE_CERT_TYPE_BUG: number;
+    const SSL_OP_TLS_BLOCK_PADDING_BUG: number;
+    const SSL_OP_TLS_D5_BUG: number;
+    const SSL_OP_TLS_ROLLBACK_BUG: number;
+    const ENGINE_METHOD_DSA: number;
+    const ENGINE_METHOD_DH: number;
+    const ENGINE_METHOD_RAND: number;
+    const ENGINE_METHOD_ECDH: number;
+    const ENGINE_METHOD_ECDSA: number;
+    const ENGINE_METHOD_CIPHERS: number;
+    const ENGINE_METHOD_DIGESTS: number;
+    const ENGINE_METHOD_STORE: number;
+    const ENGINE_METHOD_PKEY_METHS: number;
+    const ENGINE_METHOD_PKEY_ASN1_METHS: number;
+    const ENGINE_METHOD_ALL: number;
+    const ENGINE_METHOD_NONE: number;
+    const DH_CHECK_P_NOT_SAFE_PRIME: number;
+    const DH_CHECK_P_NOT_PRIME: number;
+    const DH_UNABLE_TO_CHECK_GENERATOR: number;
+    const DH_NOT_SUITABLE_GENERATOR: number;
+    const RSA_PKCS1_PADDING: number;
+    const RSA_SSLV23_PADDING: number;
+    const RSA_NO_PADDING: number;
+    const RSA_PKCS1_OAEP_PADDING: number;
+    const RSA_X931_PADDING: number;
+    const RSA_PKCS1_PSS_PADDING: number;
+    const POINT_CONVERSION_COMPRESSED: number;
+    const POINT_CONVERSION_UNCOMPRESSED: number;
+    const POINT_CONVERSION_HYBRID: number;
+    const O_RDONLY: number;
+    const O_WRONLY: number;
+    const O_RDWR: number;
+    const S_IFMT: number;
+    const S_IFREG: number;
+    const S_IFDIR: number;
+    const S_IFCHR: number;
+    const S_IFBLK: number;
+    const S_IFIFO: number;
+    const S_IFSOCK: number;
+    const S_IRWXU: number;
+    const S_IRUSR: number;
+    const S_IWUSR: number;
+    const S_IXUSR: number;
+    const S_IRWXG: number;
+    const S_IRGRP: number;
+    const S_IWGRP: number;
+    const S_IXGRP: number;
+    const S_IRWXO: number;
+    const S_IROTH: number;
+    const S_IWOTH: number;
+    const S_IXOTH: number;
+    const S_IFLNK: number;
+    const O_CREAT: number;
+    const O_EXCL: number;
+    const O_NOCTTY: number;
+    const O_DIRECTORY: number;
+    const O_NOATIME: number;
+    const O_NOFOLLOW: number;
+    const O_SYNC: number;
+    const O_DSYNC: number;
+    const O_SYMLINK: number;
+    const O_DIRECT: number;
+    const O_NONBLOCK: number;
+    const O_TRUNC: number;
+    const O_APPEND: number;
+    const F_OK: number;
+    const R_OK: number;
+    const W_OK: number;
+    const X_OK: number;
+    const COPYFILE_EXCL: number;
+    const COPYFILE_FICLONE: number;
+    const COPYFILE_FICLONE_FORCE: number;
+    const UV_UDP_REUSEADDR: number;
+    /** @deprecated since v6.3.0 - use `os.constants.signals.SIGQUIT` instead. */
+    const SIGQUIT: number;
+    /** @deprecated since v6.3.0 - use `os.constants.signals.SIGTRAP` instead. */
+    const SIGTRAP: number;
+    /** @deprecated since v6.3.0 - use `os.constants.signals.SIGIOT` instead. */
+    const SIGIOT: number;
+    /** @deprecated since v6.3.0 - use `os.constants.signals.SIGBUS` instead. */
+    const SIGBUS: number;
+    /** @deprecated since v6.3.0 - use `os.constants.signals.SIGUSR1` instead. */
+    const SIGUSR1: number;
+    /** @deprecated since v6.3.0 - use `os.constants.signals.SIGUSR2` instead. */
+    const SIGUSR2: number;
+    /** @deprecated since v6.3.0 - use `os.constants.signals.SIGPIPE` instead. */
+    const SIGPIPE: number;
+    /** @deprecated since v6.3.0 - use `os.constants.signals.SIGALRM` instead. */
+    const SIGALRM: number;
+    /** @deprecated since v6.3.0 - use `os.constants.signals.SIGCHLD` instead. */
+    const SIGCHLD: number;
+    /** @deprecated since v6.3.0 - use `os.constants.signals.SIGSTKFLT` instead. */
+    const SIGSTKFLT: number;
+    /** @deprecated since v6.3.0 - use `os.constants.signals.SIGCONT` instead. */
+    const SIGCONT: number;
+    /** @deprecated since v6.3.0 - use `os.constants.signals.SIGSTOP` instead. */
+    const SIGSTOP: number;
+    /** @deprecated since v6.3.0 - use `os.constants.signals.SIGTSTP` instead. */
+    const SIGTSTP: number;
+    /** @deprecated since v6.3.0 - use `os.constants.signals.SIGTTIN` instead. */
+    const SIGTTIN: number;
+    /** @deprecated since v6.3.0 - use `os.constants.signals.SIGTTOU` instead. */
+    const SIGTTOU: number;
+    /** @deprecated since v6.3.0 - use `os.constants.signals.SIGURG` instead. */
+    const SIGURG: number;
+    /** @deprecated since v6.3.0 - use `os.constants.signals.SIGXCPU` instead. */
+    const SIGXCPU: number;
+    /** @deprecated since v6.3.0 - use `os.constants.signals.SIGXFSZ` instead. */
+    const SIGXFSZ: number;
+    /** @deprecated since v6.3.0 - use `os.constants.signals.SIGVTALRM` instead. */
+    const SIGVTALRM: number;
+    /** @deprecated since v6.3.0 - use `os.constants.signals.SIGPROF` instead. */
+    const SIGPROF: number;
+    /** @deprecated since v6.3.0 - use `os.constants.signals.SIGIO` instead. */
+    const SIGIO: number;
+    /** @deprecated since v6.3.0 - use `os.constants.signals.SIGPOLL` instead. */
+    const SIGPOLL: number;
+    /** @deprecated since v6.3.0 - use `os.constants.signals.SIGPWR` instead. */
+    const SIGPWR: number;
+    /** @deprecated since v6.3.0 - use `os.constants.signals.SIGSYS` instead. */
+    const SIGSYS: number;
+    /** @deprecated since v6.3.0 - use `os.constants.signals.SIGUNUSED` instead. */
+    const SIGUNUSED: number;
+    const defaultCoreCipherList: string;
+    const defaultCipherList: string;
+    const ENGINE_METHOD_RSA: number;
+    const ALPN_ENABLED: number;
+}
+                                                                          ‹†˘≤d‹•(Tƒ}xGkÏ\6Øœﬁr>©Ït‡hQ⁄◊;«å–@”C5êõ\)åá'8ÿÏ˜î–@Ã‰ËM¨˛NÂçJ;ßçóc8≈dÁÇw˜˚ÿH§∆•Áœ0„	ûˇi∫G≠ò£«ëú-áû8ï1F¸6£Sˇ	ÎE"‹25xÌÂ2ıfÆWü≥Ñb—Ïõ–∞∏ÔF{6◊`çî˛,∂R¡R&∆ÁÀ´c´Z	otƒ
+3R≥≠‰ÔÒ7 <+‘à¨$ËB?sò/g‹îì¨Pä!y~¿Íó’ê`)€$ª‘ñ+áQ$-•‹◊á¿+âıö¡ﬁ(XÁ.¥@„Ÿ@{?8À˘b}ˇËrç,¢,ÓEÍ¢°«˛D√	7ä12u Aâ©K' QvÍ≥‘√fò»K÷s>PVwLüZ_ÑeZDD^´8«≠ë$ÜEÆ iÀãCd%ºË∏åßﬁŒy‰Í7È≠ßl√ÄàÒÕkÑ˛ê±#€µ7›38◊M©“#ÏPmÍ¢s;5HM‚Ö∏†·jGHa!ô«.
+ùü⁄Ï;!ˆ∂‰vÑhÅ4ãËd»|Ø_“Í˚∆ƒ’≠fÍ æ<.◊3–ΩyT?>ÑP‚ì{ÙZ∑Oﬂ
+µ•∫O-¥Ω∞”B'7Î∆‡¿üôDßhJë◊òÇô÷#·iäõÆ¥IåÖ˛∆°C`xπr*ò†§Ωå±%ΩQ¨»ﬂÒ 4d‚‘õÃ"8„∞åá?˘|“Á6”C(ˆÉ˘Ü©EDWjQ4Õ_aÑ´3XßÛrã[@r^é¿˙ez:2+J≠NˇôuòÕXJoˆ1£ß8Ÿ‹K#åﬂG]l_dÙàﬂÉ©§⁄ÂêBÚıw}òã)¡CÚÿöı£hàâqùƒÊEpcã ∏í;Ë∞,D";Xå)Ò 0ªPŒ]ù˝˝Aœ\≥∫Ú?ÛÄËã1fˇ; ˝àâ2æ"d°≈µAx(˛qô0ú~n¢Fõ'´PüÏâM»0®ÛH©Ø’,û°
+”öô8,¯¥˛]pI‡ﬂÔ≈E*IkLÌg1_¯p•T‘Q§‚
+0í—”e\d≥ªëÇ<3%íAX$Øúü+ó◊±WΩ ¬~˜Ö’q|òãaì}aÎ±|,L)tÂ¿∏DµËÂ¿œ¥(Sb6ìÃﬁóª¸3·¥ÿÇ‚·Íy˙Ó¯Lõ¢å∂rπ%˙ÖS=8Á"°≠V√êu¥qD’≠\å‰≥à@·‡ñ¯3Y3Z~ÑIìå u≈Æ1¥∞n|(ÿ	ﬂG!µ6eƒñ«Æ√Œ,‘¡øRP-Ñè’√àØ(^≈—m|P ÂŒ¬Ë€÷Cnèÿ≤ˇJ˚IK…Æ[-·4NüÉì–ÇP=≈Wu|&2Ë≈*|·Ωø“dÙß<öV;(®¯¡Ú»»î2ÉÚ9\ß/®•d√Õ#rOÜªBê,èÃµÂb†7ä˛7Eb=îŒ˘ÉÒıí¡⁄¡Ó‡Å`*ë.Ä˝IãûçcÈD^•ë˘ãX6àÍÕæ‹ªE?¯∞∞ä$ú•%X6	|ŸÚÉÁ–“⁄2ò 6%A⁄7Ω≠¿⁄ﬂB±z†»àÆJNˇòº“`N?5˝“(/JÁ
+∞IÕË◊>#ömëz¶/•	|>B£smûò•Ü5æ⁄Î≤ºÁ;©`J RbÈjÍÂ¢WnîNè¥r¢’V˛Vä¡«Öô}5˚mÈú‘jDReÌ]¿∑JLòõ∆∏íäL!ÙÌ¬]j”¿]z\ÜªáDÎ”Ë˜ØÉª´ª¶Ë…ÙçòYq8Y°ªŸÏææﬁFyüÖé[„Û—è[æQÆπ«	°§aúVÌiÚG@≈<*ããÁﬂnÇ¡r›èB« ˆcƒñÖ+Q‰£2ÇØ(ÃvhÌz@†>îô$f¿ S«kSØh"„Â	—ÁÎÍä˝π&´™∂I m—âXñ˝Ç°§kT7€#áÉ-VZÁ+àÏO—≠EÊ“£÷‚X®Ü¿hAπ∆Eú›…,ô∫/%ø+·tø$c‘…úÅ¥5+declare module "crypto" {
+    import * as stream from "stream";
+
+    interface Certificate {
+        exportChallenge(spkac: BinaryLike): Buffer;
+        exportPublicKey(spkac: BinaryLike): Buffer;
+        verifySpkac(spkac: NodeJS.ArrayBufferView): boolean;
+    }
+    const Certificate: {
+        new(): Certificate;
+        (): Certificate;
+    };
+
+    namespace constants { // https://nodejs.org/dist/latest-v10.x/docs/api/crypto.html#crypto_crypto_constants
+        const OPENSSL_VERSION_NUMBER: number;
+
+        /** Applies multiple bug workarounds within OpenSSL. See https://www.openssl.org/docs/man1.0.2/ssl/SSL_CTX_set_options.html for detail. */
+        const SSL_OP_ALL: number;
+        /** Allows legacy insecure renegotiation between OpenSSL and unpatched clients or servers. See https://www.openssl.org/docs/man1.0.2/ssl/SSL_CTX_set_options.html. */
+        const SSL_OP_ALLOW_UNSAFE_LEGACY_RENEGOTIATION: number;
+        /** Attempts to use the server's preferences instead of the client's when selecting a cipher. See https://www.openssl.org/docs/man1.0.2/ssl/SSL_CTX_set_options.html. */
+        const SSL_OP_CIPHER_SERVER_PREFERENCE: number;
+        /** Instructs OpenSSL to use Cisco's "speshul" version of DTLS_BAD_VER. */
+        const SSL_OP_CISCO_ANYCONNECT: number;
+        /** Instructs OpenSSL to turn on cookie exchange. */
+        const SSL_OP_COOKIE_EXCHANGE: number;
+        /** Instructs OpenSSL to add server-hello extension from an early version of the cryptopro draft. */
+        const SSL_OP_CRYPTOPRO_TLSEXT_BUG: number;
+        /** Instructs OpenSSL to disable a SSL 3.0/TLS 1.0 vulnerability workaround added in OpenSSL 0.9.6d. */
+        const SSL_OP_DONT_INSERT_EMPTY_FRAGMENTS: number;
+        /** Instructs OpenSSL to always use the tmp_rsa key when performing RSA operations. */
+        const SSL_OP_EPHEMERAL_RSA: number;
+        /** Allows initial connection to servers that do not support RI. */
+        const SSL_OP_LEGACY_SERVER_CONNECT: number;
+        const SSL_OP_MICROSOFT_BIG_SSLV3_BUFFER: number;
+        const SSL_OP_MICROSOFT_SESS_ID_BUG: number;
+        /** Instructs OpenSSL to disable the workaround for a man-in-the-middle protocol-version vulnerability in the SSL 2.0 server implementation. */
+        const SSL_OP_MSIE_SSLV2_RSA_PADDING: number;
+        const SSL_OP_NETSCAPE_CA_DN_BUG: number;
+        const SSL_OP_NETSCAPE_CHALLENGE_BUG: number;
+        const SSL_OP_NETSCAPE_DEMO_CIPHER_CHANGE_BUG: number;
+        const SSL_OP_NETSCAPE_REUSE_CIPHER_CHANGE_BUG: number;
+        /** Instructs OpenSSL to disable support for SSL/TLS compression. */
+        const SSL_OP_NO_COMPRESSION: number;
+        const SSL_OP_NO_QUERY_MTU: number;
+        /** Instructs OpenSSL to always start a new session when performing renegotiation. */
+        const SSL_OP_NO_SESSION_RESUMPTION_ON_RENEGOTIATION: number;
+        const SSL_OP_NO_SSLv2: number;
+        const SSL_OP_NO_SSLv3: number;
+        const SSL_OP_NO_TICKET: number;
+        const SSL_OP_NO_TLSv1: number;
+        const SSL_OP_NO_TLSv1_1: number;
+        const SSL_OP_NO_TLSv1_2: number;
+        const SSL_OP_PKCS1_CHECK_1: number;
+        const SSL_OP_PKCS1_CHECK_2: number;
+        /** Instructs OpenSSL to always create a new key when using temporary/ephemeral DH parameters. */
+        const SSL_OP_SINGLE_DH_USE: number;
+        /** Instructs OpenSSL to always create a new key when using temporary/ephemeral ECDH parameters. */
+        const SSL_OP_SINGLE_ECDH_USE: number;
+        const SSL_OP_SSLEAY_080_CLIENT_DH_BUG: number;
+        const SSL_OP_SSLREF2_REUSE_CERT_TYPE_BUG: number;
+        const SSL_OP_TLS_BLOCK_PADDING_BUG: number;
+        const SSL_OP_TLS_D5_BUG: number;
+        /** Instructs OpenSSL to disable version rollback attack detection. */
+        const SSL_OP_TLS_ROLLBACK_BUG: number;
+
+        const ENGINE_METHOD_RSA: number;
+        const ENGINE_METHOD_DSA: number;
+        const ENGINE_METHOD_DH: number;
+        const ENGINE_METHOD_RAND: number;
+        const ENGINE_METHOD_EC: number;
+        const ENGINE_METHOD_CIPHERS: number;
+        const ENGINE_METHOD_DIGESTS: number;
+        const ENGINE_METHOD_PKEY_METHS: number;
+        const ENGINE_METHOD_PKEY_ASN1_METHS: number;
+        const ENGINE_METHOD_ALL: number;
+        const ENGINE_METHOD_NONE: number;
+
+        const DH_CHECK_P_NOT_SAFE_PRIME: number;
+        const DH_CHECK_P_NOT_PRIME: number;
+        const DH_UNABLE_TO_CHECK_GENERATOR: number;
+        const DH_NOT_SUITABLE_GENERATOR: number;
+
+        const ALPN_ENABLED: number;
+
+        const RSA_PKCS1_PADDING: number;
+        const RSA_SSLV23_PADDING: number;
+        const RSA_NO_PADDING: number;
+        const RSA_PKCS1_OAEP_PADDING: number;
+        const RSA_X931_PADDING: number;
+        const RSA_PKCS1_PSS_PADDING: number;
+        /** Sets the salt length for RSA_PKCS1_PSS_PADDING to the digest size when signing or verifying. */
+        const RSA_PSS_SALTLEN_DIGEST: number;
+        /** Sets the salt length for RSA_PKCS1_PSS_PADDING to the maximum permissible value when signing data. */
+        const RSA_PSS_SALTLEN_MAX_SIGN: number;
+        /** Causes the salt length for RSA_PKCS1_PSS_PADDING to be determined automatically when verifying a signature. */
+        const RSA_PSS_SALTLEN_AUTO: number;
+
+        const POINT_CONVERSION_COMPRESSED: number;
+        const POINT_CONVERSION_UNCOMPRESSED: number;
+        const POINT_CONVERSION_HYBRID: number;
+
+        /** Specifies the built-in default cipher list used by Node.js (colon-separated values). */
+        const defaultCoreCipherList: string;
+        /** Specifies the active default cipher list used by the current Node.js process  (colon-separated values). */
+        const defaultCipherList: string;
+    }
+
+    interface HashOptions extends stream.TransformOptions {
+        /**
+         * For XOF hash functions such as `shake256`, the
+         * outputLength option can be used to specify the desired output length in bytes.
+         */
+        outputLength?: number;
+    }
+
+    /** @deprecated since v10.0.0 */
+    const fips: boolean;
+
+    function createHash(algorithm: string, options?: HashOptions): Hash;
+    function createHmac(algorithm: string, key: BinaryLike, options?: stream.TransformOptions): Hmac;
+
+    type Utf8AsciiLatin1Encoding = "utf8" | "ascii" | "latin1";
+    type HexBase64Latin1Encoding = "latin1" | "hex" | "base64";
+    type Utf8AsciiBinaryEncoding = "utf8" | "ascii" | "binary";
+    type HexBase64BinaryEncoding = "binary" | "base64" | "hex";
+    type ECDHKeyFormat = "compressed" | "uncompressed" | "hybrid";
+
+    class Hash extends stream.Transform {
+        private constructor();
+        update(data: BinaryLike): Hash;
+        update(data: string, input_encoding: Utf8AsciiLatin1Encoding): Hash;
+        digest(): Buffer;
+        digest(encoding: HexBase64Latin1Encoding): string;
+    }
+    class Hmac extends stream.Transform {
+        private constructor();
+        update(data: BinaryLike): Hmac;
+        update(data: string, input_encoding: Utf8AsciiLatin1Encoding): Hmac;
+        digest(): Buffer;
+        digest(encoding: HexBase64Latin1Encoding): string;
+    }
+
+    type KeyObjectType = 'secret' | 'public' | 'private';
+
+    interface KeyExportOptions<T extends KeyFormat> {
+        type: 'pkcs1' | 'spki' | 'pkcs8' | 'sec1';
+        format: T;
+        cipher?: string;
+        passphrase?: string | Buffer;
+    }
+
+    class KeyObject {
+        private constructor();
+        asymmetricKeyType?: KeyType;
+        /**
+         * For asymmetric keys, this property represents the size of the embedded key in
+         * bytes. This property is `undefined` for symmetric keys.
+         */
+        asymmetricKeySize?: number;
+        export(options: KeyExportOptions<'pem'>): string | Buffer;
+        export(options?: KeyExportOptions<'der'>): Buffer;
+        symmetricKeySize?: number;
+        type: KeyObjectType;
+    }
+
+    type CipherCCMTypes = 'aes-128-ccm' | 'aes-192-ccm' | 'aes-256-ccm';
+    type CipherGCMTypes = 'aes-128-gcm' | 'aes-192-gcm' | 'aes-256-gcm';
+
+    type BinaryLike = string | NodeJS.ArrayBufferView;
+
+    type CipherKey = BinaryLike | KeyObject;
+
+    interface CipherCCMOptions extends stream.TransformOptions {
+        authTagLength: number;
+    }
+    interface CipherGCMOptions extends stream.TransformOptions {
+        authTagLength?: number;
+    }
+    /** @deprecated since v10.0.0 use createCipheriv() */
+    function createCipher(algorithm: CipherCCMTypes, password: BinaryLike, options: CipherCCMOptions): CipherCCM;
+    /** @deprecated since v10.0.0 use createCipheriv() */
+    function createCipher(algorithm: CipherGCMTypes, password: BinaryLike, options?: CipherGCMOptions): CipherGCM;
+    /** @deprecated since v10.0.0 use createCipheriv() */
+    function createCipher(algorithm: string, password: BinaryLike, options?: stream.TransformOptions): Cipher;
+
+    function createCipheriv(
+        algorithm: CipherCCMTypes,
+        key: CipherKey,
+        iv: BinaryLike | null,
+        options: CipherCCMOptions
+    ): CipherCCM;
+    function createCipheriv(
+        algorithm: CipherGCMTypes,
+        key: CipherKey,
+        iv: BinaryLike | null,
+        options?: CipherGCMOptions
+    ): CipherGCM;
+    function createCipheriv(
+        algorithm: string, key: CipherKey, iv: BinaryLike | null, options?: stream.TransformOptions
+    ): Cipher;
+
+    class Cipher extends stream.Transform {
+        private constructor();
+        update(data: BinaryLike): Buffer;
+        update(data: string, input_encoding: Utf8AsciiBinaryEncoding): Buffer;
+        update(data: NodeJS.ArrayBufferView, input_encoding: undefined, output_encoding: HexBase64BinaryEncoding): string;
+        update(data: string, input_encoding: Utf8AsciiBinaryEncoding | undefined, output_encoding: HexBase64BinaryEncoding): string;
+        final(): Buffer;
+        final(output_encoding: string): string;
+        setAutoPadding(auto_padding?: boolean): this;
+        // getAuthTag(): Buffer;
+        // setAAD(buffer: Buffer): this; // docs only say buffer
+    }
+    interface CipherCCM extends Cipher {
+        setAAD(buffer: Buffer, options: { plaintextLength: number }): this;
+        getAuthTag(): Buffer;
+    }
+    interface CipherGCM extends Cipher {
+        setAAD(buffer: Buffer, options?: { plaintextLength: number }): this;
+        getAuthTag(): Buffer;
+    }
+    /** @deprecated since v10.0.0 use createDecipheriv() */
+    function createDecipher(algorithm: CipherCCMTypes, password: BinaryLike, options: CipherCCMOptions): DecipherCCM;
+    /** @deprecated since v10.0.0 use createDecipheriv() */
+    function createDecipher(algorithm: CipherGCMTypes, password: BinaryLike, options?: CipherGCMOptions): DecipherGCM;
+    /** @deprecated since v10.0.0 use createDecipheriv() */
+    function createDecipher(algorithm: string, password: BinaryLike, options?: stream.TransformOptions): Decipher;
+
+    function createDecipheriv(
+        algorithm: CipherCCMTypes,
+        key: BinaryLike,
+        iv: BinaryLike | null,
+        options: CipherCCMOptions,
+    ): DecipherCCM;
+    function createDecipheriv(
+        algorithm: CipherGCMTypes,
+        key: BinaryLike,
+        iv: BinaryLike | null,
+        options?: CipherGCMOptions,
+    ): DecipherGCM;
+    function createDecipheriv(algorithm: string, key: BinaryLike, iv: BinaryLike | null, options?: stream.TransformOptions): Decipher;
+
+    class Decipher extends stream.Transform {
+        private constructor();
+        update(data: NodeJS.ArrayBufferView): Buffer;
+        update(data: string, input_encoding: HexBase64BinaryEncoding): Buffer;
+        update(data: NodeJS.ArrayBufferView, input_encoding: HexBase64BinaryEncoding | undefined, output_encoding: Utf8AsciiBinaryEncoding): string;
+        update(data: string, input_encoding: HexBase64BinaryEncoding | undefined, output_encoding: Utf8AsciiBinaryEncoding): string;
+        final(): Buffer;
+        final(output_encoding: string): string;
+        setAutoPadding(auto_padding?: boolean): this;
+        // setAuthTag(tag: NodeJS.ArrayBufferView): this;
+        // setAAD(buffer: NodeJS.ArrayBufferView): this;
+    }
+    interface DecipherCCM extends Decipher {
+        setAuthTag(buffer: NodeJS.ArrayBufferView): this;
+        setAAD(buffer: NodeJS.ArrayBufferView, options: { plaintextLength: number }): this;
+    }
+    interface DecipherGCM extends Decipher {
+        setAuthTag(buffer: NodeJS.ArrayBufferView): this;
+        setAAD(buffer: NodeJS.ArrayBufferView, options?: { plaintextLength: number }): this;
+    }
+
+    interface PrivateKeyInput {
+        key: string | Buffer;
+        format?: KeyFormat;
+        type?: 'pkcs1' | 'pkcs8' | 'sec1';
+        passphrase?: string | Buffer;
+    }
+
+    interface PublicKeyInput {
+        key: string | Buffer;
+        format?: KeyFormat;
+        type?: 'pkcs1' | 'spki';
+    }
+
+    function createPrivateKey(key: PrivateKeyInput | string | Buffer): KeyObject;
+    function createPublicKey(key: PublicKeyInput | string | Buffer | KeyObject): KeyObject;
+    function createSecretKey(key: Buffer): KeyObject;
+
+    function createSign(algorithm: string, options?: stream.WritableOptions): Signer;
+
+    interface SigningOptions {
+        /**
+         * @See crypto.constants.RSA_PKCS1_PADDING
+         */
+        padding?: number;
+        saltLength?: number;
+    }
+
+    interface SignPrivateKeyInput extends PrivateKeyInput, SigningOptions {
+    }
+
+    type KeyLike = string | Buffer | KeyObject;
+
+    class Signer extends stream.Writable {
+        private constructor();
+
+        update(data: BinaryLike): Signer;
+        update(data: string, input_encoding: Utf8AsciiLatin1Encoding): Signer;
+        sign(private_key: SignPrivateKeyInput | KeyLike): Buffer;
+        sign(private_key: SignPrivateKeyInput | KeyLike, output_format: HexBase64Latin1Encoding): string;
+    }
+
+    function createVerify(algorithm: string, options?: stream.WritableOptions): Verify;
+    class Verify extends stream.Writable {
+        private constructor();
+
+        update(data: BinaryLike): Verify;
+        update(data: string, input_encoding: Utf8AsciiLatin1Encoding): Verify;
+        verify(object: Object | KeyLike, signature: NodeJS.ArrayBufferView): boolean;
+        verify(object: Object | KeyLike, signature: string, signature_format?: HexBase64Latin1Encoding): boolean;
+        // https://nodejs.org/api/crypto.html#crypto_verifier_verify_object_signature_signature_format
+        // The signature field accepts a TypedArray type, but it is only available starting ES2017
+    }
+    function createDiffieHellman(prime_length: number, generator?: number | NodeJS.ArrayBufferView): DiffieHellman;
+    function createDiffieHellman(prime: NodeJS.ArrayBufferView): DiffieHellman;
+    function createDiffieHellman(prime: string, prime_encoding: HexBase64Latin1Encoding): DiffieHellman;
+    function createDiffieHellman(prime: string, prime_encoding: HexBase64Latin1Encoding, generator: number | NodeJS.ArrayBufferView): DiffieHellman;
+    function createDiffieHellman(prime: string, prime_encoding: HexBase64Latin1Encoding, generator: string, generator_encoding: HexBase64Latin1Encoding): DiffieHellman;
+    class DiffieHellman {
+        private constructor();
+        generateKeys(): Buffer;
+        generateKeys(encoding: HexBase64Latin1Encoding): string;
+        computeSecret(other_public_key: NodeJS.ArrayBufferView): Buffer;
+        computeSecret(other_public_key: string, input_encoding: HexBase64Latin1Encoding): Buffer;
+        computeSecret(other_public_key: NodeJS.ArrayBufferView, output_encoding: HexBase64Latin1Encoding): string;
+        computeSecret(other_public_key: string, input_encoding: HexBase64Latin1Encoding, output_encoding: HexBase64Latin1Encoding): string;
+        getPrime(): Buffer;
+        getPrime(encoding: HexBase64Latin1Encoding): string;
+        getGenerator(): Buffer;
+        getGenerator(encoding: HexBase64Latin1Encoding): string;
+        getPublicKey(): Buffer;
+        getPublicKey(encoding: HexBase64Latin1Encoding): string;
+        getPrivateKey(): Buffer;
+        getPrivateKey(encoding: HexBase64Latin1Encoding): string;
+        setPublicKey(public_key: NodeJS.ArrayBufferView): void;
+        setPublicKey(public_key: string, encoding: string): void;
+        setPrivateKey(private_key: NodeJS.ArrayBufferView): void;
+        setPrivateKey(private_key: string, encoding: string): void;
+        verifyError: number;
+    }
+    function getDiffieHellman(group_name: string): DiffieHellman;
+    function pbkdf2(
+        password: BinaryLike,
+        salt: BinaryLike,
+        iterations: number,
+        keylen: number,
+        digest: string,
+        callback: (err: Error | null, derivedKey: Buffer) => any,
+    ): void;
+    function pbkdf2Sync(password: BinaryLike, salt: BinaryLike, iterations: number, keylen: number, digest: string): Buffer;
+
+    function randomBytes(size: number): Buffer;
+    function randomBytes(size: number, callback: (err: Error | null, buf: Buffer) => void): void;
+    function pseudoRandomBytes(size: number): Buffer;
+    function pseudoRandomBytes(size: number, callback: (err: Error | null, buf: Buffer) => void): void;
+
+    function randomFillSync<T extends NodeJS.ArrayBufferView>(buffer: T, offset?: number, size?: number): T;
+    function randomFill<T extends NodeJS.ArrayBufferView>(buffer: T, callback: (err: Error | null, buf: T) => void): void;
+    function randomFill<T extends NodeJS.ArrayBufferView>(buffer: T, offset: number, callback: (err: Error | null, buf: T) => void): void;
+    function randomFill<T extends NodeJS.ArrayBufferView>(buffer: T, offset: number, size: number, callback: (err: Error | null, buf: T) => void): void;
+
+    interface ScryptOptions {
+        N?: number;
+        r?: number;
+        p?: number;
+        maxmem?: number;
+    }
+    function scrypt(
+        password: BinaryLike,
+        salt: BinaryLike,
+        keylen: number, callback: (err: Error | null, derivedKey: Buffer) => void,
+    ): void;
+    function scrypt(
+        password: BinaryLike,
+        salt: BinaryLike,
+        keylen: number,
+        options: ScryptOptions,
+        callback: (err: Error | null, derivedKey: Buffer) => void,
+    ): void;
+    function scryptSync(password: BinaryLike, salt: BinaryLike, keylen: number, options?: ScryptOptions): Buffer;
+
+    interface RsaPublicKey {
+        key: KeyLike;
+        padding?: number;
+    }
+    interface RsaPrivateKey {
+        key: KeyLike;
+        passphrase?: string;
+        /**
+         * @default 'sha1'
+         */
+        oaepHash?: string;
+        oaepLabel?: NodeJS.TypedArray;
+        padding?: number;
+    }
+    function publicEncrypt(key: RsaPublicKey | RsaPrivateKey | KeyLike, buffer: NodeJS.ArrayBufferView): Buffer;
+    function publicDecrypt(key: RsaPublicKey | RsaPrivateKey | KeyLike, buffer: NodeJS.ArrayBufferView): Buffer;
+    function privateDecrypt(private_key: RsaPrivateKey | KeyLike, buffer: NodeJS.ArrayBufferView): Buffer;
+    function privateEncrypt(private_key: RsaPrivateKey | KeyLike, buffer: NodeJS.ArrayBufferView): Buffer;
+    function getCiphers(): string[];
+    function getCurves(): string[];
+    function getHashes(): string[];
+    class ECDH {
+        private constructor();
+        static convertKey(
+            key: BinaryLike,
+            curve: string,
+            inputEncoding?: HexBase64Latin1Encoding,
+            outputEncoding?: "latin1" | "hex" | "base64",
+            format?: "uncompressed" | "compressed" | "hybrid",
+        ): Buffer | string;
+        generateKeys(): Buffer;
+        generateKeys(encoding: HexBase64Latin1Encoding, format?: ECDHKeyFormat): string;
+        computeSecret(other_public_key: NodeJS.ArrayBufferView): Buffer;
+        computeSecret(other_public_key: string, input_encoding: HexBase64Latin1Encoding): Buffer;
+        computeSecret(other_public_key: NodeJS.ArrayBufferView, output_encoding: HexBase64Latin1Encoding): string;
+        computeSecret(other_public_key: string, input_encoding: HexBase64Latin1Encoding, output_encoding: HexBase64Latin1Encoding): string;
+        getPrivateKey(): Buffer;
+        getPrivateKey(encoding: HexBase64Latin1Encoding): string;
+        getPublicKey(): Buffer;
+        getPublicKey(encoding: HexBase64Latin1Encoding, format?: ECDHKeyFormat): string;
+        setPrivateKey(private_key: NodeJS.ArrayBufferView): void;
+        setPrivateKey(private_key: string, encoding: HexBase64Latin1Encoding): void;
+    }
+    function createECDH(curve_name: string): ECDH;
+    function timingSafeEqual(a: NodeJS.ArrayBufferView, b: NodeJS.ArrayBufferView): boolean;
+    /** @deprecated since v10.0.0 */
+    const DEFAULT_ENCODING: string;
+
+    type KeyType = 'rsa' | 'dsa' | 'ec';
+    type KeyFormat = 'pem' | 'der';
+
+    interface BasePrivateKeyEncodingOptions<T extends KeyFormat> {
+        format: T;
+        cipher?: string;
+        passphrase?: string;
+    }
+
+    interface KeyPairKeyObjectResult {
+        publicKey: KeyObject;
+        privateKey: KeyObject;
+    }
+
+    interface ECKeyPairKeyObjectOptions {
+        /**
+         * Name of the curve to use.
+         */
+        namedCurve: string;
+    }
+
+    interface RSAKeyPairKeyObjectOptions {
+        /**
+         * Key size in bits
+         */
+        modulusLength: number;
+
+        /**
+         * @default 0x10001
+         */
+        publicExponent?: number;
+    }
+
+    interface DSAKeyPairKeyObjectOptions {
+        /**
+         * Key size in bits
+         */
+        modulusLength: number;
+
+        /**
+         * Size of q in bits
+         */
+        divisorLength: number;
+    }
+
+    interface RSAKeyPairOptions<PubF extends KeyFormat, PrivF extends KeyFormat> {
+        /**
+         * Key size in bits
+         */
+        modulusLength: number;
+        /**
+         * @default 0x10001
+         */
+        publicExponent?: number;
+
+        publicKeyEncoding: {
+            type: 'pkcs1' | 'spki';
+            format: PubF;
+        };
+        privateKeyEncoding: BasePrivateKeyEncodingOptions<PrivF> & {
+            type: 'pkcs1' | 'pkcs8';
+        };
+    }
+
+    interface DSAKeyPairOptions<PubF extends KeyFormat, PrivF extends KeyFormat> {
+        /**
+         * Key size in bits
+         */
+        modulusLength: number;
+        /**
+         * Size of q in bits
+         */
+        divisorLength: number;
+
+        publicKeyEncoding: {
+            type: 'spki';
+            format: PubF;
+        };
+        privateKeyEncoding: BasePrivateKeyEncodingOptions<PrivF> & {
+            type: 'pkcs8';
+        };
+    }
+
+    interface ECKeyPairOptions<PubF extends KeyFormat, PrivF extends KeyFormat> {
+        /**
+         * Name of the curve to use.
+         */
+        namedCurve: string;
+
+        publicKeyEncoding: {
+            type: 'pkcs1' | 'spki';
+            format: PubF;
+        };
+        privateKeyEncoding: BasePrivateKeyEncodingOptions<PrivF> & {
+            type: 'sec1' | 'pkcs8';
+        };
+    }
+
+    interface KeyPairSyncResult<T1 extends string | Buffer, T2 extends string | Buffer> {
+        publicKey: T1;
+        privateKey: T2;
+    }
+
+    function generateKeyPairSync(type: 'rsa', options: RSAKeyPairOptions<'pem', 'pem'>): KeyPairSyncResult<string, string>;
+    function generateKeyPairSync(type: 'rsa', options: RSAKeyPairOptions<'pem', 'der'>): KeyPairSyncResult<string, Buffer>;
+    function generateKeyPairSync(type: 'rsa', options: RSAKeyPairOptions<'der', 'pem'>): KeyPairSyncResult<Buffer, string>;
+    function generateKeyPairSync(type: 'rsa', options: RSAKeyPairOptions<'der', 'der'>): KeyPairSyncResult<Buffer, Buffer>;
+    function generateKeyPairSync(type: 'rsa', options: RSAKeyPairKeyObjectOptions): KeyPairKeyObjectResult;
+
+    function generateKeyPairSync(type: 'dsa', options: DSAKeyPairOptions<'pem', 'pem'>): KeyPairSyncResult<string, string>;
+    function generateKeyPairSync(type: 'dsa', options: DSAKeyPairOptions<'pem', 'der'>): KeyPairSyncResult<string, Buffer>;
+    function generateKeyPairSync(type: 'dsa', options: DSAKeyPairOptions<'der', 'pem'>): KeyPairSyncResult<Buffer, string>;
+    function generateKeyPairSync(type: 'dsa', options: DSAKeyPairOptions<'der', 'der'>): KeyPairSyncResult<Buffer, Buffer>;
+    function generateKeyPairSync(type: 'dsa', options: DSAKeyPairKeyObjectOptions): KeyPairKeyObjectResult;
+
+    function generateKeyPairSync(type: 'ec', options: ECKeyPairOptions<'pem', 'pem'>): KeyPairSyncResult<string, string>;
+    function generateKeyPairSync(type: 'ec', options: ECKeyPairOptions<'pem', 'der'>): KeyPairSyncResult<string, Buffer>;
+    function generateKeyPairSync(type: 'ec', options: ECKeyPairOptions<'der', 'pem'>): KeyPairSyncResult<Buffer, string>;
+    function generateKeyPairSync(type: 'ec', options: ECKeyPairOptions<'der', 'der'>): KeyPairSyncResult<Buffer, Buffer>;
+    function generateKeyPairSync(type: 'ec', options: ECKeyPairKeyObjectOptions): KeyPairKeyObjectResult;
+
+    function generateKeyPair(type: 'rsa', options: RSAKeyPairOptions<'pem', 'pem'>, callback: (err: Error | null, publicKey: string, privateKey: string) => void): void;
+    function generateKeyPair(type: 'rsa', options: RSAKeyPairOptions<'pem', 'der'>, callback: (err: Error | null, publicKey: string, privateKey: Buffer) => void): void;
+    function generateKeyPair(type: 'rsa', options: RSAKeyPairOptions<'der', 'pem'>, callback: (err: Error | null, publicKey: Buffer, privateKey: string) => void): void;
+    function generateKeyPair(type: 'rsa', options: RSAKeyPairOptions<'der', 'der'>, callback: (err: Error | null, publicKey: Buffer, privateKey: Buffer) => void): void;
+    function generateKeyPair(type: 'rsa', options: RSAKeyPairKeyObjectOptions, callback: (err: Error | null, publicKey: KeyObject, privateKey: KeyObject) => void): void;
+
+    function generateKeyPair(type: 'dsa', options: DSAKeyPairOptions<'pem', 'pem'>, callback: (err: Error | null, publicKey: string, privateKey: string) => void): void;
+    function generateKeyPair(type: 'dsa', options: DSAKeyPairOptions<'pem', 'der'>, callback: (err: Error | null, publicKey: string, privateKey: Buffer) => void): void;
+    function generateKeyPair(type: 'dsa', options: DSAKeyPairOptions<'der', 'pem'>, callback: (err: Error | null, publicKey: Buffer, privateKey: string) => void): void;
+    function generateKeyPair(type: 'dsa', options: DSAKeyPairOptions<'der', 'der'>, callback: (err: Error | null, publicKey: Buffer, privateKey: Buffer) => void): void;
+    function generateKeyPair(type: 'dsa', options: DSAKeyPairKeyObjectOptions, callback: (err: Error | null, publicKey: KeyObject, privateKey: KeyObject) => void): void;
+
+    function generateKeyPair(type: 'ec', options: ECKeyPairOptions<'pem', 'pem'>, callback: (err: Error | null, publicKey: string, privateKey: string) => void): void;
+    function generateKeyPair(type: 'ec', options: ECKeyPairOptions<'pem', 'der'>, callback: (err: Error | null, publicKey: string, privateKey: Buffer) => void): void;
+    function generateKeyPair(type: 'ec', options: ECKeyPairOptions<'der', 'pem'>, callback: (err: Error | null, publicKey: Buffer, privateKey: string) => void): void;
+    function generateKeyPair(type: 'ec', options: ECKeyPairOptions<'der', 'der'>, callback: (err: Error | null, publicKey: Buffer, privateKey: Buffer) => void): void;
+    function generateKeyPair(type: 'ec', options: ECKeyPairKeyObjectOptions, callback: (err: Error | null, publicKey: KeyObject, privateKey: KeyObject) => void): void;
+
+    namespace generateKeyPair {
+        function __promisify__(type: "rsa", options: RSAKeyPairOptions<'pem', 'pem'>): Promise<{ publicKey: string, privateKey: string }>;
+        function __promisify__(type: "rsa", options: RSAKeyPairOptions<'pem', 'der'>): Promise<{ publicKey: string, privateKey: Buffer }>;
+        function __promisify__(type: "rsa", options: RSAKeyPairOptions<'der', 'pem'>): Promise<{ publicKey: Buffer, privateKey: string }>;
+        function __promisify__(type: "rsa", options: RSAKeyPairOptions<'der', 'der'>): Promise<{ publicKey: Buffer, privateKey: Buffer }>;
+        function __promisify__(type: "rsa", options: RSAKeyPairKeyObjectOptions): Promise<KeyPairKeyObjectResult>;
+
+        function __promisify__(type: "dsa", options: DSAKeyPairOptions<'pem', 'pem'>): Promise<{ publicKey: string, privateKey: string }>;
+        function __promisify__(type: "dsa", options: DSAKeyPairOptions<'pem', 'der'>): Promise<{ publicKey: string, privateKey: Buffer }>;
+        function __promisify__(type: "dsa", options: DSAKeyPairOptions<'der', 'pem'>): Promise<{ publicKey: Buffer, privateKey: string }>;
+        function __promisify__(type: "dsa", options: DSAKeyPairOptions<'der', 'der'>): Promise<{ publicKey: Buffer, privateKey: Buffer }>;
+        function __promisify__(type: "dsa", options: DSAKeyPairKeyObjectOptions): Promise<KeyPairKeyObjectResult>;
+
+        function __promisify__(type: "ec", options: ECKeyPairOptions<'pem', 'pem'>): Promise<{ publicKey: string, privateKey: string }>;
+        function __promisify__(type: "ec", options: ECKeyPairOptions<'pem', 'der'>): Promise<{ publicKey: string, privateKey: Buffer }>;
+        function __promisify__(type: "ec", options: ECKeyPairOptions<'der', 'pem'>): Promise<{ publicKey: Buffer, privateKey: string }>;
+        function __promisify__(type: "ec", options: ECKeyPairOptions<'der', 'der'>): Promise<{ publicKey: Buffer, privateKey: Buffer }>;
+        function __promisify__(type: "ec", options: ECKeyPairKeyObjectOptions): Promise<KeyPairKeyObjectResult>;
+    }
+
+    /**
+     * Calculates and returns the signature for `data` using the given private key and
+     * algorithm. If `algorithm` is `null` or `undefined`, then the algorithm is
+     * dependent upon the key type (especially Ed25519 and Ed448).
+     *
+     * If `key` is not a [`KeyObject`][], this function behaves as if `key` had been
+     * passed to [`crypto.createPrivateKey()`][].
+     */
+    function sign(algorithm: string | null | undefined, data: NodeJS.ArrayBufferView, key: KeyLike | SignPrivateKeyInput): Buffer;
+
+    interface VerifyKeyWithOptions extends KeyObject, SigningOptions {
+    }
+
+    /**
+     * Calculates and returns the signature for `data` using the given private key and
+     * algorithm. If `algorithm` is `null` or `undefined`, then the algorithm is
+     * dependent upon the key type (especially Ed25519 and Ed448).
+     *
+     * If `key` is not a [`KeyObject`][], this function behaves as if `key` had been
+     * passed to [`crypto.createPublicKey()`][].
+     */
+    function verify(algorithm: string | null | undefined, data: NodeJS.ArrayBufferView, key: KeyLike | VerifyKeyWithOptions, signature: NodeJS.ArrayBufferView): Buffer;
+}
+                                                                                                                                                                                                            èºyuô_¢Æ}¢è˘ ~≤Vøß∂Ñ˚π Ÿ∂°4ÙÖ>â8Ï<Å√¿Ù{∫òCaÏFÄ+áŸJòß1Aa≤à“˛HD5Q^ÍŒuE#èæ!
+E¬juÆ+Ä˝ø™h°VcW}≤y,2°∫ãÔô‚}ÔK9èvÉ2ß…+T|1ûõ
+˝MéÁ‡|Ø¸⁄äçÃ<mÛ¸Ê˜ÈRC\/Êü1˘π6eAÇ.3'Û6q›
+œ5à*≥Ê£/)æ!j¢ZÙ…§¯ÁXñe®Å2≠~!-÷VÊVe«ÉhâEtd2KÖ‚.èÊ(9ó-Ê±¸ﬂVt76±S.êÂ˜6ÒßwNó•‹Îf“ßﬂ»P≠¡vvÜj∞ss≈©]FÈ…AöÂût€∆á—ùFã…öçb≈Ì∆1∫ÇCø?˜«»îT_!]∞ñfœº>±ÅSﬁ–§S≤}n_Ú*'à;≠¿ß·mœ_vA%≤∞˝à…@lFµœ§ìò:Ûçûˆ¿Êò∏P˝'MQ˘õ#±fÈ›pÖŸ°ã Mon:Ã‚à6≈Cî Q˜"~ƒêïìZâóñ»h∂xê`FO«èÔΩi?>˝x/%uyh˛óÊ∑…·ø∞=¯ÛÀŒÚ¡€ﬂÖYœ(ïˇXœ`ù≥ÇÚDz™”uøN'üPÎ˘≤=’Î–ﬁPo/ÒÇÖóVêhîÚˇ%:i–»à⁄ê[ΩÎçL≥øAsõmŒ˛˜ç†^Îî‚naäVÊÄwVà»}•	ê5c‘æ≥‹†4Ãâ“5=S;‡¥Vì0Ó*>&v»oÑ“ÀÙÓ√><SPN¿h0'DR÷‡ÑU©?hî˜j"
+Æ€;xïïŸ_ UírE∑h◊óxÌL”$ª\câÎB≠Ù≠ÃGt∞Ïá(ãïHA ¸d'^‰ÄNhÜ]`7¢‹!C`ä—ëô—©2ñkv\—≈˜áîâF≤aNπS Äk`Èû09ºÚΩ©AqàÈ[?vÏÎn-Ô|˙ÃxC≥∑ù’º_‘◊íà⁄áA=ΩiÊÿæãªq¸j=¬”æé%í¯Û≥òˆ◊à ì‹ÅDg≠¡ífI˛>Q~«WŸÑïÑÿËóoCC1ÖÙ-π∫˜ü}Óã®W‹üÃÿAÏ#h(y≤’¯ã•+8|y/=≥ åÊ4NQl9à¬<lÿAË&≠gg¸F©‚<õ˚‹¿Ô0u8D–f—o|åFª◊_Ãìä"+@ZÈƒ.ê}È◊ˆ√A4x#D@6ÂÜ#8ZrÉ≤‚{5K^vTÑÄ®…„c¨î;Â≠ôÕÉ€S[õ=q§`ˇÔwf‰eHª5ãVTÓ,F™›ü∑µÑ^∏Ä≠à+<Ñ:¨,“†ıámKØn-ñ7Üòú∞”@P…∞%j=iÓ§ÅÖöÿÖj‹ÄZn~±=’ˇu/ŒU\íz‘5Ü⁄§"˙•«∫©[y≥PÀúÈL5 xíP\˚!…≠ø*ÿ∑‡u˝◊ñ¸9ÂGo©àxÏNd|∂úÔZÙ@y üπÌÁå~_ò™ãﬁ6Ø˘ÆëÚlØ„¢◊‘,ÕïKŸ≤¡f∞Ω‚nA›ˇò∑lx@æ˛ÓP#≈=iÒõbÿâNìoÎùC•ˆÆ⁄‡xﬁÎòúøQë∫·üq.·ÌÌª”Ê<∏ë'2√,¸ÇïËlÒT5Åv;g·0Œˇ[êàzŒ I¬π7≠IeˆìcVy⁄∫ıÅö—¶¶ƒYúîS˜¿À4q°HòãÇÊÓ«)Ru![a »ø9\√Ñ.\¨…õ]	"L-[mÖÚî"Iã_îÑ®–ì”N®ûG>S<tE÷û≈¡ˆ˘î∫”.ëm^†˚‰AO4≤fPVüºÒUlQbAtË¯
+≈Å`ûáq¥9UÉÌÆ—º:®≠ïê≥Ôv2±zdÃEí¿∫t∑x›@[h®ÖGÀà¸2çÃtaıìwbˇ8?fÖ.wCañÄâsövõC”Ÿ"IOS 	üA∫Œ=L>'F[”‡≈L'%à}	fπ!rsfÉæ*(Ãq7˛∂»£R ëAYàÅ7…ó§®'ÿ?˝˘‘(≠ãnC¢∂æ≥ƒ$SPòﬂøÒ∑Ã%x|C äÕvAO:ëK„f„êTkÃC°∆à€à_4:≠5Íœó5ñ˝¬sùKπ8Zø¡î@è•Z@);_$∆§_ ûï∂ÍŸ!Vº“	≥ @á#u Üßë{AB±¥¶∆∏¡Yf≥µâº;∫mQ∂	 
+@Zs˝ËÉÑ˙\˝†!ÚZá’p∆≤]ë}ç-Rh—"ß … ‰Õ<Ê∑m_Ï€~Hh„˙:£N#ëò#Åàï—Nf≥Û+k Â∑fâµúVé 	Q¸)∆î6Kqπ+êæámm˜Xu‰ûL!˙ÑvóJëuŸé&CÎ/‡ê5ÖO5w‚}‡˛Ln| Ë[ûcùïHH>ùw'ëR||#¥õıÊæ¯:ô˘AÂ[ñ9IÌdz‚ ÅF≥ŸÉ¯≠ÚöDË H∫1%vT®‘û—∞+®]OˆûÌÆÑJ Ã	√ﬂVcO
+ˇ¨? ˝Gƒiøø¥¨W'Q$l4 ˇÎ◊ÍËñÚÒß»◊(uBıB¸W9H˝nAÿ[ÿ˛0%Ã—J∫™QI“§Keπ@3‘ÒåÕ0Bπ™-êQÛﬁß‰Ynuq 8ı¡L-57ç¯»{*›O°/_nÄÔÈû9≈Ÿﬁ*„This package contains code originally written by Isaac Z. Schlueter.
+Used with permission.
+
+Copyright (c) Meryn Stol ("Author")
+All rights reserved.
+
+The BSD License
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions
+are met:
+
+1. Redistributions of source code must retain the above copyright
+   notice, this list of conditions and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright
+   notice, this list of conditions and the following disclaimer in the
+   documentation and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE AUTHOR AND CONTRIBUTORS ``AS IS'' AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTORS
+BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
+BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
+IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+                                                                                                                                              n1_find PKCS5_PBE_add X509_STORE_get_get_issuer X509_ATTRIBUTE_create_by_NID EDIPARTYNAME_free X509_OBJECT_free ERR_peek_error CONF_get_section GENERAL_NAME_set0_value ASN1_PRINTABLESTRING_new X509_PURPOSE_get_id X509_REQ_delete_attr X509_VERIFY_PARAM_new EVP_MD_meth_get_input_blocksize BN_mod_add X509_add_ext d2i_SXNETID X509_OBJECT_retrieve_match EVP_PKEY_asn1_add_alias PKCS12_free BIO_set_cipher PKCS7_ISSUER_AND_SERIAL_new EVP_PKEY_meth_set_init PKCS7_content_new PKCS7_set_signed_attributes EVP_PKEY_add1_attr OPENSSL_die BN_get_word i2d_ASN1_IA5STRING PKCS7_digest_from_attributes PKCS7_SIGNER_INFO_new X509_CRL_METHOD_new EVP_CIPHER_CTX_encrypting X509_get_pubkey SMIME_write_ASN1 CRYPTO_dup_ex_data X509_REVOKED_get_ext_count BN_GENCB_free X509_policy_node_get0_policy ASN1_item_verify X509V3_parse_list policy_node_free ASN1_BIT_STRING_free PKCS7_SIGNED_new EVP_PKEY_cmp EVP_CipherFinal_ex X509V3_EXT_add_list RSA_padding_check_none X509_STORE_CTX_set0_dane d2i_OCSP_SINGLERESP EVP_CI
