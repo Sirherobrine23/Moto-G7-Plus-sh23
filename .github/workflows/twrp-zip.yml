@@ -39,9 +39,8 @@ jobs:
       id: tag
       run: |
         echo ::set-env name=RELEASE_TAG::"$(TZ=UTC+3 date +"%d/%m/%Y")-TWRP-Zip_files"
+        echo "$(TZ=UTC+3 date +"%H:%M:%S")" >> release.txt
         echo "©Sirherobrine23" >> release.txt
-        echo "${{ env.EVENTO	}}" >> release.txt
-        echo "${{ env.EVENTO	}}"
         echo "::set-output name=status::success"
     
     - name: Upload do zip para o Release
