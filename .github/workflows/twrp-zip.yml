@@ -22,10 +22,7 @@ jobs:
       env:
         DEBIAN_FRONTEND: noninteractive
       run: |
-        sudo -E apt-get -qq update
         sudo -E apt-get -qq install zip unzip dos2unix
-        sudo timedatectl set-timezone "$TZ"
-
     - name: Clonando
       run: git clone --depth 1 $REPO_URL -b $REPO_BRANCH zip-sh
 
