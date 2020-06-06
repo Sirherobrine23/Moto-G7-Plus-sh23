@@ -7,9 +7,7 @@ ui_print() {
   echo "ui_print $1
     ui_print" >> $OUTFD
 }
-#setenforce 0
 unzip -o "$OPENGAZIP" -d "$TMP"
-set_progress() { echo "set_progress $1" >> $OUTFD; }
 #Agora vem o script
 #chmoad
 set_perm() {
@@ -83,9 +81,9 @@ sleep 5
 ui_print "Seu sistema tem a partição: $AS_ROOT"
 ui_print "diretorio do seu sistema: $SYSTEM"
 sleep 2
-if [ -d $SYSTEM/app/Youtube/YouTube:$SYSTEM/app/youtube ];then
+if [ -d $SYSTEM/app/YouTube ];then
     ui_print "Removendo o YouTube"
-    rm -rf $SYSTEM/app/YouTube/
+    rm -rf $SYSTEM/app/YouTube
     ui_print "Vamos instalar o YouTube Vanced"
 else
     ui_print "YouTube não está instalado"
@@ -104,7 +102,7 @@ if [ -d $TMP/system ];then
     ui_print " "
     cp -rf $TMP/system/* $SYSTEM
 else
-    ui_print "alguns arquivos não foi extraidos. por favor execute de novo.
+    ui_print "alguns arquivos não foi extraidos. por favor execute de novo."
     exit
 fi
 sleep 2
@@ -128,7 +126,7 @@ else
     exit
 fi
 ui_print "- Completo!"
-ui_print "- © Sirherobrine23
+ui_print "- © Sirherobrine23"
 ui_print " "
 #não me apague
 exit
