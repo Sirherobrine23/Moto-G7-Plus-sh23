@@ -40,10 +40,8 @@ jobs:
     - name: Gerando o body
       id: tag
       run: |
-        echo "Zip Actions" >> release.txt
-        echo "Twrp for Moto g7 Plus lake" >> release.txt
         echo "©Sirherobrine23" >> release.txt
-        echo "${{ create }}"
+        echo "${{ create }}" >> release.txt
         echo "::set-output name=status::success"
     
     - name: Upload do zip para o Release
