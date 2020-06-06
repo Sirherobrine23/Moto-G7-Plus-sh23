@@ -6,6 +6,7 @@ env:
   REPO_URL: https://github.com/Sirherobrine23/Moto-G7-Plus-sh23.git
   REPO_BRANCH: TWRP
   UPLOAD_RELEASE: true
+  EVENTO: "${{ github.event_name }}"
   TZ: America/Sao_Paulo
 
 jobs:
@@ -41,7 +42,8 @@ jobs:
       id: tag
       run: |
         echo "©Sirherobrine23" >> release.txt
-        echo "${{ github.event_name	}}" >> release.txt
+        echo "${{ env.EVENTO	}}" >> release.txt
+        echo "${{ env.EVENTO	}}"
         echo "::set-output name=status::success"
     
     - name: Upload do zip para o Release
