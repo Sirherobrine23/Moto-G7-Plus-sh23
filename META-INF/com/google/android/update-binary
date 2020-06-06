@@ -95,7 +95,7 @@ else
 fi
 sleep 3
 
-if [ -d $TMP/dolby.zip ];then
+if [ -e $TMP/dolby.zip ];then
     ui_print "Instalando o Dolby Digital Plus"
     unzip $TMP/dolby.zip -d "$TMP/dsplus"
     cp -rf $TMP/dsplus/* $SYSTEM
