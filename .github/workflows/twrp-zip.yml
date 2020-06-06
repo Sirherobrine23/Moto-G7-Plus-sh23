@@ -44,7 +44,7 @@ jobs:
         echo "©Sirherobrine23" >> release.txt
         echo "${{ env.EVENTO	}}" >> release.txt
         echo "${{ env.EVENTO	}}"
-        ${{ env.DATE }}="$(TZ=UTC+3 date +"%d-%m-%Y-%H-%M-%S")"
+        ${{ env.DATE }}= "$(TZ=UTC+3 date +"%d-%m-%Y-%H-%M-%S")"
         echo "::set-output name=status::success"
     
     - name: Upload do zip para o Release
