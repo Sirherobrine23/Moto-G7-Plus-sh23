@@ -15,8 +15,8 @@ jobs:
     if: github.event.repository.owner.id == github.event.sender.id
 
     steps:
-    - name: Checando
-      uses: actions/checkout@master
+#    - name: Checando
+#      uses: actions/checkout@master
 
     - name: Inicializando
       env:
