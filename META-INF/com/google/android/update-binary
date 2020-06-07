@@ -95,16 +95,14 @@ else
     ui_print "Não temos arquivos product"
 fi
 sleep 3
+#--------------------
 
-if [ -e $TMP/dolby.zip ];then
-    ui_print "Instalando o Dolby Digital Plus"
-    mkdir "$TMP/dsplus"
-    unzip "$TMP/dolby.zip" -d "$TMP/dsplus"
-    cp -rf $TMP/dsplus/* $SYSTEM
+if [ -e $SYSTEM/product/media/bootabi*.zip ];then
+    cp -rf 
 else
-    ui_print "Dolby Digital Plus não sera instalado"
+
 fi
-sleep 10
+#--------------------
 ui_print "boot-logo"
 if [ -e $TMP/logo.bin ];then
     #logo
