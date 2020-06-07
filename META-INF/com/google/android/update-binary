@@ -68,8 +68,6 @@ else
     ui_print "YouTube não está instalado no $SYSTEM/app/"
 fi
 ui_print " "
-ui_print "Variaveis prontas"
-sleep 10
 if [ -d $SYSTEM/priv-app/YouTube ];then
     ui_print "Removendo o YouTube do $SYSTEM/priv-app"
     rm -rf $SYSTEM/priv-app/YouTube
@@ -77,18 +75,26 @@ else
     ui_print "YouTube não está instalado no $SYSTEM/priv-app/"
 fi
 ui_print " "
+ui_print "Variaveis prontas"
+sleep 10
 
 if [ -d $PROD/priv-app/Camera2 ];then
     ui_print "Android Camera2 AOSP detectado. removendo"
     rm -rf "$PROD/priv-app/Camera2"
 else
     ui_print "não foi detectado a Camera2 AOSP"
-    ui_print "Continuando ..."
 fi
+if [ -d $PROD/priv-app/camera2 ];then
+    ui_print "Android Camera2 AOSP detectado. removendo"
+    rm -rf "$PROD/priv-app/camera2"
+else
+    ui_print " "
+fi
+
 ui_print " "
 
 if [ -d $TMP/system ];then
-    ui_print "Instalando alguns aplicativos e o novo Youtube"
+    ui_print "Instalando alguns aplicativos"
     ui_print " "
     cp -rf $TMP/system/* $SYSTEM
 else
@@ -98,14 +104,14 @@ fi
 ui_print " "
 
 if [ -d $TMP/product ];then
-    ui_print "Novos arquivos no Product"
+    ui_print "Product"
     cp -rf $TMP/product $PROD
 else
     ui_print "Não temos arquivos product"
 fi
 ui_print " "
 sleep 3
-if [ -e $SYSTEM/product/media/bootanimation.zip || $SYSTEM/product/media/bootanimation-dark.zip];then
+if [ -e $PROD/media/bootanimation.zip ];then
     ui_print "Bootanimation no PRODUCT"
     rm -rf $PROD/media/bootanimation*
     cp $TMP/bootanimation/* $PROD/media/
@@ -113,6 +119,11 @@ else
     ui_print "Bootanimation no SYSTEM"
     rm -rf $SYSTEM/media/bootanimation*
     cp $TMP/bootanimation/* $SYSTEM/media/
+fi
+if [ -e $PROD/media/bootanimation-dark.zip ];then
+    rm -rf $PROD/media/bootanimation-dark.zip
+else
+    ui_print "..."
 fi
 ui_print " "
 ui_print "boot-logo"
