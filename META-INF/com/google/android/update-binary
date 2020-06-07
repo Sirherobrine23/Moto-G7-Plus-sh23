@@ -100,9 +100,7 @@ if [ -e $TMP/dolby.zip ];then
     ui_print "Instalando o Dolby Digital Plus"
     mkdir "$TMP/dsplus"
     unzip "$TMP/dolby.zip" -d "$TMP/dsplus"
-    mv $TMP/dsplus/vendor $TMP
     cp -rf $TMP/dsplus/* $SYSTEM
-    cp -rf $TMP/vendor/* $VENDOR
 else
     ui_print "Dolby Digital Plus não sera instalado"
 fi
