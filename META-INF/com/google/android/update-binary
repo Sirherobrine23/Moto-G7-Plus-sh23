@@ -96,11 +96,10 @@ else
 fi
 sleep 3
 #--------------------
-
 if [ -e $SYSTEM/product/media/bootabi*.zip ];then
-    cp -rf 
+    ui_print "Bootanimation no product"
 else
-
+    ui_print "Bootanimation no system"
 fi
 #--------------------
 ui_print "boot-logo"
