@@ -103,7 +103,6 @@ fi
 if [ -e $SYSTEM/media/bootanimation-dark.zip ];then
     rm -rf $PROD/media/bootanimation-dark.zip
 fi
-if [ -e $TMP/logo.bin ];then
     ui_print " "
     ui_print "Backup do logo na pasta /data/backup/"
     mkdir /data/backup
@@ -115,10 +114,6 @@ if [ -e $TMP/logo.bin ];then
     #logos
     cp -rf $TMP/logo.bin /dev/block/by-name/logo_a
     cp -rf $TMP/logo.bin /dev/block/by-name/logo_b
-else
-    ui_print "arquivo do logo não encontrado."
-    exit
-fi
 ui_print " "
 ui_print "- Completo!"
 ui_print "- © Sirherobrine23"
