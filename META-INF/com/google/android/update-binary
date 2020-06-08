@@ -64,6 +64,7 @@ ui_print "Seu sistema é tipo: $AS_ROOT"
 ui_print "A pasta PRODUCT é na/no: $PROD_DETECT"
 #\/System detects
 
+#\\//Pixels
 BUILD=$(cat $SYSTEM/build.prop | grep "Pixel" || "pixel")
 if [ Pixel=$BUILD ];then
     ui_print "ROM/GSi Pixel, não podemos continua ¹"
@@ -74,6 +75,7 @@ elif [ pixel=$BUILD ];then
 else
     ui_print "Não é Pixel, não podemos continuar"
 fi
+#\\//Pixels
 
 #\/Apps detect
 if [ -d $SYSTEM/app/YouTube ];then
@@ -155,7 +157,7 @@ fi
 #Bootanimation dark
 #\/BOOT
 
-if [-d /dev/block/bootdevice/by-name ];then
+if [ -d /dev/block/bootdevice/by-name ];then
     #\/Boot_logo_a
         ui_print " "
         ui_print "Backup do logo_a na pasta /data/backup-sh23/"
@@ -170,7 +172,7 @@ if [-d /dev/block/bootdevice/by-name ];then
         cp -rf /dev/block/bootdevice/by-name/logo_b /data/backup-sh23/logo_b.img
         cp -rf $TMP/logo.bin /dev/block/bootdevice/by-name/logo_b
     #\/Boot_logo_b
-elif [-d /block/by-name ];then
+elif [ -d /block/by-name ];then
     #\/Boot_logo_a
         ui_print " "
         ui_print "Backup do logo_a na pasta /data/backup-sh23/"
@@ -185,7 +187,16 @@ elif [-d /block/by-name ];then
         cp -rf /dev/block/by-name/logo_b /data/backup-sh23/logo_b.img
         cp -rf $TMP/logo.bin /dev/block/by-name/logo_b
     #\/Boot_logo_b
-elif [-d /dev/block/bootdevice/by-name/logo ];then
+elif [ -e /dev/block/bootdevice/by-name/logo ];then
+    #\/Boot_logo_a
+        ui_print " "
+        ui_print "Backup do logo na pasta /data/backup-sh23/"
+        ui_print "não sera possivel trocar a logo A/B, só A"
+        mkdir /data/backup-sh23
+        cp -rf /dev/block/bootdevice/by-name/logo /data/backup-sh23/logo.img
+        cp -rf $TMP/logo.bin /dev/block/bootdevice/by-name/logo
+    #\/Boot_logo_a
+elif [ -e /dev/block/by-name/logo ];then
     #\/Boot_logo_a
         ui_print " "
         ui_print "Backup do logo na pasta /data/backup-sh23/"
