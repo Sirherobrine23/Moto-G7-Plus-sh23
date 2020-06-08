@@ -42,17 +42,6 @@ else
 fi
 #//\\Mount
 
-BUILD=$(cat build.txt | grep "Pixel" || "pixel")
-if [ Pixel=$BUILD ];then
-    ui_print "Pixel não podemos continua ¹"
-    exit
-elif [ pixel=$BUILD ];then
-    ui_print "Pixel não podemos continua ²"
-    exit
-else
-    ui_print "Não Pixel"
-fi
-
 #\/System detects
 if [ -d /system/system ];then
     export SYSTEM=/system/system
@@ -74,6 +63,17 @@ fi
 ui_print "Seu sistema é tipo: $AS_ROOT"
 ui_print "A pasta PRODUCT é na/no: $PROD_DETECT"
 #\/System detects
+
+BUILD=$(cat $SYSTEM/build.prop | grep "Pixel" || "pixel")
+if [ Pixel=$BUILD ];then
+    ui_print "ROM/GSi Pixel, não podemos continua ¹"
+    exit
+elif [ pixel=$BUILD ];then
+    ui_print "ROM/GSi Pixel, não podemos continua ²"
+    exit
+else
+    ui_print "Não é Pixel, não podemos continuar"
+fi
 
 #\/Apps detect
 if [ -d $SYSTEM/app/YouTube ];then
