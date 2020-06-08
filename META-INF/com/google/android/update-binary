@@ -135,25 +135,39 @@ fi
 #Bootanimation dark
 #\/BOOT
 
-#\/Boot_logo_a
-if [-e /dev/block/bootdevice/by-name/logo_a ];then
-    ui_print " "
-    ui_print "Backup do logo_a na pasta /data/backup-sh23/"
-    mkdir /data/backup-sh23
-    cp -rf /dev/block/bootdevice/by-name/logo_a /data/backup-sh23/logo_a.img
-    cp -rf $TMP/logo.bin /dev/block/bootdevice/by-name/logo_a
+if [-d /dev/block/bootdevice/by-name ];then
+    #\/Boot_logo_a
+        ui_print " "
+        ui_print "Backup do logo_a na pasta /data/backup-sh23/"
+        mkdir /data/backup-sh23
+        cp -rf /dev/block/bootdevice/by-name/logo_a /data/backup-sh23/logo_a.img
+        cp -rf $TMP/logo.bin /dev/block/bootdevice/by-name/logo_a
+    #\/Boot_logo_a
+    #\/Boot_logo_b
+        ui_print " "
+        ui_print "Backup do logo_b na pasta /data/backup-sh23/"
+        mkdir /data/backup-sh23
+        cp -rf /dev/block/bootdevice/by-name/logo_b /data/backup-sh23/logo_b.img
+        cp -rf $TMP/logo.bin /dev/block/bootdevice/by-name/logo_b
+    #\/Boot_logo_b
+elif [-d /block/by-name ];then
+    #\/Boot_logo_a
+        ui_print " "
+        ui_print "Backup do logo_a na pasta /data/backup-sh23/"
+        mkdir /data/backup-sh23
+        cp -rf /dev/block/by-name/logo_a /data/backup-sh23/logo_a.img
+        cp -rf $TMP/logo.bin /dev/block/by-name/logo_a
+    #\/Boot_logo_a
+    #\/Boot_logo_b
+        ui_print " "
+        ui_print "Backup do logo_b na pasta /data/backup-sh23/"
+        mkdir /data/backup-sh23
+        cp -rf /dev/block/by-name/logo_b /data/backup-sh23/logo_b.img
+        cp -rf $TMP/logo.bin /dev/block/by-name/logo_b
+    #\/Boot_logo_b
+else
+    ui_print "Não podemos trocar o Logo Boot"
 fi
-#\/Boot_logo_a
-#\/Boot_logo_b
-if [-e /dev/block/bootdevice/by-name/logo_b ];then
-    ui_print " "
-    ui_print "Backup do logo_b na pasta /data/backup-sh23/"
-    mkdir /data/backup-sh23
-    cp -rf /dev/block/bootdevice/by-name/logo_b /data/backup-sh23/logo_b.img
-    cp -rf $TMP/logo.bin /dev/block/bootdevice/by-name/logo_b
-fi
-#\/Boot_logo_b
-
 #---------------------------------------------------------------------------------
 #Final do script
 
@@ -164,6 +178,5 @@ ui_print " "
 ui_print " "
 ui_print " "
 
-umount -a
-mount data
+umount system
 exit
