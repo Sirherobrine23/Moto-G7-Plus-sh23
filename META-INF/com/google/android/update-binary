@@ -27,10 +27,18 @@ ui_print " "
 #//\\Mount
 
 if [ -d /system/system ];then
-    ui_print "Partição montada"
+    echo "ui_print  /*/*/*/*/*\*\*\*\*/*/*/*/\*"
 else
-    ui_print "Partição não montada"
     mount system
+fi
+if [ -d /system/system ];then
+    ui_print "Partição montada"
+elif [ -d /system ];then
+    ui_print "Montando partição"
+    mount system
+else
+    ui_print "Partições não montadas, saindo ..."
+    exit
 fi
 #//\\Mount
 
