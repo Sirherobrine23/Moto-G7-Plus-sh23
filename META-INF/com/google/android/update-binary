@@ -71,6 +71,14 @@ if [ -d $SYSTEM/priv-app/AudioFX ];then
     ui_print "Removendo o AudioFX"
     rm -rf $SYSTEM/priv-app/AudioFX
 fi
+if [ -d $SYSTEM/priv-app/MusicFX ];then
+    ui_print "Removendo o MusicFX"
+    rm -rf $SYSTEM/priv-app/MusicFX
+fi
+if [ -d $SYSTEM/app/MusicFX ];then
+    ui_print "Removendo o MusicFX"
+    rm -rf $SYSTEM/app/MusicFX
+fi
 if [ -d $PROD/priv-app/Camera2 ];then
     ui_print "Android Camera2 AOSP detectado. removendo"
     rm -rf "$PROD/priv-app/Camera2"
