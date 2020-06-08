@@ -42,6 +42,17 @@ else
 fi
 #//\\Mount
 
+BUILD=$(cat build.txt | grep "Pixel" || "pixel")
+if [ Pixel=$BUILD ];then
+    ui_print "Pixel não podemos continua ¹"
+    exit
+elif [ pixel=$BUILD ];then
+    ui_print "Pixel não podemos continua ²"
+    exit
+else
+    ui_print "Não Pixel"
+fi
+
 #\/System detects
 if [ -d /system/system ];then
     export SYSTEM=/system/system
