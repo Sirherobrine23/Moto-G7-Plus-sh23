@@ -131,25 +131,17 @@ if [ -z $NEW ]; then
   ui_print " "
   ui_print "- Select Option -"
   ui_print "   Choose which option you want installed:"
-  ui_print "   Vol Up = New, Vol Down = Old"
+  ui_print "   Vol Up = Debug On, Vol Down = Debug Off"
   if $FUNCTION; then 
-    NEW=true
+    debug=true
   else 
-    NEW=false
+    debug=false
   fi
 else
   ui_print "   Option specified in zipname!"
 fi
 
-if $NEW; then
-  # insert stuff for new here
-else
-  # insert stuff for old here
-fi
-
-DEBUGS="$(echo "$debug" | grep "true")"
-
-if [ false="$DEBUGS" ];then
+if [ true="$debug" ];then
     ui_print "Modo debug desligado"
 else
     #\\//Pixels
