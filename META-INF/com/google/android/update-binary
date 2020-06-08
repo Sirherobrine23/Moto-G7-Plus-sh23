@@ -50,14 +50,19 @@ else
     export SYSTEM=/system
     export AS_ROOT="A Only"
 fi
-ui_print " "
+
 if [ -d $SYSTEM/product ];then
     ui_print "Indentificamos a pasta product"
     export PROD="$SYSTEM/product"
-else
-    ui_print "Não temos uma pasta product"
+    
 fi
 
+if [ -d /product ];then
+    ui_print "Indentificamos a pasta product"
+    export PROD="/product"
+fi
+
+ui_print " "
     ui_print "Seu sistema tem a partição: $AS_ROOT"
     ui_print " "
 
@@ -68,6 +73,13 @@ else
     ui_print "YouTube não está instalado no $SYSTEM/app/"
 fi
 ui_print " "
+if [ -d $SYSTEM/priv-app/AudioFX ];then
+    ui_print "Removendo o AudioFX"
+    rm -rf $SYSTEM/priv-app/AudioFX
+else
+    ui_print "O AudioFX não está instalado"
+fi
+ui_print " "
 if [ -d $SYSTEM/priv-app/YouTube ];then
     ui_print "Removendo o YouTube do $SYSTEM/priv-app"
     rm -rf $SYSTEM/priv-app/YouTube
@@ -75,8 +87,7 @@ else
     ui_print "YouTube não está instalado no $SYSTEM/priv-app/"
 fi
 ui_print " "
-ui_print "Variaveis prontas"
-sleep 10
+
 
 if [ -d $PROD/priv-app/Camera2 ];then
     ui_print "Android Camera2 AOSP detectado. removendo"

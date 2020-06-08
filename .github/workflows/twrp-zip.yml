@@ -32,6 +32,7 @@ jobs:
        cd zip-sh
        sudo dos2unix META-INF/com/google/android/update-binary
        sudo rm -rf README.md LICENSE *.git*
+       sudo chmod 644 */*/*/*/*
        sudo zip "$(TZ=UTC+3 date +"%H-%M-%S").zip" -r * 
        sudo mv *-*.zip ../files/
     
