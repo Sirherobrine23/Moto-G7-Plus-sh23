@@ -65,10 +65,10 @@ ui_print "A pasta PRODUCT é na/no: $PROD_DETECT"
 #\/System detects
 
 # Get option from zip name if applicable
-case $(basename $ZIP) in
-  *debug*|*DEBUG*|*De*) debug=true;;
-  *old*|*Old*|*OLD*) NEW=false;;
-esac
+#case $(basename $ZIP) in
+#  *debug*|*DEBUG*|*De*) debug=true;;
+#  *old*|*Old*|*OLD*) debug=false;;
+#esac
 
 # Change this path to wherever the keycheck binary is located in your installer
 KEYCHECK=$TMP/keycheck
@@ -120,18 +120,22 @@ if [ -z $NEW ]; then
     FUNCTION=choose
   else
     FUNCTION=chooseold
-    ui_print "   ! Legacy device detected! Using old keycheck method"
+    ui_print "   ! Dispositivo legado detectado! Usando Metodo antigo"
     ui_print " "
-    ui_print "- Vol Key Programming -"
-    ui_print "   Press Vol Up Again:"
+    ui_print "- Programando Botão de Volume -"
+    ui_print "   Press Vol Up de novo:"
     $FUNCTION "UP"
     ui_print "   Press Vol Down"
     $FUNCTION "DOWN"
   fi
+  
+  #//\\Botoes
   ui_print " "
   ui_print "- Select Option -"
   ui_print "   Choose which option you want installed:"
   ui_print "   Vol Up = Debug On, Vol Down = Debug Off"
+  #//\\Botoes
+
   if $FUNCTION; then 
     debug=true
   else 
