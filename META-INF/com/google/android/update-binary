@@ -2,7 +2,6 @@
 export OPENGAZIP="$3"
 export OUTFD="/proc/self/fd/$2"
 export TMP="/tmp"
-export VENDOR=/vendor
 ui_print() {
   echo "ui_print $1
     ui_print" >> $OUTFD
@@ -37,9 +36,8 @@ ui_print " "
 ui_print " "
 ui_print " "
 ui_print " "
-ui_print "Mountando algumas partiçoes"
+ui_print "Mountando partiçoes"
 mount system
-mount -a
 ui_print "Partição montadas"
 ui_print " "
 ui_print " "
@@ -52,13 +50,14 @@ else
 fi
 
 if [ -d $SYSTEM/product ];then
-    ui_print "Indentificamos a pasta product"
+    ui_print "Indentificamos a pasta product no $SYSTEM"
     export PROD="$SYSTEM/product"
     
 fi
 
 if [ -d /product ];then
-    ui_print "Indentificamos a pasta product"
+    ui_print "Indentificamos a pasta product na raiz"
+    mount product
     export PROD="/product"
 fi
 
@@ -113,28 +112,22 @@ else
     exit
 fi
 ui_print " "
-
-if [ -d $TMP/product ];then
-    ui_print "Product"
-    cp -rf $TMP/product $PROD
-else
-    ui_print "Não temos arquivos product"
-fi
-ui_print " "
 sleep 3
 if [ -e $PROD/media/bootanimation.zip ];then
     ui_print "Bootanimation no PRODUCT"
     rm -rf $PROD/media/bootanimation*
     cp $TMP/bootanimation/* $PROD/media/
-else
+fi
+if [-e $SYSTEM/media/bootanimation.zip ];then
     ui_print "Bootanimation no SYSTEM"
     rm -rf $SYSTEM/media/bootanimation*
     cp $TMP/bootanimation/* $SYSTEM/media/
 fi
 if [ -e $PROD/media/bootanimation-dark.zip ];then
     rm -rf $PROD/media/bootanimation-dark.zip
-else
-    ui_print "..."
+fi
+if [ -e $SYSTEM/media/bootanimation-dark.zip ];then
+    rm -rf $PROD/media/bootanimation-dark.zip
 fi
 ui_print " "
 ui_print "boot-logo"
@@ -142,10 +135,10 @@ if [ -e $TMP/logo.bin ];then
     ui_print " "
     ui_print "Backup do logo na pasta /data/backup/"
     mkdir /data/backup
-    cp -rf /dev/block/by-name/logo_a /data/backup/logo_a.bin
-    rm -rf /dev/block/by-name/logo_a
-    cp -rf /dev/block/by-name/logo_b /data/backup/logo_b.bin
-    rm -rf /dev/block/by-name/logo_b
+    cp /dev/block/by-name/logo_a /data/backup/logo_a.bin
+    rm /dev/block/by-name/logo_a
+    cp /dev/block/by-name/logo_b /data/backup/logo_b.bin
+    rm /dev/block/by-name/logo_b
     ui_print "Logo para o novo BootAnimation /-\ Moto G7 Plus"
     #logos
     cp -rf $TMP/logo.bin /dev/block/by-name/logo_a
