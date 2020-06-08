@@ -53,11 +53,12 @@ fi
 if [ -d $SYSTEM/product ];then
     export PROD="$SYSTEM/product"
     export PROD_DETECT="$SYSTEM"
-fi
-if [ -d /product ];then
+elif [ -d /product ];then
     mount product
     export PROD="/product"
-    export PROD_DETECT="Raiz"
+    export PROD_DETECT="Raiz do sistema"
+else
+    export PROD_DETECT="Não tem"
 fi
 ui_print "Seu sistema é tipo: $AS_ROOT"
 ui_print "A pasta PRODUCT é na/no: $PROD_DETECT"
@@ -65,31 +66,35 @@ ui_print "A pasta PRODUCT é na/no: $PROD_DETECT"
 
 #\/Apps detect
 if [ -d $SYSTEM/app/YouTube ];then
-    ui_print "Removendo o YouTube do $SYSTEM/app"
+    ui_print "Removendo o YouTube ¹"
     rm -rf $SYSTEM/app/YouTube
 fi
 if [ -d $SYSTEM/priv-app/YouTube ];then
-    ui_print "Removendo o YouTube do $SYSTEM/priv-app"
+    ui_print "Removendo o YouTube ²"
     rm -rf $SYSTEM/priv-app/YouTube
 fi
 if [ -d $SYSTEM/priv-app/AudioFX ];then
-    ui_print "Removendo o AudioFX"
+    ui_print "Removendo o AudioFX ¹"
+    rm -rf $SYSTEM/priv-app/AudioFX
+fi
+if [ -d $SYSTEM/app/AudioFX ];then
+    ui_print "Removendo o AudioFX ²"
     rm -rf $SYSTEM/priv-app/AudioFX
 fi
 if [ -d $SYSTEM/priv-app/MusicFX ];then
-    ui_print "Removendo o MusicFX"
+    ui_print "Removendo o MusicFX ¹"
     rm -rf $SYSTEM/priv-app/MusicFX
 fi
 if [ -d $SYSTEM/app/MusicFX ];then
-    ui_print "Removendo o MusicFX"
+    ui_print "Removendo o MusicFX ²"
     rm -rf $SYSTEM/app/MusicFX
 fi
 if [ -d $PROD/priv-app/Camera2 ];then
-    ui_print "Android Camera2 AOSP detectado. removendo"
+    ui_print "Android Camera2 AOSP detectado. removendo ¹"
     rm -rf "$PROD/priv-app/Camera2"
 fi
 if [ -d $PROD/app/Camera2 ];then
-    ui_print "Android Camera2 AOSP detectado. removendo"
+    ui_print "Android Camera2 AOSP detectado. removendo ²"
     rm -rf "$PROD/app/camera2"
 fi
 #\/Apps detect
@@ -108,7 +113,11 @@ fi
 #/\audio
 if [-d $SYSTEM/media ];then
     ui_print "Audio no System"
-    cp -rf $TMP/
+    cp -rf $TMP/ $SYSTEM/media
+fi
+if [-d $PROD/media ];then
+    ui_print "Audio no Product"
+    cp -rf $TMP/ $PROD/media
 fi
 #/\audio
 
@@ -165,6 +174,15 @@ elif [-d /block/by-name ];then
         cp -rf /dev/block/by-name/logo_b /data/backup-sh23/logo_b.img
         cp -rf $TMP/logo.bin /dev/block/by-name/logo_b
     #\/Boot_logo_b
+elif [-d /dev/block/bootdevice/by-name/logo ];then
+    #\/Boot_logo_a
+        ui_print " "
+        ui_print "Backup do logo na pasta /data/backup-sh23/"
+        ui_print "não sera possivel trocar a logo A/B, só A"
+        mkdir /data/backup-sh23
+        cp -rf /dev/block/bootdevice/by-name/logo /data/backup-sh23/logo.img
+        cp -rf $TMP/logo.bin /dev/block/bootdevice/by-name/logo
+    #\/Boot_logo_a
 else
     ui_print "Não podemos trocar o Logo Boot"
 fi
