@@ -38,6 +38,7 @@ ui_print " "
 ui_print " "
 ui_print "Mountando partiçoes"
 mount system
+mount -a
 ui_print "Partição montadas"
 ui_print " "
 ui_print " "
@@ -48,61 +49,36 @@ else
     export SYSTEM=/system
     export AS_ROOT="A Only"
 fi
-
+    ui_print "seu sistema é tipo: $AS_ROOT"
 if [ -d $SYSTEM/product ];then
     ui_print "Indentificamos a pasta product no $SYSTEM"
     export PROD="$SYSTEM/product"
-    
 fi
-
 if [ -d /product ];then
     ui_print "Indentificamos a pasta product na raiz"
     mount product
     export PROD="/product"
 fi
-
-ui_print " "
-    ui_print "Seu sistema tem a partição: $AS_ROOT"
-    ui_print " "
-
 if [ -d $SYSTEM/app/YouTube ];then
     ui_print "Removendo o YouTube do $SYSTEM/app"
     rm -rf $SYSTEM/app/YouTube
-else
-    ui_print "YouTube não está instalado no $SYSTEM/app/"
 fi
-ui_print " "
-if [ -d $SYSTEM/priv-app/AudioFX ];then
-    ui_print "Removendo o AudioFX"
-    rm -rf $SYSTEM/priv-app/AudioFX
-else
-    ui_print "O AudioFX não está instalado"
-fi
-ui_print " "
 if [ -d $SYSTEM/priv-app/YouTube ];then
     ui_print "Removendo o YouTube do $SYSTEM/priv-app"
     rm -rf $SYSTEM/priv-app/YouTube
-else
-    ui_print "YouTube não está instalado no $SYSTEM/priv-app/"
 fi
-ui_print " "
-
-
+if [ -d $SYSTEM/priv-app/AudioFX ];then
+    ui_print "Removendo o AudioFX"
+    rm -rf $SYSTEM/priv-app/AudioFX
+fi
 if [ -d $PROD/priv-app/Camera2 ];then
     ui_print "Android Camera2 AOSP detectado. removendo"
     rm -rf "$PROD/priv-app/Camera2"
-else
-    ui_print "não foi detectado a Camera2 AOSP"
 fi
-if [ -d $PROD/priv-app/camera2 ];then
+if [ -d $PROD/app/Camera2 ];then
     ui_print "Android Camera2 AOSP detectado. removendo"
-    rm -rf "$PROD/priv-app/camera2"
-else
-    ui_print " "
+    rm -rf "$PROD/app/camera2"
 fi
-
-ui_print " "
-
 if [ -d $TMP/system ];then
     ui_print "Instalando alguns aplicativos"
     ui_print " "
@@ -111,8 +87,6 @@ else
     ui_print "alguns arquivos não foi extraidos. por favor execute de novo."
     exit
 fi
-ui_print " "
-sleep 3
 if [ -e $PROD/media/bootanimation.zip ];then
     ui_print "Bootanimation no PRODUCT"
     rm -rf $PROD/media/bootanimation*
@@ -129,8 +103,6 @@ fi
 if [ -e $SYSTEM/media/bootanimation-dark.zip ];then
     rm -rf $PROD/media/bootanimation-dark.zip
 fi
-ui_print " "
-ui_print "boot-logo"
 if [ -e $TMP/logo.bin ];then
     ui_print " "
     ui_print "Backup do logo na pasta /data/backup/"
