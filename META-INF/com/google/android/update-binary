@@ -14,19 +14,25 @@ set_perm() {
 ch_con() {
   chcon -h u:object_r:system_file:s0 "$1"
 }
-ui_print " "
-ui_print " "
-ui_print " "
-ui_print " "
-ui_print "Mountando partiçoes"
-mount system
-ui_print "Partição montadas"
-mount system
-ui_print "Verificado a partição montadas"
-ui_print " "
-ui_print " "
 #---------------------------------------------------------------------------------
 #script
+
+#
+ui_print " "
+ui_print " "
+ui_print " "
+ui_print " "
+#
+
+#//\\Mount
+
+if [ -d /system/system ];then
+    ui_print "Partição montada"
+else
+    ui_print "Partição não montada"
+    mount system
+fi
+#//\\Mount
 
 #\/System detects
 if [ -d /system/system ];then
@@ -142,10 +148,14 @@ fi
 
 #---------------------------------------------------------------------------------
 #Final do script
+
 ui_print " "
 ui_print "- Completo!"
 ui_print "- © Sirherobrine23"
 ui_print " "
 ui_print " "
 ui_print " "
+
+umount -a
+mount data
 exit
