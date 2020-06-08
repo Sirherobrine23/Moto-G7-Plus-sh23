@@ -29,7 +29,7 @@ ui_print " "
 if [ -d /system/system ];then
     echo "ui_print  /*/*/*/*/*\*\*\*\*/*/*/*/\*"
 else
-    mount system
+    mount -a
 fi
 if [ -d /system/system ];then
     ui_print "Partição montada"
