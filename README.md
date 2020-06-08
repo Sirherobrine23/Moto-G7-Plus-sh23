@@ -21,13 +21,13 @@ Câmera frontal              | 12 MP, 1,25µm
 <div>
     <h3>git clone</h3>
         Matheus-testes <code> git clone https://github.com/Sirherobrine23/Moto-G7-Plus -b Matheus-testes </code>
-     <p>TWRP-base-magisk <code> git clone https://github.com/Sirherobrine23/Moto-G7-Plus -b TWRP-base-magisk </code></p>
+     <p>TWRP-base-magisk <code> git clone https://github.com/Sirherobrine23/Moto-G7-Plus -b TWRP </code></p>
 </div>
 
 <div>
     <h3>Github Web
         Matheus-testes <a href="https://github.com/Sirherobrine23/Moto-G7-Plus/tree/Matheus-testes"> Aqui </a>
-     <p>TWRP-base-magisk <a href="https://github.com/Sirherobrine23/Moto-G7-Plus/tree/TWRP-base-magisk"> Aqui </a></p>
+     <p>TWRP           <a href="https://github.com/Sirherobrine23/Moto-G7-Plus/tree/TWRP"> Aqui </a></p>
 </div>
 
 
