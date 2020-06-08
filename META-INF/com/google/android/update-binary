@@ -18,30 +18,17 @@ ui_print " "
 ui_print " "
 ui_print " "
 ui_print " "
-ui_print " "
-ui_print " "
-ui_print " "
-ui_print " "
-ui_print " "
-ui_print " "
-ui_print " "
-ui_print " "
-ui_print " "
-ui_print " "
-ui_print " "
-ui_print " "
-ui_print " "
-ui_print " "
-ui_print " "
-ui_print " "
-ui_print " "
-ui_print " "
 ui_print "Mountando partiçoes"
 mount system
-mount -a
 ui_print "Partição montadas"
+mount system
+ui_print "Verificado a partição montadas"
 ui_print " "
 ui_print " "
+#---------------------------------------------------------------------------------
+#script
+
+#\/System detects
 if [ -d /system/system ];then
     export SYSTEM=/system/system
     export AS_ROOT="A/B"
@@ -49,16 +36,20 @@ else
     export SYSTEM=/system
     export AS_ROOT="A Only"
 fi
-    ui_print "seu sistema é tipo: $AS_ROOT"
 if [ -d $SYSTEM/product ];then
-    ui_print "Indentificamos a pasta product no $SYSTEM"
     export PROD="$SYSTEM/product"
+    export PROD_DETECT="$SYSTEM"
 fi
 if [ -d /product ];then
-    ui_print "Indentificamos a pasta product na raiz"
     mount product
     export PROD="/product"
+    export PROD_DETECT="Raiz"
 fi
+ui_print "Seu sistema é tipo: $AS_ROOT"
+ui_print "A pasta PRODUCT é na/no: $PROD_DETECT"
+#\/System detects
+
+#\/Apps detect
 if [ -d $SYSTEM/app/YouTube ];then
     ui_print "Removendo o YouTube do $SYSTEM/app"
     rm -rf $SYSTEM/app/YouTube
@@ -87,6 +78,9 @@ if [ -d $PROD/app/Camera2 ];then
     ui_print "Android Camera2 AOSP detectado. removendo"
     rm -rf "$PROD/app/camera2"
 fi
+#\/Apps detect
+
+#\/Arquivos no System
 if [ -d $TMP/system ];then
     ui_print "Instalando alguns aplicativos"
     ui_print " "
@@ -95,33 +89,59 @@ else
     ui_print "alguns arquivos não foi extraidos. por favor execute de novo."
     exit
 fi
+#\/Arquivos no System
+
+#/\audio
+if [-d $SYSTEM/media ];then
+    ui_print "Audio no System"
+    cp -rf $TMP/
+fi
+#/\audio
+
+#\/BOOT
+#Bootanimation light
 if [ -e $PROD/media/bootanimation.zip ];then
     ui_print "Bootanimation no PRODUCT"
-    rm -rf $PROD/media/bootanimation*
-    cp $TMP/bootanimation/* $PROD/media/
+    cp -rf $TMP/bootanimation/bootanimation.zip $PROD/media/
 fi
 if [-e $SYSTEM/media/bootanimation.zip ];then
     ui_print "Bootanimation no SYSTEM"
-    rm -rf $SYSTEM/media/bootanimation*
-    cp $TMP/bootanimation/* $SYSTEM/media/
+    cp -rf $TMP/bootanimation/bootanimation.zip $SYSTEM/media/
 fi
+#Bootanimation light
+#Bootanimation dark
 if [ -e $PROD/media/bootanimation-dark.zip ];then
-    rm -rf $PROD/media/bootanimation-dark.zip
+    ui_print "Bootanimation dark no PRODUCT"
+    cp -rf $TMP/bootanimation/bootanimation-dark.zip $PROD/media/
 fi
 if [ -e $SYSTEM/media/bootanimation-dark.zip ];then
-    rm -rf $PROD/media/bootanimation-dark.zip
+    ui_print "Bootanimation DARK no SYSTEM"
+    cp -rf $TMP/bootanimation/bootanimation-dark.zip $SYSTEM/media/
 fi
+#Bootanimation dark
+#\/BOOT
+
+#\/Boot_logo_a
+if [-e /dev/block/bootdevice/by-name/logo_a ];then
     ui_print " "
-    ui_print "Backup do logo na pasta /data/backup/"
-    mkdir /data/backup
-    cp /dev/block/by-name/logo_a /data/backup/logo_a.bin
-    rm /dev/block/by-name/logo_a
-    cp /dev/block/by-name/logo_b /data/backup/logo_b.bin
-    rm /dev/block/by-name/logo_b
-    ui_print "Logo para o novo BootAnimation /-\ Moto G7 Plus"
-    #logos
-    cp -rf $TMP/logo.bin /dev/block/by-name/logo_a
-    cp -rf $TMP/logo.bin /dev/block/by-name/logo_b
+    ui_print "Backup do logo_a na pasta /data/backup-sh23/"
+    mkdir /data/backup-sh23
+    cp -rf /dev/block/bootdevice/by-name/logo_a /data/backup-sh23/logo_a.img
+    cp -rf $TMP/logo.bin /dev/block/bootdevice/by-name/logo_a
+fi
+#\/Boot_logo_a
+#\/Boot_logo_b
+if [-e /dev/block/bootdevice/by-name/logo_b ];then
+    ui_print " "
+    ui_print "Backup do logo_b na pasta /data/backup-sh23/"
+    mkdir /data/backup-sh23
+    cp -rf /dev/block/bootdevice/by-name/logo_b /data/backup-sh23/logo_b.img
+    cp -rf $TMP/logo.bin /dev/block/bootdevice/by-name/logo_b
+fi
+#\/Boot_logo_b
+
+#---------------------------------------------------------------------------------
+#Final do script
 ui_print " "
 ui_print "- Completo!"
 ui_print "- © Sirherobrine23"
