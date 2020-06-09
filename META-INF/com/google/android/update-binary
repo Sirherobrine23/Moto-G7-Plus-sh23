@@ -16,6 +16,249 @@ set_perm() {
 ch_con() {
   chcon -h u:object_r:system_file:s0 "$1"
 }
+
+setup_mountpoint() {
+  test -L $1 && mv -f $1 ${1}_link
+  if [ ! -d $1 ]; then
+    rm -f $1
+    mkdir $1
+  fi
+}
+
+set_progress() { echo "set_progress $1" >> $OUTFD; }
+
+is_mounted() { mount | grep -q " $1 "; }
+
+mount_apex() {
+  test -d /system/apex || return 1
+  local apex dest loop minorx num
+  setup_mountpoint /apex
+  test -e /dev/block/loop1 && minorx=$(ls -l /dev/block/loop1 | awk '{ print $6 }') || minorx=1
+  num=0
+  for apex in /system/apex/*; do
+    dest=/apex/$(basename $apex .apex)
+    test "$dest" == /apex/com.android.runtime.release && dest=/apex/com.android.runtime
+    mkdir -p $dest
+    case $apex in
+      *.apex)
+        unzip -qo $apex apex_payload.img -d /apex
+        mv -f /apex/apex_payload.img $dest.img
+        mount -t ext4 -o ro,noatime $dest.img $dest 2>/dev/null
+        if [ $? != 0 ]; then
+          while [ $num -lt 64 ]; do
+            loop=/dev/block/loop$num
+            (mknod $loop b 7 $((num * minorx))
+            losetup $loop $dest.img) 2>/dev/null
+            num=$((num + 1))
+            losetup $loop | grep -q $dest.img && break
+          done
+          mount -t ext4 -o ro,loop,noatime $loop $dest
+          if [ $? != 0 ]; then
+            losetup -d $loop 2>/dev/null
+          fi
+        fi
+      ;;
+      *) mount -o bind $apex $dest;;
+    esac
+  done
+  export ANDROID_RUNTIME_ROOT=/apex/com.android.runtime
+  export ANDROID_TZDATA_ROOT=/apex/com.android.tzdata
+  export BOOTCLASSPATH=/apex/com.android.runtime/javalib/core-oj.jar:/apex/com.android.runtime/javalib/core-libart.jar:/apex/com.android.runtime/javalib/okhttp.jar:/apex/com.android.runtime/javalib/bouncycastle.jar:/apex/com.android.runtime/javalib/apache-xml.jar:/system/framework/framework.jar:/system/framework/ext.jar:/system/framework/telephony-common.jar:/system/framework/voip-common.jar:/system/framework/ims-common.jar:/system/framework/android.test.base.jar:/apex/com.android.conscrypt/javalib/conscrypt.jar:/apex/com.android.media/javalib/updatable-media.jar
+}
+
+
+umount_apex() {
+  test -d /apex || return 1
+  local dest loop
+  for dest in $(find /apex -type d -mindepth 1 -maxdepth 1); do
+    if [ -f $dest.img ]; then
+      loop=$(mount | grep $dest | cut -d" " -f1)
+    fi
+    (umount -l $dest
+    losetup -d $loop) 2>/dev/null
+  done
+  rm -rf /apex 2>/dev/null
+  unset ANDROID_RUNTIME_ROOT ANDROID_TZDATA_ROOT BOOTCLASSPATH
+}
+
+mount_all() {
+  if ! is_mounted /data; then
+    mount /data
+    UMOUNT_DATA=1
+  fi
+  (mount /cache
+  mount -o ro -t auto /persist
+  mount -o ro -t auto /vendor) 2>/dev/null
+  setup_mountpoint $ANDROID_ROOT
+  if ! is_mounted $ANDROID_ROOT; then
+    mount -o ro -t auto $ANDROID_ROOT 2>/dev/null
+  fi
+  case $ANDROID_ROOT in
+    /system_root) setup_mountpoint /system;;
+    /system)
+      if ! is_mounted /system && ! is_mounted /system_root; then
+        setup_mountpoint /system_root
+        mount -o ro -t auto /system_root
+      elif [ -f /system/system/build.prop ]; then
+        setup_mountpoint /system_root
+        mount --move /system /system_root
+      fi
+      if [ $? != 0 ]; then
+        umount /system
+        umount -l /system 2>/dev/null
+        if [ "$dynamic_partitions" == "true" ]; then
+          test -e /dev/block/mapper/system || local slot=$(getprop ro.boot.slot_suffix 2>/dev/null)
+          mount -o ro -t auto /dev/block/mapper/system$slot /system_root
+          mount -o ro -t auto /dev/block/mapper/vendor$slot /vendor 2>/dev/null
+          mount -o ro -t auto /dev/block/mapper/product$slot /product 2>/dev/null
+        else
+          test -e /dev/block/bootdevice/by-name/system || local slot=$(getprop ro.boot.slot_suffix 2>/dev/null)
+          mount -o ro -t auto /dev/block/bootdevice/by-name/system$slot /system_root
+        fi
+      fi
+    ;;
+  esac
+  if is_mounted /system_root; then
+    if [ -f /system_root/build.prop ]; then
+      mount -o bind /system_root /system
+    else
+      mount -o bind /system_root/system /system
+    fi
+  fi
+  mount_apex
+}
+
+umount_all() {
+  (umount_apex
+  umount /system
+  umount -l /system
+  if [ -e /system_root ]; then
+    umount /system_root
+    umount -l /system_root
+  fi
+  for p in "/cache" "/persist" "/vendor" "/product"; do
+    umount $p
+    umount -l $p
+  done
+  if [ "$UMOUNT_DATA" ]; then
+    umount /data
+    umount -l /data
+  fi) 2>/dev/null
+}
+
+ui_print "- Mounting partitions"
+set_progress 0.01
+
+ps | grep zygote | grep -v grep >/dev/null && BOOTMODE=true || BOOTMODE=false
+$BOOTMODE || ps -A 2>/dev/null | grep zygote | grep -v grep >/dev/null && BOOTMODE=true
+
+test "$ANDROID_ROOT" || ANDROID_ROOT=/system
+
+dynamic_partitions=`getprop ro.boot.dynamic_partitions`
+
+# emulators can only flash booted and may need /system (on legacy images), or / (on system-as-root images), remounted rw
+if ! $BOOTMODE; then
+  mount -o bind /dev/urandom /dev/random
+  umount_all
+  mount_all
+fi
+if [ "$dynamic_partitions" == "true" ]; then
+  for block in system vendor product; do
+    for slot in "" _a _b; do
+      blockdev --setrw /dev/block/mapper/$block$slot 2>/dev/null
+    done
+  done
+fi
+mount -o rw,remount -t auto /system || mount -o rw,remount -t auto /
+mount -o rw,remount -t auto /vendor 2>/dev/null
+mount -o rw,remount -t auto /product 2>/dev/null
+
+ui_print " "
+
+device_abpartition=false
+system_as_root=`getprop ro.build.system_root_image`
+if [ "$system_as_root" == "true" ]; then
+  active_slot=`getprop ro.boot.slot_suffix`
+  if [ ! -z "$active_slot" ]; then
+    device_abpartition=true
+  fi
+fi
+
+  set_progress 10.0
+  if ! $BOOTMODE; then
+    ui_print "- Unmounting partitions"
+    umount_all
+    (for dir in /apex /system /system_root; do
+      if [ -L "${dir}_link" ]; then
+        rmdir $dir
+        mv -f ${dir}_link $dir
+      fi
+    done
+    umount -l /dev/random) 2>/dev/null
+  fi
+
+install_extracted() {
+  file_list="$(find "$TMP/$1/" -mindepth 1 -type f | cut -d/ -f5-)"
+  dir_list="$(find "$TMP/$1/" -mindepth 1 -type d | cut -d/ -f5-)"
+  for file in $file_list; do
+      install -D "$TMP/$1/${file}" "/system/${file}"
+      ch_con "/system/${file}"
+      set_perm 0 0 644 "/system/${file}"
+  done
+  for dir in $dir_list; do
+    ch_con "/system/${dir}"
+    set_perm 0 0 755 "/system/${dir}"
+  done
+  case $preodex in
+    true*)
+      installedapkpaths="$(find "$TMP/$1/" -name "*.apk" -type f | cut -d/ -f5-)"
+      for installedapkpath in $installedapkpaths; do  # TODO fix spaces-handling
+        if ! checkmanifest "/system/$installedapkpath" "classes.dex"; then
+          ui_print "- pre-ODEX-ing $gapp_name"
+          log "pre-ODEX-ing" "$gapp_name"
+          odexapk "/system/$installedapkpath"
+        fi
+      done
+    ;;
+  esac
+  bkup_list=$'\n'"${file_list}${bkup_list}"
+  rm -rf "$TMP/$1"
+}
+
+sys_app() {
+  for folder in /system/app /system/product/app /system/priv-app /system/product/priv-app; do
+    if ( grep -q "codePath=\"$folder/$1" /data/system/packages.xml ); then
+      return 0
+    fi
+  done
+  return 1
+}
+folder_extract() {
+  archive="$1"
+  shift
+  if [ -e "$archive.zip" ]; then
+    for f in "$@"; do
+      if [ "$f" != "unknown" ]; then
+        unzip "$TMP" -f - "$f" && install_extracted "$f"
+      fi
+    done
+    rm -f "$archive.zip"
+  elif [ -e "$archive.lz" ]; then
+    for f in "$@"; do
+      if [ "$f" != "unknown" ]; then
+        "$TMP/tar-$BINARCH" -xf "$archive.lz" -C "$TMP" "$f" && install_extracted "$f"
+      fi
+    done
+    rm -f "$archive.lz"
+  elif [ -e "$archive" ]; then
+    for f in "$@"; do
+      if [ "$f" != "unknown" ]; then
+        "$TMP/tar-$BINARCH" -xf "$archive" -C "$TMP" "$f" && install_extracted "$f"
+      fi
+    done
+    rm -f "$archive"
+  fi
+}
 #---------------------------------------------------------------------------------
 #script
 
@@ -130,7 +373,7 @@ if [ -z $NEW ]; then
     ui_print "   Press Vol Down"
     $FUNCTION "DOWN"
   fi
-  
+  set_progress 0.10
   #//\\Botoes
   ui_print " "
   ui_print "- Selecione uma opção -"
@@ -151,9 +394,9 @@ ui_print " "
 ui_print " "
 ui_print "$debug"
 ui_print " "
-
+set_progress 0.20
 case $debug in
-  true ) ui_print "Modo debug desligado";;
+  true ) ui_print "Modo debug ligado";;
   false ) 
         BUILD="$(cat /system/system/build.prop | grep "ixel")"
         case $BUILD in
@@ -163,7 +406,7 @@ case $debug in
         esac
     ;;
 esac
-
+set_progress 0.30
 #\/Apps detect
 if [ -d $SYSTEM/app/YouTube ];then
     ui_print "Removendo o YouTube ¹"
@@ -198,7 +441,7 @@ if [ -d $PROD/app/Camera2 ];then
     rm -rf "$PROD/app/camera2"
 fi
 #\/Apps detect
-
+set_progress 0.40
 #\/Arquivos no System
 #if [ -d $TMP/system ];then
 #    ui_print "Instalando alguns aplicativos"
@@ -211,8 +454,11 @@ fi
 #    ui_print "alguns arquivos não foi extraidos. por favor execute de novo."
 #    exit
 #fi
-#\/Arquivos no System
 
+ui_print "$( install_extracted )"
+
+#\/Arquivos no System
+set_progress 0.50
 #/\audio
 if [ -d $SYSTEM/media/audio ];then
     ui_print "Audio no System"
@@ -223,7 +469,7 @@ if [ -d $PROD/media/audio ];then
     cp -rf $TMP/audio/* $PROD/media/audio
 fi
 #/\audio
-
+set_progress 0.60
 #\/BOOT
 #Bootanimation
 if [ -e $PROD/media/bootanimation.zip ];then
@@ -244,7 +490,7 @@ if [ -e $SYSTEM/media/bootanimation-dark.zip ];then
 fi
 #Bootanimation
 #\/BOOT
-
+set_progress 0.70
 if [ -d /dev/block/bootdevice/by-name ];then
     #\/Boot_logo_a
         ui_print " "
@@ -291,4 +537,5 @@ ui_print "- © Sirherobrine23"
 ui_print " "
 ui_print " "
 ui_print " "
+set_progress 0.80
 exit
