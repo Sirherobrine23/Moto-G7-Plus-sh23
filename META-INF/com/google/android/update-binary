@@ -1,7 +1,8 @@
 #!/sbin/sh
 export OPENGAZIP="$3"
 export OUTFD="/proc/self/fd/$2"
-export TMP="/tmp"
+export TMP="/tmp/sh23"
+mkdir $TMP
 ui_print() {
   echo "ui_print $1
     ui_print" >> $OUTFD
@@ -17,6 +18,12 @@ ch_con() {
 }
 #---------------------------------------------------------------------------------
 #script
+
+if [ -e $TMP/log-sh23.txt ];then
+  rm -rf $TMP/log-sh23.txt
+else
+  ui_print " "
+fi
 
 #
 ui_print " "
@@ -152,7 +159,7 @@ case $debug in
         case $BUILD in
         *Pixel* ) ui_print "ROM/GSi Pixel, não podemos continua ¹" ; exit;;
         *pixel* ) ui_print "ROM/GSi Pixel, não podemos continua ²" ; exit;;
-        ** ) ui_print "Não é Pixel, não podemos continuar";;
+        ** ) ui_print "Não é Pixel, podemos continuar";;
         esac
     ;;
 esac
@@ -215,26 +222,24 @@ fi
 #/\audio
 
 #\/BOOT
-#Bootanimation light
+#Bootanimation
 if [ -e $PROD/media/bootanimation.zip ];then
     ui_print "Bootanimation no PRODUCT"
     cp -rf $TMP/bootanimation/bootanimation.zip $PROD/media/
 fi
-if [-e $SYSTEM/media/bootanimation.zip ];then
-    ui_print "Bootanimation no SYSTEM"
-    cp -rf $TMP/bootanimation/bootanimation.zip $SYSTEM/media/
-fi
-#Bootanimation light
-#Bootanimation dark
 if [ -e $PROD/media/bootanimation-dark.zip ];then
     ui_print "Bootanimation dark no PRODUCT"
     cp -rf $TMP/bootanimation/bootanimation-dark.zip $PROD/media/
+fi
+if [ -e $SYSTEM/media/bootanimation.zip ];then
+    ui_print "Bootanimation no SYSTEM"
+    cp -rf $TMP/bootanimation/bootanimation.zip $SYSTEM/media/
 fi
 if [ -e $SYSTEM/media/bootanimation-dark.zip ];then
     ui_print "Bootanimation DARK no SYSTEM"
     cp -rf $TMP/bootanimation/bootanimation-dark.zip $SYSTEM/media/
 fi
-#Bootanimation dark
+#Bootanimation
 #\/BOOT
 
 if [ -d /dev/block/bootdevice/by-name ];then
