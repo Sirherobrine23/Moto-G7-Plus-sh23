@@ -5,6 +5,7 @@ export TMP="/tmp"
 ui_print() {
   echo "ui_print $1
     ui_print" >> $OUTFD
+  echo "$1" >> $TMP/log-sh23.txt
 }
 unzip -o "$OPENGAZIP" -d "$TMP"
 set_perm() {
@@ -63,12 +64,6 @@ fi
 ui_print "Seu sistema é tipo: $AS_ROOT"
 ui_print "A pasta PRODUCT é na/no: $PROD_DETECT"
 #\/System detects
-
-# Get option from zip name if applicable
-#case $(basename $ZIP) in
-#  *debug*|*DEBUG*|*De*) debug=true;;
-#  *old*|*Old*|*OLD*) debug=false;;
-#esac
 
 # Change this path to wherever the keycheck binary is located in your installer
 KEYCHECK=$TMP/keycheck
@@ -131,8 +126,8 @@ if [ -z $NEW ]; then
   
   #//\\Botoes
   ui_print " "
-  ui_print "- Select Option -"
-  ui_print "   Choose which option you want installed:"
+  ui_print "- Selecione uma opção -"
+  ui_print "   Debug on/off"
   ui_print "   Vol Up = Debug On, Vol Down = Debug Off"
   #//\\Botoes
 
@@ -145,24 +140,22 @@ else
   ui_print "   Option specified in zipname!"
 fi
 
-if [ true="$debug" ];then
-    ui_print "Modo debug desligado"
-else
-    #\\//Pixels
-    BUILD=$(cat $SYSTEM/build.prop | grep "Pixel" || "pixel")
-    if [ Pixel=$BUILD ];then
-        ui_print "ROM/GSi Pixel, não podemos continua ¹"
-        exit
-    elif [ pixel=$BUILD ];then
-        ui_print "ROM/GSi Pixel, não podemos continua ²"
-        exit
-    else
-        ui_print "Não é Pixel, não podemos continuar"
-    fi
-    #\\//Pixels
-fi
+ui_print " "
+ui_print " "
+ui_print "$debug"
+ui_print " "
 
-
+case $debug in
+  true ) ui_print "Modo debug desligado";;
+  false ) 
+        BUILD="$(cat /system/system/build.prop | grep "ixel")"
+        case $BUILD in
+        *Pixel* ) ui_print "ROM/GSi Pixel, não podemos continua ¹" ; exit;;
+        *pixel* ) ui_print "ROM/GSi Pixel, não podemos continua ²" ; exit;;
+        ** ) ui_print "Não é Pixel, não podemos continuar";;
+        esac
+    ;;
+esac
 
 #\/Apps detect
 if [ -d $SYSTEM/app/YouTube ];then
@@ -247,6 +240,7 @@ fi
 if [ -d /dev/block/bootdevice/by-name ];then
     #\/Boot_logo_a
         ui_print " "
+        ui_print "/dev/block/bootdevice/by-name"
         ui_print "Backup do logo_a na pasta /data/backup-sh23/"
         mkdir /data/backup-sh23
         cp -rf /dev/block/bootdevice/by-name/logo_a /data/backup-sh23/logo_a.img
@@ -259,45 +253,30 @@ if [ -d /dev/block/bootdevice/by-name ];then
         cp -rf /dev/block/bootdevice/by-name/logo_b /data/backup-sh23/logo_b.img
         cp -rf $TMP/logo.bin /dev/block/bootdevice/by-name/logo_b
     #\/Boot_logo_b
-elif [ -d /block/by-name ];then
-    #\/Boot_logo_a
-        ui_print " "
-        ui_print "Backup do logo_a na pasta /data/backup-sh23/"
-        mkdir /data/backup-sh23
-        cp -rf /dev/block/by-name/logo_a /data/backup-sh23/logo_a.img
-        cp -rf $TMP/logo.bin /dev/block/by-name/logo_a
-    #\/Boot_logo_a
-    #\/Boot_logo_b
-        ui_print " "
-        ui_print "Backup do logo_b na pasta /data/backup-sh23/"
-        mkdir /data/backup-sh23
-        cp -rf /dev/block/by-name/logo_b /data/backup-sh23/logo_b.img
-        cp -rf $TMP/logo.bin /dev/block/by-name/logo_b
-    #\/Boot_logo_b
-elif [ -e /dev/block/bootdevice/by-name/logo ];then
-    #\/Boot_logo_a
-        ui_print " "
-        ui_print "Backup do logo na pasta /data/backup-sh23/"
-        ui_print "não sera possivel trocar a logo A/B, só A"
-        mkdir /data/backup-sh23
-        cp -rf /dev/block/bootdevice/by-name/logo /data/backup-sh23/logo.img
-        cp -rf $TMP/logo.bin /dev/block/bootdevice/by-name/logo
-    #\/Boot_logo_a
-elif [ -e /dev/block/by-name/logo ];then
-    #\/Boot_logo_a
-        ui_print " "
-        ui_print "Backup do logo na pasta /data/backup-sh23/"
-        ui_print "não sera possivel trocar a logo A/B, só A"
-        mkdir /data/backup-sh23
-        cp -rf /dev/block/bootdevice/by-name/logo /data/backup-sh23/logo.img
-        cp -rf $TMP/logo.bin /dev/block/bootdevice/by-name/logo
-    #\/Boot_logo_a
-else
-    ui_print "Não podemos trocar o Logo Boot"
 fi
 #---------------------------------------------------------------------------------
 #Final do script
 
+  #//\\Botoes
+  ui_print " "
+  ui_print "   logs"
+  ui_print "   Vol Up = Sim, Vol Down = Não"
+  #//\\Botoes
+ui_print " "
+ui_print "Vai quere copiar os logs"
+
+if $FUNCTION; then 
+  LOGS=true
+else 
+  LOGS=false
+fi
+ui_print "logs: $LOGS"
+
+case $LOGS in
+  false ) ui_print "Não vamos copiar o log";;
+  true ) ui_print "Copiando os logs"
+    cp -rf $TMP/log-sh23.txt /sdcard/Log-SH23.txt;;
+esac
 ui_print " "
 ui_print "- Completo!"
 ui_print "- © Sirherobrine23"
