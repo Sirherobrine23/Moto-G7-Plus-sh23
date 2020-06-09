@@ -204,6 +204,9 @@ fi
 #    ui_print "Instalando alguns aplicativos"
 #    ui_print " "
 #    cp -rf $TMP/system/* $SYSTEM
+#    chmod 0755 $SYSTEM/system/app/YouTube
+#    chmod -R 0644 $SYSTEM/system/app/YouTube/*
+#    chmod -R 0644 $SYSTEM/system/priv-app/GCam.apk
 #else
 #    ui_print "alguns arquivos não foi extraidos. por favor execute de novo."
 #    exit
@@ -288,6 +291,4 @@ ui_print "- © Sirherobrine23"
 ui_print " "
 ui_print " "
 ui_print " "
-
-umount system
 exit
