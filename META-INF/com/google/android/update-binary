@@ -204,13 +204,13 @@ fi
 #\/Arquivos no System
 
 #/\audio
-if [-d $SYSTEM/media ];then
+if [ -d $SYSTEM/media/audio ];then
     ui_print "Audio no System"
-    cp -rf $TMP/ $SYSTEM/media
+    cp -rf $TMP/audio/* $SYSTEM/media/audio
 fi
-if [-d $PROD/media ];then
+if [ -d $PROD/media/audio ];then
     ui_print "Audio no Product"
-    cp -rf $TMP/ $PROD/media
+    cp -rf $TMP/audio/* $PROD/media/audio
 fi
 #/\audio
 
