@@ -193,14 +193,14 @@ fi
 #\/Apps detect
 
 #\/Arquivos no System
-if [ -d $TMP/system ];then
-    ui_print "Instalando alguns aplicativos"
-    ui_print " "
-    cp -rf $TMP/system/* $SYSTEM
-else
-    ui_print "alguns arquivos não foi extraidos. por favor execute de novo."
-    exit
-fi
+#if [ -d $TMP/system ];then
+#    ui_print "Instalando alguns aplicativos"
+#    ui_print " "
+#    cp -rf $TMP/system/* $SYSTEM
+#else
+#    ui_print "alguns arquivos não foi extraidos. por favor execute de novo."
+#    exit
+#fi
 #\/Arquivos no System
 
 #/\audio
