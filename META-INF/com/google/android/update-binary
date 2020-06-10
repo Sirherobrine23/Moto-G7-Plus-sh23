@@ -455,6 +455,65 @@ fi
 #/\audio
 set_progress 0.60
 #\/BOOT
+
+ui_print " "
+ui_print "Boot Animation light ou dark"
+ui_print "Vol UP dark, Vol DOWN light"
+if $FUNCTION; then 
+  ANIMA=true
+else 
+  ANIMA=false
+fi
+case $ANIMA in
+  true ) 
+    ui_print "Dark"
+    if [ -e $PROD/media/bootanimation.zip ];then
+        ui_print "Bootanimation no PRODUCT"
+        rm -rf $PROD/media/bootanimation.zip
+        cp -rf $TMP/bootanimation/bootanimation-dark.zip $PROD/media/bootanimation.zip
+    fi
+    if [ -e $PROD/media/bootanimation-dark.zip ];then
+        ui_print "Bootanimation dark no PRODUCT"
+        rm -rf $PROD/media/bootanimation-dark.zip
+        cp -rf $TMP/bootanimation/bootanimation-dark.zip $PROD/media/bootanimation-dark.zip
+    fi
+    if [ -e $SYSTEM/media/bootanimation.zip ];then
+        ui_print "Bootanimation no SYSTEM"
+        rm -rf $SYSTEM/media/bootanimation.zip
+        cp -rf $TMP/bootanimation/bootanimation-dark.zip $SYSTEM/media/bootanimation.zip
+    fi
+    if [ -e $SYSTEM/media/bootanimation-dark.zip ];then
+        ui_print "Bootanimation DARK no SYSTEM"
+        rm -rf $SYSTEM/media/bootanimation-dark.zip
+        cp -rf $TMP/bootanimation/bootanimation-dark.zip $SYSTEM/media/bootanimation-dark.zip
+    fi
+    ;;
+  false ) 
+    ui_print "Light"
+    if [ -e $PROD/media/bootanimation.zip ];then
+        ui_print "Bootanimation no PRODUCT"
+        rm -rf $PROD/media/bootanimation.zip
+        cp -rf $TMP/bootanimation/bootanimation.zip $PROD/media/bootanimation.zip
+    fi
+    if [ -e $PROD/media/bootanimation-dark.zip ];then
+        ui_print "Bootanimation dark no PRODUCT"
+        rm -rf $PROD/media/bootanimation-dark.zip
+        cp -rf $TMP/bootanimation/bootanimation.zip $PROD/media/bootanimation-dark.zip
+    fi
+    if [ -e $SYSTEM/media/bootanimation.zip ];then
+        ui_print "Bootanimation no SYSTEM"
+        rm -rf $SYSTEM/media/bootanimation.zip
+        cp -rf $TMP/bootanimation/bootanimation.zip $SYSTEM/media/bootanimation.zip
+    fi
+    if [ -e $SYSTEM/media/bootanimation-dark.zip ];then
+        ui_print "Bootanimation DARK no SYSTEM"
+        rm -rf $SYSTEM/media/bootanimation-dark.zip
+        cp -rf $TMP/bootanimation/bootanimation.zip $SYSTEM/media/bootanimation-dark.zip
+    fi
+    ;;
+esac
+
+
 #Bootanimation
 if [ -e $PROD/media/bootanimation.zip ];then
     ui_print "Bootanimation no PRODUCT"
