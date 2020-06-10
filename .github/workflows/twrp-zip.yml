@@ -2,10 +2,7 @@ name: Zip TWRP
 
 on:
   push:
-    branches:
-      - TWRP
     tags-ignore:
-    - "*-*"
 env:
   REPO_URL: https://github.com/Sirherobrine23/Moto-G7-Plus-sh23.git
   REPO_BRANCH: TWRP
@@ -19,9 +16,6 @@ jobs:
     if: github.event.repository.owner.id == github.event.sender.id
 
     steps:
-#    - name: Checando
-#      uses: actions/checkout@master
-
     - name: Inicializando
       env:
         DEBIAN_FRONTEND: noninteractive
