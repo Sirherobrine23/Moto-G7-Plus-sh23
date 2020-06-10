@@ -3,7 +3,6 @@ name: Zip TWRP
 on:
   push:
   tags-ignore:
-      - *
 env:
   REPO_URL: https://github.com/Sirherobrine23/Moto-G7-Plus-sh23.git
   REPO_BRANCH: TWRP
