@@ -1,14 +1,16 @@
 #!/sbin/sh
 export OPENGAZIP="$3"
 export OUTFD="/proc/self/fd/$2"
-export TMP="/tmp/sh23"
+export TMP="/tmp/opengapps"
+export TMP2="/tmp/sh23"
 mkdir $TMP
+mkdir $TMP2
 ui_print() {
   echo "ui_print $1
     ui_print" >> $OUTFD
-  echo "$1" >> $TMP/log-sh23.txt
+  echo "$1" >> $TMP2/log-sh23.txt
 }
-unzip -o "$OPENGAZIP" -d "$TMP"
+unzip -o "$OPENGAZIP" -d "$TMP2"
 set_perm() {
   chown "$1:$2" "$4"
   chmod "$3" "$4"
@@ -197,98 +199,44 @@ fi
     umount -l /dev/random) 2>/dev/null
   fi
 
-install_extracted() {
-  file_list="$(find "$TMP/$1/" -mindepth 1 -type f | cut -d/ -f5-)"
-  dir_list="$(find "$TMP/$1/" -mindepth 1 -type d | cut -d/ -f5-)"
-  for file in $file_list; do
-      install -D "$TMP/$1/${file}" "/system/${file}"
-      ch_con "/system/${file}"
-      set_perm 0 0 644 "/system/${file}"
-  done
-  for dir in $dir_list; do
-    ch_con "/system/${dir}"
-    set_perm 0 0 755 "/system/${dir}"
-  done
-  case $preodex in
-    true*)
-      installedapkpaths="$(find "$TMP/$1/" -name "*.apk" -type f | cut -d/ -f5-)"
-      for installedapkpath in $installedapkpaths; do  # TODO fix spaces-handling
-        if ! checkmanifest "/system/$installedapkpath" "classes.dex"; then
-          ui_print "- pre-ODEX-ing $gapp_name"
-          log "pre-ODEX-ing" "$gapp_name"
-          odexapk "/system/$installedapkpath"
-        fi
-      done
-    ;;
-  esac
-  bkup_list=$'\n'"${file_list}${bkup_list}"
-  rm -rf "$TMP/$1"
-}
+
+#---------------------------------------------------------------------------------
+#script
+
+
 
 sys_app() {
-  for folder in /system/app /system/product/app /system/priv-app /system/product/priv-app; do
+  for folder in $SYSTEM/app $SYSTEM/product/app $SYSTEM/priv-app $SYSTEM/product/priv-app; do
     if ( grep -q "codePath=\"$folder/$1" /data/system/packages.xml ); then
       return 0
     fi
   done
   return 1
 }
-folder_extract() {
-  archive="$1"
-  shift
-  if [ -e "$archive.zip" ]; then
-    for f in "$@"; do
-      if [ "$f" != "unknown" ]; then
-        unzip "$TMP" -f - "$f" && install_extracted "$f"
-      fi
-    done
-    rm -f "$archive.zip"
-  elif [ -e "$archive.lz" ]; then
-    for f in "$@"; do
-      if [ "$f" != "unknown" ]; then
-        "$TMP/tar-$BINARCH" -xf "$archive.lz" -C "$TMP" "$f" && install_extracted "$f"
-      fi
-    done
-    rm -f "$archive.lz"
-  elif [ -e "$archive" ]; then
-    for f in "$@"; do
-      if [ "$f" != "unknown" ]; then
-        "$TMP/tar-$BINARCH" -xf "$archive" -C "$TMP" "$f" && install_extracted "$f"
-      fi
-    done
-    rm -f "$archive"
-  fi
-}
-#---------------------------------------------------------------------------------
-#script
-
-if [ -e $TMP/log-sh23.txt ];then
-  rm -rf $TMP/log-sh23.txt
+if [ -e $TMP2/log-sh23.txt ];then
+  rm -rf $TMP2/log-sh23.txt
 else
   ui_print " "
 fi
-
-#
 ui_print " "
 ui_print " "
 ui_print " "
 ui_print " "
-#
-
 #//\\Mount
-
 if [ -d /system/system ];then
     echo "ui_print  /*/*/*/*/*\*\*\*\*/*/*/*/\*"
 else
     mount -a
 fi
 if [ -d /system/system ];then
-    ui_print "Partição montada"
+    ui_print "A partição system já está montada"
 elif [ -d /system ];then
     ui_print "Montando partição"
+    mount_all
     mount system
 else
     ui_print "Partições não montadas, saindo ..."
+    umount_all
     exit
 fi
 #//\\Mount
@@ -316,7 +264,7 @@ ui_print "A pasta PRODUCT é na/no: $PROD_DETECT"
 #\/System detects
 
 # Change this path to wherever the keycheck binary is located in your installer
-KEYCHECK=$TMP/keycheck
+KEYCHECK=$TMP2/keycheck
 chmod 755 $KEYCHECK
 
 keytest() {
@@ -360,7 +308,6 @@ chooseold() {
   fi
 }
 ui_print " "
-if [ -z $NEW ]; then
   if keytest; then
     FUNCTION=choose
   else
@@ -374,39 +321,32 @@ if [ -z $NEW ]; then
     $FUNCTION "DOWN"
   fi
   set_progress 0.10
-  #//\\Botoes
-  ui_print " "
-  ui_print "- Selecione uma opção -"
-  ui_print "   Debug on/off"
-  ui_print "   Vol Up = Debug On, Vol Down = Debug Off"
-  #//\\Botoes
-
-  if $FUNCTION; then 
-    debug=true
-  else 
-    debug=false
-  fi
-else
-  ui_print "   Option specified in zipname!"
-fi
-
-ui_print " "
-ui_print " "
-ui_print "$debug"
-ui_print " "
-set_progress 0.20
-case $debug in
-  true ) ui_print "Modo debug ligado";;
-  false ) 
-        BUILD="$(cat /system/system/build.prop | grep "ixel")"
-        case $BUILD in
-        *Pixel* ) ui_print "ROM/GSi Pixel, não podemos continua ¹" ; exit;;
-        *pixel* ) ui_print "ROM/GSi Pixel, não podemos continua ²" ; exit;;
-        ** ) ui_print "Não é Pixel, podemos continuar";;
-        esac
-    ;;
-esac
+#  #//\\Botoes
+#  ui_print " "
+#  ui_print "- Selecione uma opção -"
+#  ui_print "   Debug on/off"
+#  ui_print "   Vol Up = Debug On, Vol Down = Debug Off"
+#  #//\\Botoes
+#
+#  if $FUNCTION; then 
+#    debug=true
+#  else 
+#    debug=false
+#  fi
+#
+#case $debug in
+#  true ) ui_print "Modo debug ligado";;
+#  false ) 
+#        BUILD="$(cat /system/system/build.prop | grep "ixel")"
+#        case $BUILD in
+#        *Pixel* ) ui_print "ROM/GSi Pixel, não podemos continua ¹" ; exit;;
+#        *pixel* ) ui_print "ROM/GSi Pixel, não podemos continua ²" ; exit;;
+#        * ) ui_print "Não é Pixel, podemos continuar";;
+#        esac
+#    ;;
+#esac
 set_progress 0.30
+ui_print " "
 #\/Apps detect
 if [ -d $SYSTEM/app/YouTube ];then
     ui_print "Removendo o YouTube ¹"
@@ -434,31 +374,75 @@ if [ -d $SYSTEM/app/MusicFX ];then
 fi
 if [ -d $PROD/priv-app/Camera2 ];then
     ui_print "Android Camera2 AOSP detectado. removendo ¹"
+    rm -rf "$PROD/priv-app/Camera2/*"
     rm -rf "$PROD/priv-app/Camera2"
 fi
-if [ -d $PROD/app/Camera2 ];then
+if [ -d $SYSTEM/app/Camera2 ];then
     ui_print "Android Camera2 AOSP detectado. removendo ²"
-    rm -rf "$PROD/app/camera2"
+    rm -rf "$SYSTEM/app/Camera2/*"
+    rm -rf "$SYSTEM/app/Camera2"
+fi
+if [ -d $PROD/priv-app/camera2 ];then
+    ui_print "Android Camera2 AOSP detectado. removendo ¹²"
+    rm -rf "$PROD/priv-app/Camera2/*"
+    rm -rf "$PROD/priv-app/Camera2"
+fi
+if [ -d $SYSTEM/app/camera2 ];then
+    ui_print "Android Camera2 AOSP detectado. removendo ¹²"
+    rm -rf "$SYSTEM/app/Camera2/*"
+    rm -rf "$SYSTEM/app/Camera2"
 fi
 #\/Apps detect
-set_progress 0.40
-#\/Arquivos no System
-#if [ -d $TMP/system ];then
-#    ui_print "Instalando alguns aplicativos"
-#    ui_print " "
-#    cp -rf $TMP/system/* $SYSTEM
-#    chmod 0755 $SYSTEM/system/app/YouTube
-#    chmod -R 0644 $SYSTEM/system/app/YouTube/*
-#    chmod -R 0644 $SYSTEM/system/priv-app/GCam.apk
-#else
-#    ui_print "alguns arquivos não foi extraidos. por favor execute de novo."
-#    exit
-#fi
-
-ui_print "$( install_extracted )"
-
-#\/Arquivos no System
-set_progress 0.50
+ui_print " "
+cp -rf $TMP2/system/* $TMP/
+#/**/***//**/*/*/*/*/*/*/*//
+install_extracted() {
+  file_list="$(find "$TMP/$1/" -mindepth 1 -type f | cut -d/ -f5-)"
+  dir_list="$(find "$TMP/$1/" -mindepth 1 -type d | cut -d/ -f5-)"
+  for file in $file_list; do
+      install -D "$TMP/$1/${file}" "$SYSTEM/${file}"
+      ch_con "$SYSTEM/${file}"
+      set_perm 0 0 644 "$SYSTEM/${file}"
+  done
+  for dir in $dir_list; do
+    ch_con "$SYSTEM/${dir}"
+    set_perm 0 0 755 "$SYSTEM/${dir}"
+  done
+  bkup_list=$'\n'"${file_list}${bkup_list}"
+}
+#/\***\*\**\*\**\*\**\*\*\**\*\**\*\**\*\**\*\*
+ui_print " "
+ui_print "Você está fazendo a instalação de novo?"
+ui_print "Se não Vol UP, Se sim Vol DOWN"
+if $FUNCTION; then 
+  ERRO=true
+else 
+  ERRO=false
+fi
+case $ERRO in
+  true ) 
+        ui_print " "
+        ui_print "Instalando alguns aplicativos no system"
+        set_progress 0.40
+        install_extracted
+        ui_print "Pronto"
+        ui_print "Outros arquivos no System"
+        cp -rf $TMP2/system2/* $SYSTEM
+        ui_print "Pronto2"
+        ui_print " "
+        set_progress 0.50
+    ;;
+  false ) 
+        ui_print "Instalando alguns aplicativos no system"
+        cp -rf $TMP/* $SYSTEM/
+        ui_print "Pronto"
+        ui_print "Outros arquivos no System"
+        cp -rf $TMP2/system2/* $SYSTEM
+        ui_print "Pronto2"
+        ui_print " "
+        set_progress 0.50
+    ;;
+esac
 #/\audio
 if [ -d $SYSTEM/media/audio ];then
     ui_print "Audio no System"
@@ -474,18 +458,22 @@ set_progress 0.60
 #Bootanimation
 if [ -e $PROD/media/bootanimation.zip ];then
     ui_print "Bootanimation no PRODUCT"
+    rm -rf $PROD/media/bootanimation.zip
     cp -rf $TMP/bootanimation/bootanimation.zip $PROD/media/
 fi
 if [ -e $PROD/media/bootanimation-dark.zip ];then
     ui_print "Bootanimation dark no PRODUCT"
+    rm -rf $PROD/media/bootanimation-dark.zip
     cp -rf $TMP/bootanimation/bootanimation-dark.zip $PROD/media/
 fi
 if [ -e $SYSTEM/media/bootanimation.zip ];then
     ui_print "Bootanimation no SYSTEM"
+    rm -rf $SYSTEM/media/bootanimation.zip
     cp -rf $TMP/bootanimation/bootanimation.zip $SYSTEM/media/
 fi
 if [ -e $SYSTEM/media/bootanimation-dark.zip ];then
     ui_print "Bootanimation DARK no SYSTEM"
+    rm -rf $SYSTEM/media/bootanimation-dark.zip
     cp -rf $TMP/bootanimation/bootanimation-dark.zip $SYSTEM/media/
 fi
 #Bootanimation
@@ -498,14 +486,14 @@ if [ -d /dev/block/bootdevice/by-name ];then
         ui_print "Backup do logo_a na pasta /data/backup-sh23/"
         mkdir /data/backup-sh23
         cp -rf /dev/block/bootdevice/by-name/logo_a /data/backup-sh23/logo_a.img
-        cp -rf $TMP/logo.bin /dev/block/bootdevice/by-name/logo_a
+        cp -rf $TMP/logo-dark.bin /dev/block/bootdevice/by-name/logo_a
     #\/Boot_logo_a
     #\/Boot_logo_b
         ui_print " "
         ui_print "Backup do logo_b na pasta /data/backup-sh23/"
         mkdir /data/backup-sh23
         cp -rf /dev/block/bootdevice/by-name/logo_b /data/backup-sh23/logo_b.img
-        cp -rf $TMP/logo.bin /dev/block/bootdevice/by-name/logo_b
+        cp -rf $TMP/logo-dark.bin /dev/block/bootdevice/by-name/logo_b
     #\/Boot_logo_b
 fi
 #---------------------------------------------------------------------------------
@@ -529,7 +517,7 @@ ui_print "logs: $LOGS"
 case $LOGS in
   false ) ui_print "Não vamos copiar o log";;
   true ) ui_print "Copiando os logs"
-    cp -rf $TMP/log-sh23.txt /sdcard/Log-SH23.txt;;
+    cp -rf $TMP2/log-sh23.txt /sdcard/Log-SH23.txt;;
 esac
 ui_print " "
 ui_print "- Completo!"
