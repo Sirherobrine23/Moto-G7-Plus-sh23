@@ -1,6 +1,7 @@
 name: tag
 on:
   push:
+    tags-ignore:
 jobs:
   Tag-TWRP:
     runs-on: ubuntu-latest
