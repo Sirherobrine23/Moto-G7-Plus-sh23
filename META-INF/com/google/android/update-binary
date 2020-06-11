@@ -321,30 +321,7 @@ ui_print " "
     $FUNCTION "DOWN"
   fi
   set_progress 0.10
-#  #//\\Botoes
-#  ui_print " "
-#  ui_print "- Selecione uma opção -"
-#  ui_print "   Debug on/off"
-#  ui_print "   Vol Up = Debug On, Vol Down = Debug Off"
-#  #//\\Botoes
-#
-#  if $FUNCTION; then 
-#    debug=true
-#  else 
-#    debug=false
-#  fi
-#
-#case $debug in
-#  true ) ui_print "Modo debug ligado";;
-#  false ) 
-#        BUILD="$(cat /system/system/build.prop | grep "ixel")"
-#        case $BUILD in
-#        *Pixel* ) ui_print "ROM/GSi Pixel, não podemos continua ¹" ; exit;;
-#        *pixel* ) ui_print "ROM/GSi Pixel, não podemos continua ²" ; exit;;
-#        * ) ui_print "Não é Pixel, podemos continuar";;
-#        esac
-#    ;;
-#esac
+
 set_progress 0.30
 ui_print " "
 #\/Apps detect
@@ -394,33 +371,26 @@ if [ -d $SYSTEM/app/camera2 ];then
 fi
 #\/Apps detect
 ui_print " "
-cp -rf $TMP2/system/* $TMP/
+
 #/**/***//**/*/*/*/*/*/*/*//
 install_extracted() {
   file_list="$(find "$TMP/$1/" -mindepth 1 -type f | cut -d/ -f5-)"
   dir_list="$(find "$TMP/$1/" -mindepth 1 -type d | cut -d/ -f5-)"
   for file in $file_list; do
-      install -D "$TMP/$1/${file}" "$SYSTEM/${file}"
-      ch_con "$SYSTEM/${file}"
+      cp -rf "$TMP/$1/${file}" "$SYSTEM/${file}"
+      #ch_con "$SYSTEM/${file}"
       set_perm 0 0 644 "$SYSTEM/${file}"
   done
-  for dir in $dir_list; do
-    ch_con "$SYSTEM/${dir}"
-    set_perm 0 0 755 "$SYSTEM/${dir}"
-  done
-  bkup_list=$'\n'"${file_list}${bkup_list}"
 }
 #/\***\*\**\*\**\*\**\*\*\**\*\**\*\**\*\**\*\*
-ui_print " "
-ui_print "Você está fazendo a instalação de novo?"
-ui_print "Se não Vol UP, Se sim Vol DOWN"
-if $FUNCTION; then 
-  ERRO=true
-else 
-  ERRO=false
-fi
-case $ERRO in
-  true ) 
+export TMP3=/tmp/apps/
+
+mkdir $TMP/priv-app/
+mkdir $TMP/app/
+mkdir $TMP3/
+unzip $TMP2/app.zip -d $TMP/app/
+unzip $TMP2/priv.zip -d $TMP/priv-app/
+
         ui_print " "
         ui_print "Instalando alguns aplicativos no system"
         set_progress 0.40
@@ -431,26 +401,14 @@ case $ERRO in
         ui_print "Pronto2"
         ui_print " "
         set_progress 0.50
-    ;;
-  false ) 
-        ui_print "Instalando alguns aplicativos no system"
-        cp -rf $TMP/* $SYSTEM/
-        ui_print "Pronto"
-        ui_print "Outros arquivos no System"
-        cp -rf $TMP2/system2/* $SYSTEM
-        ui_print "Pronto2"
-        ui_print " "
-        set_progress 0.50
-    ;;
-esac
 #/\audio
 if [ -d $SYSTEM/media/audio ];then
     ui_print "Audio no System"
-    cp -rf $TMP/audio/* $SYSTEM/media/audio
+    cp -rf $TMP2/audio/* $SYSTEM/media/audio
 fi
 if [ -d $PROD/media/audio ];then
     ui_print "Audio no Product"
-    cp -rf $TMP/audio/* $PROD/media/audio
+    cp -rf $TMP2/audio/* $PROD/media/audio
 fi
 #/\audio
 set_progress 0.60
@@ -466,84 +424,79 @@ else
 fi
 case $ANIMA in
   true ) 
+  ui_print "************************************************************************"
     ui_print "Dark"
     if [ -e $PROD/media/bootanimation.zip ];then
         ui_print "Bootanimation no PRODUCT"
         rm -rf $PROD/media/bootanimation.zip
-        cp -rf $TMP/bootanimation/bootanimation-dark.zip $PROD/media/bootanimation.zip
+        cp -rf $TMP2/bootanimation/bootanimation-dark.zip $PROD/media/bootanimation.zip
     fi
     if [ -e $PROD/media/bootanimation-dark.zip ];then
         ui_print "Bootanimation dark no PRODUCT"
         rm -rf $PROD/media/bootanimation-dark.zip
-        cp -rf $TMP/bootanimation/bootanimation-dark.zip $PROD/media/bootanimation-dark.zip
+        cp -rf $TMP2/bootanimation/bootanimation-dark.zip $PROD/media/bootanimation-dark.zip
     fi
     if [ -e $SYSTEM/media/bootanimation.zip ];then
         ui_print "Bootanimation no SYSTEM"
         rm -rf $SYSTEM/media/bootanimation.zip
-        cp -rf $TMP/bootanimation/bootanimation-dark.zip $SYSTEM/media/bootanimation.zip
+        cp -rf $TMP2/bootanimation/bootanimation-dark.zip $SYSTEM/media/bootanimation.zip
     fi
     if [ -e $SYSTEM/media/bootanimation-dark.zip ];then
         ui_print "Bootanimation DARK no SYSTEM"
         rm -rf $SYSTEM/media/bootanimation-dark.zip
-        cp -rf $TMP/bootanimation/bootanimation-dark.zip $SYSTEM/media/bootanimation-dark.zip
+        cp -rf $TMP2/bootanimation/bootanimation-dark.zip $SYSTEM/media/bootanimation-dark.zip
     fi
-
     if [ -d /dev/block/bootdevice/by-name ];then
-    #\/Boot_logo_a
         ui_print " "
         ui_print "/dev/block/bootdevice/by-name"
         ui_print "Backup do logo_a na pasta /data/backup-sh23/"
         mkdir /data/backup-sh23
         cp -rf /dev/block/bootdevice/by-name/logo_a /data/backup-sh23/logo_a.img
-        cp -rf $TMP/logo-dark.bin /dev/block/bootdevice/by-name/logo_a
-    #\/Boot_logo_a
-    #\/Boot_logo_b
+        cp -rf $TMP2/logo-dark.bin /dev/block/bootdevice/by-name/logo_a
         ui_print " "
         ui_print "Backup do logo_b na pasta /data/backup-sh23/"
         mkdir /data/backup-sh23
         cp -rf /dev/block/bootdevice/by-name/logo_b /data/backup-sh23/logo_b.img
-        cp -rf $TMP/logo-dark.bin /dev/block/bootdevice/by-name/logo_b
-    #\/Boot_logo_b
+        cp -rf $TMP2/logo-dark.bin /dev/block/bootdevice/by-name/logo_b
+        ui_print "************************************************************************"
 fi
     ;;
   false ) 
+    ui_print "**************************************************************************"
     ui_print "Light"
     if [ -e $PROD/media/bootanimation.zip ];then
         ui_print "Bootanimation no PRODUCT"
         rm -rf $PROD/media/bootanimation.zip
-        cp -rf $TMP/bootanimation/bootanimation.zip $PROD/media/bootanimation.zip
+        cp -rf $TMP2/bootanimation/bootanimation.zip $PROD/media/bootanimation.zip
     fi
     if [ -e $PROD/media/bootanimation-dark.zip ];then
         ui_print "Bootanimation dark no PRODUCT"
         rm -rf $PROD/media/bootanimation-dark.zip
-        cp -rf $TMP/bootanimation/bootanimation.zip $PROD/media/bootanimation-dark.zip
+        cp -rf $TMP2/bootanimation/bootanimation.zip $PROD/media/bootanimation-dark.zip
     fi
     if [ -e $SYSTEM/media/bootanimation.zip ];then
         ui_print "Bootanimation no SYSTEM"
         rm -rf $SYSTEM/media/bootanimation.zip
-        cp -rf $TMP/bootanimation/bootanimation.zip $SYSTEM/media/bootanimation.zip
+        cp -rf $TMP2/bootanimation/bootanimation.zip $SYSTEM/media/bootanimation.zip
     fi
     if [ -e $SYSTEM/media/bootanimation-dark.zip ];then
         ui_print "Bootanimation DARK no SYSTEM"
         rm -rf $SYSTEM/media/bootanimation-dark.zip
-        cp -rf $TMP/bootanimation/bootanimation.zip $SYSTEM/media/bootanimation-dark.zip
+        cp -rf $TMP2/bootanimation/bootanimation.zip $SYSTEM/media/bootanimation-dark.zip
     fi
     if [ -d /dev/block/bootdevice/by-name ];then
-    #\/Boot_logo_a
         ui_print " "
         ui_print "/dev/block/bootdevice/by-name"
         ui_print "Backup do logo_a na pasta /data/backup-sh23/"
         mkdir /data/backup-sh23
         cp -rf /dev/block/bootdevice/by-name/logo_a /data/backup-sh23/logo_a.img
-        cp -rf $TMP/logo-light.bin /dev/block/bootdevice/by-name/logo_a
-    #\/Boot_logo_a
-    #\/Boot_logo_b
+        cp -rf $TMP2/logo-light.bin /dev/block/bootdevice/by-name/logo_a
         ui_print " "
         ui_print "Backup do logo_b na pasta /data/backup-sh23/"
         mkdir /data/backup-sh23
         cp -rf /dev/block/bootdevice/by-name/logo_b /data/backup-sh23/logo_b.img
-        cp -rf $TMP/logo-light.bin /dev/block/bootdevice/by-name/logo_b
-    #\/Boot_logo_b
+        cp -rf $TMP2/logo-light.bin /dev/block/bootdevice/by-name/logo_b
+      ui_print "************************************************************************"
 fi
     ;;
 esac
@@ -555,21 +508,7 @@ set_progress 0.70
 #---------------------------------------------------------------------------------
 #Final do script
 
-  #//\\Botoes
-  ui_print " "
-  ui_print "   logs"
-  ui_print "   Vol Up = Sim, Vol Down = Não"
-  #//\\Botoes
-ui_print " "
-ui_print "Vai quere copiar os logs"
-
-if $FUNCTION; then 
   LOGS=true
-else 
-  LOGS=false
-fi
-ui_print "logs: $LOGS"
-
 case $LOGS in
   false ) ui_print "Não vamos copiar o log";;
   true ) ui_print "Copiando os logs"
