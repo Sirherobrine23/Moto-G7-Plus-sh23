@@ -224,7 +224,70 @@ ui_print " "
 set_progress 0.30
 ui_print " "
 #\/Apps detect
-
+if [ -d $SYSTEM/app/YouTube ];then
+    ui_print "Removendo o YouTube ¹"
+    rm -rf $SYSTEM/app/YouTube
+fi
+if [ -d $SYSTEM/priv-app/YouTube ];then
+    ui_print "Removendo o YouTube ²"
+    rm -rf $SYSTEM/priv-app/YouTube
+fi
+if [ -d $SYSTEM/priv-app/AudioFX ];then
+    ui_print "Removendo o AudioFX ¹"
+    rm -rf $SYSTEM/priv-app/AudioFX
+fi
+if [ -d $SYSTEM/app/AudioFX ];then
+    ui_print "Removendo o AudioFX ²"
+    rm -rf $SYSTEM/priv-app/AudioFX
+fi
+if [ -d $SYSTEM/priv-app/MusicFX ];then
+    ui_print "Removendo o MusicFX ¹"
+    rm -rf $SYSTEM/priv-app/MusicFX
+fi
+if [ -d $SYSTEM/app/MusicFX ];then
+    ui_print "Removendo o MusicFX ²"
+    rm -rf $SYSTEM/app/MusicFX
+fi
+if [ -d $PROD/priv-app/Camera2 ];then
+    ui_print "Android Camera2 AOSP detectado. removendo ¹"
+    rm -rf "$PROD/priv-app/Camera2/*"
+    rm -rf "$PROD/priv-app/Camera2"
+fi
+if [ -d $SYSTEM/app/Camera2 ];then
+    ui_print "Android Camera2 AOSP detectado. removendo ²"
+    rm -rf "$SYSTEM/app/Camera2/*"
+    rm -rf "$SYSTEM/app/Camera2"
+fi
+if [ -d $PROD/priv-app/camera2 ];then
+    ui_print "Android Camera2 AOSP detectado. removendo ²"
+    rm -rf "$PROD/priv-app/Camera2/*"
+    rm -rf "$PROD/priv-app/Camera2"
+fi
+if [ -d $SYSTEM/app/camera2 ];then
+    ui_print "Android Camera2 AOSP detectado. removendo ²"
+    rm -rf "$SYSTEM/app/Camera2/*"
+    rm -rf "$SYSTEM/app/Camera2"
+fi
+if [ -d $PROD/app/Snap ];then
+    ui_print "Lineage Camera detectado. removendo ¹"
+    rm -rf "$PROD/app/Snap/*"
+    rm -rf "$PROD/app/Snap"
+fi
+if [ -d $PROD/priv-app/Snap ];then
+    ui_print "Lineage Camera detectado. removendo ²"
+    rm -rf "$PROD/priv-app/Snap/*"
+    rm -rf "$PROD/priv-app/Snap"
+fi
+if [ -d $SYSTEM/app/Snap ];then
+    ui_print "Lineage Camera detectado. removendo ¹"
+    rm -rf "$SYSTEM/app/Snap/*"
+    rm -rf "$SYSTEM/app/Snap"
+fi
+if [ -d $SYSTEM/priv-app/Snap ];then
+    ui_print "Lineage Camera detectado. removendo ²"
+    rm -rf "$SYSTEM/priv-app/Snap/*"
+    rm -rf "$SYSTEM/priv-app/Snap"
+fi
 #\/Apps detect
 ui_print " "
 
