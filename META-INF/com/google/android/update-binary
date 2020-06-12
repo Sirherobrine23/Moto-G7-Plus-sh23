@@ -96,9 +96,11 @@ umount_all() {
 
 ui_print "- Mounting partitions"
 set_progress 0.01
-mount -o rw,remount -t auto /system || mount -o rw,remount -t auto /
-mount -o rw,remount -t auto /vendor 2>/dev/null
+mount -a
+mount -o rw -t auto /system || mount -o rw -t auto /
+mount -o rw -t auto /vendor 2>/dev/null
 if [ -d /system/system ];then
+  ui_print "System A/B. Montande em um lugar diferente"
   mount --bind /system/system/ /system_root
 fi
 
@@ -434,4 +436,6 @@ ui_print " "
 ui_print " "
 ui_print " "
 set_progress 0.80
+umount_all
+set_progress 0.99
 exit
