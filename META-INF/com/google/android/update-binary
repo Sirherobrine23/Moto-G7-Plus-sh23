@@ -18,7 +18,6 @@ set_perm() {
 ch_con() {
   chcon -h u:object_r:system_file:s0 "$1"
 }
-
 setup_mountpoint() {
   test -L $1 && mv -f $1 ${1}_link
   if [ ! -d $1 ]; then
@@ -26,11 +25,8 @@ setup_mountpoint() {
     mkdir $1
   fi
 }
-
 set_progress() { echo "set_progress $1" >> $OUTFD; }
-
 is_mounted() { mount | grep -q " $1 "; }
-
 mount_apex() {
   test -d /system/apex || return 1
   local apex dest loop minorx num
@@ -67,8 +63,6 @@ mount_apex() {
   export ANDROID_TZDATA_ROOT=/apex/com.android.tzdata
   export BOOTCLASSPATH=/apex/com.android.runtime/javalib/core-oj.jar:/apex/com.android.runtime/javalib/core-libart.jar:/apex/com.android.runtime/javalib/okhttp.jar:/apex/com.android.runtime/javalib/bouncycastle.jar:/apex/com.android.runtime/javalib/apache-xml.jar:/system/framework/framework.jar:/system/framework/ext.jar:/system/framework/telephony-common.jar:/system/framework/voip-common.jar:/system/framework/ims-common.jar:/system/framework/android.test.base.jar:/apex/com.android.conscrypt/javalib/conscrypt.jar:/apex/com.android.media/javalib/updatable-media.jar
 }
-
-
 umount_apex() {
   test -d /apex || return 1
   local dest loop
@@ -82,54 +76,6 @@ umount_apex() {
   rm -rf /apex 2>/dev/null
   unset ANDROID_RUNTIME_ROOT ANDROID_TZDATA_ROOT BOOTCLASSPATH
 }
-
-mount_all() {
-  if ! is_mounted /data; then
-    mount /data
-    UMOUNT_DATA=1
-  fi
-  (mount /cache
-  mount -o ro -t auto /persist
-  mount -o ro -t auto /vendor) 2>/dev/null
-  setup_mountpoint $ANDROID_ROOT
-  if ! is_mounted $ANDROID_ROOT; then
-    mount -o ro -t auto $ANDROID_ROOT 2>/dev/null
-  fi
-  case $ANDROID_ROOT in
-    /system_root) setup_mountpoint /system;;
-    /system)
-      if ! is_mounted /system && ! is_mounted /system_root; then
-        setup_mountpoint /system_root
-        mount -o ro -t auto /system_root
-      elif [ -f /system/system/build.prop ]; then
-        setup_mountpoint /system_root
-        mount --move /system /system_root
-      fi
-      if [ $? != 0 ]; then
-        umount /system
-        umount -l /system 2>/dev/null
-        if [ "$dynamic_partitions" == "true" ]; then
-          test -e /dev/block/mapper/system || local slot=$(getprop ro.boot.slot_suffix 2>/dev/null)
-          mount -o ro -t auto /dev/block/mapper/system$slot /system_root
-          mount -o ro -t auto /dev/block/mapper/vendor$slot /vendor 2>/dev/null
-          mount -o ro -t auto /dev/block/mapper/product$slot /product 2>/dev/null
-        else
-          test -e /dev/block/bootdevice/by-name/system || local slot=$(getprop ro.boot.slot_suffix 2>/dev/null)
-          mount -o ro -t auto /dev/block/bootdevice/by-name/system$slot /system_root
-        fi
-      fi
-    ;;
-  esac
-  if is_mounted /system_root; then
-    if [ -f /system_root/build.prop ]; then
-      mount -o bind /system_root /system
-    else
-      mount -o bind /system_root/system /system
-    fi
-  fi
-  mount_apex
-}
-
 umount_all() {
   (umount_apex
   umount /system
@@ -150,61 +96,16 @@ umount_all() {
 
 ui_print "- Mounting partitions"
 set_progress 0.01
-
-ps | grep zygote | grep -v grep >/dev/null && BOOTMODE=true || BOOTMODE=false
-$BOOTMODE || ps -A 2>/dev/null | grep zygote | grep -v grep >/dev/null && BOOTMODE=true
-
-test "$ANDROID_ROOT" || ANDROID_ROOT=/system
-
-dynamic_partitions=`getprop ro.boot.dynamic_partitions`
-
-# emulators can only flash booted and may need /system (on legacy images), or / (on system-as-root images), remounted rw
-if ! $BOOTMODE; then
-  mount -o bind /dev/urandom /dev/random
-  umount_all
-  mount_all
-fi
-if [ "$dynamic_partitions" == "true" ]; then
-  for block in system vendor product; do
-    for slot in "" _a _b; do
-      blockdev --setrw /dev/block/mapper/$block$slot 2>/dev/null
-    done
-  done
-fi
 mount -o rw,remount -t auto /system || mount -o rw,remount -t auto /
 mount -o rw,remount -t auto /vendor 2>/dev/null
-mount -o rw,remount -t auto /product 2>/dev/null
-
-ui_print " "
-
-device_abpartition=false
-system_as_root=`getprop ro.build.system_root_image`
-if [ "$system_as_root" == "true" ]; then
-  active_slot=`getprop ro.boot.slot_suffix`
-  if [ ! -z "$active_slot" ]; then
-    device_abpartition=true
-  fi
+if [ -d /system/system ];then
+  mount --bind /system/system/ /system_root
 fi
 
-  set_progress 10.0
-  if ! $BOOTMODE; then
-    ui_print "- Unmounting partitions"
-    umount_all
-    (for dir in /apex /system /system_root; do
-      if [ -L "${dir}_link" ]; then
-        rmdir $dir
-        mv -f ${dir}_link $dir
-      fi
-    done
-    umount -l /dev/random) 2>/dev/null
-  fi
-
-
+ui_print " "
+set_progress 10.0
 #---------------------------------------------------------------------------------
 #script
-
-
-
 sys_app() {
   for folder in $SYSTEM/app $SYSTEM/product/app $SYSTEM/priv-app $SYSTEM/product/priv-app; do
     if ( grep -q "codePath=\"$folder/$1" /data/system/packages.xml ); then
@@ -223,17 +124,15 @@ ui_print " "
 ui_print " "
 ui_print " "
 #//\\Mount
-if [ -d /system/system ];then
-    echo "ui_print  /*/*/*/*/*\*\*\*\*/*/*/*/\*"
+if [ -d /system_root ];then
+    echo "System as root"
 else
-    mount -a
+    ui_print "System is not System as Root"
 fi
-if [ -d /system/system ];then
+if [ -d /system_root ];then
     ui_print "A partição system já está montada"
-elif [ -d /system ];then
-    ui_print "Montando partição"
-    mount_all
-    mount system
+elif [ -d /system/system ];then
+    ui_print "partição montada"
 else
     ui_print "Partições não montadas, saindo ..."
     umount_all
@@ -242,8 +141,8 @@ fi
 #//\\Mount
 
 #\/System detects
-if [ -d /system/system ];then
-    export SYSTEM=/system/system
+if [ -e /system_root/build.prop ];then
+    export SYSTEM=/system_root
     export AS_ROOT="A/B"
 else
     export SYSTEM=/system
@@ -260,7 +159,7 @@ else
     export PROD_DETECT="Não tem"
 fi
 ui_print "Seu sistema é tipo: $AS_ROOT"
-ui_print "A pasta PRODUCT é na/no: $PROD_DETECT"
+ui_print "A pasta PRODUCT: $PROD_DETECT"
 #\/System detects
 
 # Change this path to wherever the keycheck binary is located in your installer
