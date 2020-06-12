@@ -224,50 +224,7 @@ ui_print " "
 set_progress 0.30
 ui_print " "
 #\/Apps detect
-if [ -d $SYSTEM/app/YouTube ];then
-    ui_print "Removendo o YouTube ¹"
-    rm -rf $SYSTEM/app/YouTube
-fi
-if [ -d $SYSTEM/priv-app/YouTube ];then
-    ui_print "Removendo o YouTube ²"
-    rm -rf $SYSTEM/priv-app/YouTube
-fi
-if [ -d $SYSTEM/priv-app/AudioFX ];then
-    ui_print "Removendo o AudioFX ¹"
-    rm -rf $SYSTEM/priv-app/AudioFX
-fi
-if [ -d $SYSTEM/app/AudioFX ];then
-    ui_print "Removendo o AudioFX ²"
-    rm -rf $SYSTEM/priv-app/AudioFX
-fi
-if [ -d $SYSTEM/priv-app/MusicFX ];then
-    ui_print "Removendo o MusicFX ¹"
-    rm -rf $SYSTEM/priv-app/MusicFX
-fi
-if [ -d $SYSTEM/app/MusicFX ];then
-    ui_print "Removendo o MusicFX ²"
-    rm -rf $SYSTEM/app/MusicFX
-fi
-if [ -d $PROD/priv-app/Camera2 ];then
-    ui_print "Android Camera2 AOSP detectado. removendo ¹"
-    rm -rf "$PROD/priv-app/Camera2/*"
-    rm -rf "$PROD/priv-app/Camera2"
-fi
-if [ -d $SYSTEM/app/Camera2 ];then
-    ui_print "Android Camera2 AOSP detectado. removendo ²"
-    rm -rf "$SYSTEM/app/Camera2/*"
-    rm -rf "$SYSTEM/app/Camera2"
-fi
-if [ -d $PROD/priv-app/camera2 ];then
-    ui_print "Android Camera2 AOSP detectado. removendo ¹²"
-    rm -rf "$PROD/priv-app/Camera2/*"
-    rm -rf "$PROD/priv-app/Camera2"
-fi
-if [ -d $SYSTEM/app/camera2 ];then
-    ui_print "Android Camera2 AOSP detectado. removendo ¹²"
-    rm -rf "$SYSTEM/app/Camera2/*"
-    rm -rf "$SYSTEM/app/Camera2"
-fi
+
 #\/Apps detect
 ui_print " "
 
@@ -282,23 +239,17 @@ install_extracted() {
   done
 }
 #/\***\*\**\*\**\*\**\*\*\**\*\**\*\**\*\**\*\*
-export TMP3=/tmp/apps/
-
 mkdir $TMP/priv-app/
 mkdir $TMP/app/
-mkdir $TMP3/
 unzip $TMP2/app.zip -d $TMP/app/
 unzip $TMP2/priv.zip -d $TMP/priv-app/
+cp -rf $TMP2/system2/* $TMP
 
         ui_print " "
         ui_print "Instalando alguns aplicativos no system"
         set_progress 0.40
         install_extracted
         ui_print "Pronto"
-        ui_print "Outros arquivos no System"
-        cp -rf $TMP2/system2/* $SYSTEM
-        ui_print "Pronto2"
-        ui_print " "
         set_progress 0.50
 #/\audio
 if [ -d $SYSTEM/media/audio ];then

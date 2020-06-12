@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <permissions>
-    <library name="android.dolby" file="/system/system/framework/dolby_ds.jar" />
+    <library name="android.dolby" file="/system/framework/dolby_ds.jar" />
 </permissions>
