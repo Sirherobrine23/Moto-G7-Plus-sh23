@@ -1,4 +1,4 @@
-# Essa modificão se entroca em em teste ainda!
+# Essa mod se encotra em em teste ainda!
 ---
 # Moto-G7-Plus TWRP
 [Leia-me](https://github.com/Sirherobrine23/Moto-G7-Plus/tree/Matheus-testes#%C3%A1rea-de-teste-do-matheus)
@@ -9,4 +9,4 @@
 ## Ainda em teste
 
 # Oque é?
- * é uma pequena parte de alterações como adiciona o Youtube Vanced e outros além de adiciona pequenas coisa no build.prop(Script não está funcionando nessa parte).
+ * é uma pequena parte de alterações como adiciona o Youtube Vanced e outros.
