@@ -1,7 +1,7 @@
 #!/sbin/sh
 export OPENGAZIP="$3"
 export OUTFD="/proc/self/fd/$2"
-export TMP="/tmp/opengapps"
+export TMP="/tmp/system-install"
 export TMP2="/tmp/sh23"
 mkdir $TMP
 mkdir $TMP2
@@ -295,19 +295,19 @@ ui_print " "
 
 #/**/***//**/*/*/*/*/*/*/*//
 install_extracted() {
-  file_list="$(find "$TMP/$1/" -mindepth 1 -type f | cut -d/ -f5-)"
-  dir_list="$(find "$TMP/$1/" -mindepth 1 -type d | cut -d/ -f5-)"
+  file_list="$(find "$TMP/$1/$1/$1" -mindepth 1 -type f | cut -d/ -f5-)"
   for file in $file_list; do
+      ui_print "$TMP/$1/${file}"
       cp -rf "$TMP/$1/${file}" "$SYSTEM/${file}"
-      #ch_con "$SYSTEM/${file}"
+      ch_con "$SYSTEM/${file}"
       set_perm 0 0 644 "$SYSTEM/${file}"
   done
 }
 #/\***\*\**\*\**\*\**\*\*\**\*\**\*\**\*\**\*\*
 mkdir $TMP/priv-app/
 mkdir $TMP/app/
-unzip $TMP2/app.zip -d $TMP/app/
-unzip $TMP2/priv.zip -d $TMP/priv-app/
+unzip -o $TMP2/app.zip -d $TMP/app/
+unzip -o $TMP2/priv.zip -d $TMP/priv-app/
 cp -rf $TMP2/system2/* $TMP
 
         ui_print " "
