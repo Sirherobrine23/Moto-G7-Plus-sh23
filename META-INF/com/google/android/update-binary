@@ -295,24 +295,53 @@ ui_print " "
 
 #/**/***//**/*/*/*/*/*/*/*//
 install_extracted() {
-  file_list="$(find "$TMP/$1/$1/$1" -mindepth 1 -type f | cut -d/ -f5-)"
+  file_list="$(cat $TMP2/lista.txt)"
   for file in $file_list; do
       ui_print "$TMP/$1/${file}"
+      rm -rf "$SYSTEM/${file}"
       cp -rf "$TMP/$1/${file}" "$SYSTEM/${file}"
       ch_con "$SYSTEM/${file}"
       set_perm 0 0 644 "$SYSTEM/${file}"
   done
 }
+
+teste_sh23(){
+  file_list="$(find "$TMP/$1/" -mindepth 1 -type f )"
+  dir_list="$(find "$TMP/$1/" -mindepth 1 -type d )"
+  ui_print "find comando"
+  ui_print "$file_list"
+  ui_print "$dir_list"
+  ui_print "Cat c"
+  cat $TMP2/lista.txt
+  cat $TMP2/dir.txt
+
+}
+
+install_extracted2() {
+  
+  file_list="$(cat $TMP2/lista.txt)"
+  dir_list="$(cat $TMP2/dir.txt)"
+  for file in $file_list; do
+      ui_print "$TMP/${file}"
+      #install -D "$TMP/$1/${file}" "$SYSTEM/${file}"
+      rm -rf "$SYSTEM/${file}"
+      cp -rf "$TMP/$1/${file}" "$SYSTEM/${file}"
+      ch_con "$SYSTEM/${file}"
+      set_perm 0 0 644 "$SYSTEM/${file}"
+  done
+  for dir in $dir_list; do
+    ch_con "$SYSTEM/${dir}"
+    set_perm 0 0 755 "$SYSTEM/${dir}"
+  done
+}
+
 #/\***\*\**\*\**\*\**\*\*\**\*\**\*\**\*\**\*\*
-mkdir $TMP/priv-app/
-mkdir $TMP/app/
-unzip -o $TMP2/app.zip -d $TMP/app/
-unzip -o $TMP2/priv.zip -d $TMP/priv-app/
-cp -rf $TMP2/system2/* $TMP
+unzip -o $TMP2/system.zip -d $TMP/
 
         ui_print " "
         ui_print "Instalando alguns aplicativos no system"
         set_progress 0.40
+        teste_sh23
         install_extracted
         ui_print "Pronto"
         set_progress 0.50
