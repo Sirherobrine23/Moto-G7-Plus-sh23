@@ -175,21 +175,18 @@ ui_print " "
 # Script Sirherobrine23
 
 ui_print "Esses aquivos se encontra de BETA ainda cuidado ao fleshear e tenha alguns backup do System e do Vendor"
-sleep 2
-ui_print "Para continua usar as teclas de Volume"
-ui_print "Up = Sim, estou Ciente"
-ui_print "Down = Não, Não quero ariscar"
-if $FUNCTION; then 
-  BETA=yes
-else 
-  BETA=no
-fi
-case $BETA in
-  yes ) ui_print "Continuando"
-  ;;
-  no )  ui_print "Saindo"
-        exit 1
-  ;;
+sleep 3
+#ui_print "Para continua usar as teclas de Volume"
+#ui_print "Up = Sim, estou Ciente"
+#ui_print "Down = Não, Não quero ariscar"
+#if $FUNCTION; then 
+#  BETA=yes
+#else 
+#  BETA=no
+#fi
+#case $BETA in
+#  no ) ui_print "Continuando" ;;
+#  yes )  ui_print "Saindo" ; exit 1 ;;
 esac
 
 sound() {
