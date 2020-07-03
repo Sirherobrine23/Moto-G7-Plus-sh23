@@ -170,158 +170,159 @@ ui_print " "
 # ------------------------------------------------------------------------
 # Teste Key
 
-ui_print "- Mounting partitions"
+## OS novos Codigos
+
+# Script Sirherobrine23
+
+ui_print "Esses aquivos se encontra de BETA ainda cuidado ao fleshear e tenha alguns backup do System e do Vendor"
+sleep 2
+ui_print "Para continua usar as teclas de Volume"
+ui_print "Up = Sim, estou Ciente"
+ui_print "Down = Não, Não quero ariscar"
+if $FUNCTION; then 
+  BETA=yes
+else 
+  BETA=no
+fi
+case $BETA in
+  yes ) ui_print "Continuando"
+  ;;
+  no )  ui_print "Saindo"
+        exit 1
+  ;;
+esac
+
+sound() {
+    #/\audio
+    if [ -d $SYSTEM/media/audio ];then
+        ui_print "Audio no System"
+        cp -rf $TMP2/audio/* $SYSTEM/media/audio
+    fi
+    if [ -d $PROD/media/audio ];then
+        ui_print "Audio no Product"
+        cp -rf $TMP2/audio/* $PROD/media/audio
+    fi
+    #/\audio
+    set_progress 0.60
+}
+
+sh23_remove() {
+    #\/Apps detect
+    if [ -d $SYSTEM/app/YouTube ];then
+        ui_print "Removendo o YouTube ¹"
+        rm -rf $SYSTEM/app/YouTube
+    fi
+    if [ -d $SYSTEM/priv-app/YouTube ];then
+        ui_print "Removendo o YouTube ²"
+        rm -rf $SYSTEM/priv-app/YouTube
+    fi
+    if [ -d $SYSTEM/priv-app/AudioFX ];then
+        ui_print "Removendo o AudioFX ¹"
+        rm -rf $SYSTEM/priv-app/AudioFX
+    fi
+    if [ -d $SYSTEM/app/AudioFX ];then
+        ui_print "Removendo o AudioFX ²"
+        rm -rf $SYSTEM/priv-app/AudioFX
+    fi
+    if [ -d $SYSTEM/priv-app/MusicFX ];then
+        ui_print "Removendo o MusicFX ¹"
+        rm -rf $SYSTEM/priv-app/MusicFX
+    fi
+    if [ -d $SYSTEM/app/MusicFX ];then
+        ui_print "Removendo o MusicFX ²"
+        rm -rf $SYSTEM/app/MusicFX
+    fi
+    if [ -d $PROD/priv-app/Camera2 ];then
+        ui_print "Android Camera2 AOSP detectado. removendo ¹"
+        rm -rf "$PROD/priv-app/Camera2/*"
+        rm -rf "$PROD/priv-app/Camera2"
+    fi
+    if [ -d $SYSTEM/app/Camera2 ];then
+        ui_print "Android Camera2 AOSP detectado. removendo ²"
+        rm -rf "$SYSTEM/app/Camera2/*"
+        rm -rf "$SYSTEM/app/Camera2"
+    fi
+    if [ -d $PROD/priv-app/camera2 ];then
+        ui_print "Android Camera2 AOSP detectado. removendo ²"
+        rm -rf "$PROD/priv-app/Camera2/*"
+        rm -rf "$PROD/priv-app/Camera2"
+    fi
+    if [ -d $SYSTEM/app/camera2 ];then
+        ui_print "Android Camera2 AOSP detectado. removendo ²"
+        rm -rf "$SYSTEM/app/Camera2/*"
+        rm -rf "$SYSTEM/app/Camera2"
+    fi
+    if [ -d $PROD/app/Snap ];then
+        ui_print "Lineage Camera detectado. removendo ¹"
+        rm -rf "$PROD/app/Snap/*"
+        rm -rf "$PROD/app/Snap"
+    fi
+    if [ -d $PROD/priv-app/Snap ];then
+        ui_print "Lineage Camera detectado. removendo ²"
+        rm -rf "$PROD/priv-app/Snap/*"
+        rm -rf "$PROD/priv-app/Snap"
+    fi
+    if [ -d $SYSTEM/app/Snap ];then
+        ui_print "Lineage Camera detectado. removendo ¹"
+        rm -rf "$SYSTEM/app/Snap/*"
+        rm -rf "$SYSTEM/app/Snap"
+    fi
+    if [ -d $SYSTEM/priv-app/Snap ];then
+        ui_print "Lineage Camera detectado. removendo ²"
+        rm -rf "$SYSTEM/priv-app/Snap/*"
+        rm -rf "$SYSTEM/priv-app/Snap"
+    fi
+}
+
+sh23_mount() {
+
+ui_print "Montando Partições"
 set_progress 0.01
 mount -a
 mount -o rw -t auto /system || mount -o rw -t auto /
 mount -o rw -t auto /vendor 2>/dev/null
 if [ -d /system/system ];then
-  ui_print "System A/B. Montande em um lugar diferente"
+  ui_print "Montande o system em um lugar diferente"
   mount --bind /system/system/ /system_root
 fi
-
 ui_print " "
 set_progress 10.0
-#---------------------------------------------------------------------------------
-#script
-sys_app() {
-  for folder in $SYSTEM/app $SYSTEM/product/app $SYSTEM/priv-app $SYSTEM/product/priv-app; do
-    if ( grep -q "codePath=\"$folder/$1" /data/system/packages.xml ); then
-      return 0
-    fi
-  done
-  return 1
-}
-if [ -e $TMP2/log-sh23.txt ];then
-  rm -rf $TMP2/log-sh23.txt
-else
-  ui_print " "
-fi
-ui_print " "
-ui_print " "
-ui_print " "
-ui_print " "
 #//\\Mount
 if [ -d /system_root ];then
-    echo "System as root"
-else
-    ui_print "System is not System as Root"
-fi
-if [ -d /system_root ];then
-    ui_print "A partição system já está montada"
+    ui_print "partição montada"
 elif [ -d /system/system ];then
     ui_print "partição montada"
 else
     ui_print "Partições não montadas, saindo ..."
     umount_all
     exit
-fi
-#//\\Mount
+    fi
+    #//\\Mount
+    #\/System detects
+    if [ -e /system_root/build.prop ];then
+        export SYSTEM="/system_root"
+        export AS_ROOT="/system_root"
+    elif [ -e /system/build.prop ]
+        export SYSTEM="/system"
+        export AS_ROOT="/system"
+    else
+        export SYSTEM=/system
+        export AS_ROOT="Não detectado, Padrão"
+    fi
 
-#\/System detects
-if [ -e /system_root/build.prop ];then
-    export SYSTEM=/system_root
-    export AS_ROOT="A/B"
-else
-    export SYSTEM=/system
-    export AS_ROOT="A Only"
-fi
-if [ -d $SYSTEM/product ];then
-    export PROD="$SYSTEM/product"
-    export PROD_DETECT="$SYSTEM"
-elif [ -d /product ];then
-    mount product
-    export PROD="/product"
-    export PROD_DETECT="Raiz do sistema"
-else
-    export PROD_DETECT="Não tem"
-fi
-ui_print "Seu sistema é tipo: $AS_ROOT"
-ui_print "A pasta PRODUCT: $PROD_DETECT"
-#\/System detects
-
-
-
-set_progress 0.30
-ui_print " "
-#\/Apps detect
-if [ -d $SYSTEM/app/YouTube ];then
-    ui_print "Removendo o YouTube ¹"
-    rm -rf $SYSTEM/app/YouTube
-fi
-if [ -d $SYSTEM/priv-app/YouTube ];then
-    ui_print "Removendo o YouTube ²"
-    rm -rf $SYSTEM/priv-app/YouTube
-fi
-if [ -d $SYSTEM/priv-app/AudioFX ];then
-    ui_print "Removendo o AudioFX ¹"
-    rm -rf $SYSTEM/priv-app/AudioFX
-fi
-if [ -d $SYSTEM/app/AudioFX ];then
-    ui_print "Removendo o AudioFX ²"
-    rm -rf $SYSTEM/priv-app/AudioFX
-fi
-if [ -d $SYSTEM/priv-app/MusicFX ];then
-    ui_print "Removendo o MusicFX ¹"
-    rm -rf $SYSTEM/priv-app/MusicFX
-fi
-if [ -d $SYSTEM/app/MusicFX ];then
-    ui_print "Removendo o MusicFX ²"
-    rm -rf $SYSTEM/app/MusicFX
-fi
-if [ -d $PROD/priv-app/Camera2 ];then
-    ui_print "Android Camera2 AOSP detectado. removendo ¹"
-    rm -rf "$PROD/priv-app/Camera2/*"
-    rm -rf "$PROD/priv-app/Camera2"
-fi
-if [ -d $SYSTEM/app/Camera2 ];then
-    ui_print "Android Camera2 AOSP detectado. removendo ²"
-    rm -rf "$SYSTEM/app/Camera2/*"
-    rm -rf "$SYSTEM/app/Camera2"
-fi
-if [ -d $PROD/priv-app/camera2 ];then
-    ui_print "Android Camera2 AOSP detectado. removendo ²"
-    rm -rf "$PROD/priv-app/Camera2/*"
-    rm -rf "$PROD/priv-app/Camera2"
-fi
-if [ -d $SYSTEM/app/camera2 ];then
-    ui_print "Android Camera2 AOSP detectado. removendo ²"
-    rm -rf "$SYSTEM/app/Camera2/*"
-    rm -rf "$SYSTEM/app/Camera2"
-fi
-if [ -d $PROD/app/Snap ];then
-    ui_print "Lineage Camera detectado. removendo ¹"
-    rm -rf "$PROD/app/Snap/*"
-    rm -rf "$PROD/app/Snap"
-fi
-if [ -d $PROD/priv-app/Snap ];then
-    ui_print "Lineage Camera detectado. removendo ²"
-    rm -rf "$PROD/priv-app/Snap/*"
-    rm -rf "$PROD/priv-app/Snap"
-fi
-if [ -d $SYSTEM/app/Snap ];then
-    ui_print "Lineage Camera detectado. removendo ¹"
-    rm -rf "$SYSTEM/app/Snap/*"
-    rm -rf "$SYSTEM/app/Snap"
-fi
-if [ -d $SYSTEM/priv-app/Snap ];then
-    ui_print "Lineage Camera detectado. removendo ²"
-    rm -rf "$SYSTEM/priv-app/Snap/*"
-    rm -rf "$SYSTEM/priv-app/Snap"
-fi
-#\/Apps detect
-ui_print " "
-
-#/**/***//**/*/*/*/*/*/*/*//
-install_extracted() {
-  file_list="$(cat $TMP2/lista.txt)"
-  for file in $file_list; do
-      ui_print "$TMP/$1/${file}"
-      rm -rf "$SYSTEM/${file}"
-      cp -rf "$TMP/$1/${file}" "$SYSTEM/${file}"
-      ch_con "$SYSTEM/${file}"
-      set_perm 0 0 644 "$SYSTEM/${file}"
-  done
+    #Product Detects
+    if [ -d $SYSTEM/product ];then
+        export PROD="$SYSTEM/product"
+        export PROD_DETECT="$SYSTEM"
+    elif [ -d /product ];then
+        mount product
+        export PROD="/product"
+        export PROD_DETECT="Raiz do sistema"
+    else
+        export PROD_DETECT="Não tem"
+    fi
+    ui_print "Pasta do System: $AS_ROOT"
+    ui_print "A pasta Product: $PROD_DETECT"
 }
 
 teste_sh23(){
@@ -340,76 +341,8 @@ teste_sh23(){
   done
 }
 
-install_extracted2() {
-  
-  file_list="$(cat $TMP2/lista.txt)"
-  dir_list="$(cat $TMP2/dir.txt)"
-  for file in $file_list; do
-      ui_print "$TMP/${file}"
-      rm -rf "$SYSTEM/${file}"
-      install -D "$TMP/$1/${file}" "$SYSTEM/${file}"
-      #cp -rf "$TMP/$1/${file}" "$SYSTEM/${file}"
-      ch_con "$SYSTEM/${file}"
-      set_perm 0 0 644 "$SYSTEM/${file}"
-  done
-  for dir in $dir_list; do
-    ch_con "$SYSTEM/${dir}"
-    set_perm 0 0 755 "$SYSTEM/${dir}"
-  done
-}
-
-install_extracted3() {
-  
-  #file_list="$(cat $TMP2/lista.txt)"
-  #dir_list="$(cat $TMP2/dir.txt)"
-  file_list="$(find "$TMP/$1/" -mindepth 1 -type f | cut -d/ -f5-)"
-  dir_list="$(find "$TMP/$1/" -mindepth 1 -type d | cut -d/ -f5-)"
-  for file in $file_list; do
-      ui_print "$TMP/$1/${file}"
-      rm -rf "$SYSTEM/$1/${file}"
-      install -D "$TMP/$1/${file}" "$SYSTEM/${file}"
-      #cp -rf "$TMP/$1/${file}" "$SYSTEM/${file}"
-      ch_con "$SYSTEM/${file}"
-      set_perm 0 0 644 "$SYSTEM/${file}"
-  done
-  for dir in $dir_list; do
-    ch_con "$SYSTEM/${dir}"
-    set_perm 0 0 755 "$SYSTEM/${dir}"
-  done
-}
-
-
-#/\***\*\**\*\**\*\**\*\*\**\*\**\*\**\*\**\*\*
-unzip -o $TMP2/system1.zip -d $TMP/
-unzip -o $TMP2/system2.zip -d $TMP/
-unzip -o $TMP2/system3.zip -d $TMP/
-
-        ui_print " "
-        ui_print "Instalando alguns aplicativos no system"
-        set_progress 0.40
-        
-        install_extracted3
-        ui_print "Pronto"
-        set_progress 0.50
-
-# Testes
-
-teste_sh23
-
-#/\audio
-if [ -d $SYSTEM/media/audio ];then
-    ui_print "Audio no System"
-    cp -rf $TMP2/audio/* $SYSTEM/media/audio
-fi
-if [ -d $PROD/media/audio ];then
-    ui_print "Audio no Product"
-    cp -rf $TMP2/audio/* $PROD/media/audio
-fi
-#/\audio
-set_progress 0.60
-#\/BOOT
-
-ui_print " "
+animation() {
+    ui_print " "
 ui_print "Boot Animation light ou dark"
 ui_print "Vol UP dark, Vol DOWN light"
 if $FUNCTION; then 
@@ -492,9 +425,87 @@ fi
         cp -rf /dev/block/bootdevice/by-name/logo_b /data/backup-sh23/logo_b.img
         cp -rf $TMP2/logo-light.bin /dev/block/bootdevice/by-name/logo_b
       ui_print "************************************************************************"
-fi
+    fi
     ;;
 esac
+}
+
+system_i() {
+    ui_print " "
+    unzip -o $TMP2/system1.zip -d $TMP/
+    unzip -o $TMP2/system2.zip -d $TMP/
+    unzip -o $TMP2/system3.zip -d $TMP/
+    ui_print "Instalando alguns aplicativos no system"
+    install_extracted
+    ui_print "Pronto"
+}
+
+# --------------------------------------------------------------------- #
+
+# Outros
+sys_app() {
+  for folder in $SYSTEM/app $SYSTEM/product/app $SYSTEM/priv-app $SYSTEM/product/priv-app; do
+    if ( grep -q "codePath=\"$folder/$1" /data/system/packages.xml ); then
+      return 0
+    fi
+  done
+  return 1
+}
+
+#install_extracted() {
+#  file_list="$(cat $TMP2/lista.txt)"
+#  for file in $file_list; do
+#      ui_print "$TMP/$1/${file}"
+#      rm -rf "$SYSTEM/${file}"
+#      cp -rf "$TMP/$1/${file}" "$SYSTEM/${file}"
+#      ch_con "$SYSTEM/${file}"
+#      set_perm 0 0 644 "$SYSTEM/${file}"
+#  done
+#}
+
+install_extracted() {
+  
+  #file_list="$(cat $TMP2/lista.txt)"
+  #dir_list="$(cat $TMP2/dir.txt)"
+  file_list="$(find "$TMP/$1/" -mindepth 1 -type f | cut -d/ -f5-)"
+  dir_list="$(find "$TMP/$1/" -mindepth 1 -type d | cut -d/ -f5-)"
+  for file in $file_list; do
+      ui_print "$TMP/$1/${file}"
+      rm -rf "$SYSTEM/$1/${file}"
+      install -D "$TMP/$1/${file}" "$SYSTEM/${file}"
+      #cp -rf "$TMP/$1/${file}" "$SYSTEM/${file}"
+      ch_con "$SYSTEM/${file}"
+      set_perm 0 0 644 "$SYSTEM/${file}"
+  done
+  for dir in $dir_list; do
+    ch_con "$SYSTEM/${dir}"
+    set_perm 0 0 755 "$SYSTEM/${dir}"
+  done
+}
+
+# --------------------------------------------------------------------------------- #
+#script Sh23
+
+if [ -e $TMP2/log-sh23.txt ];then
+  rm -rf $TMP2/log-sh23.txt
+else
+  ui_print " "
+fi
+
+ui_print "Montando Partições"
+sh23_mount
+ui_print " "
+ui_print "Removendo alguns programas"
+sh23_remove
+system_i
+ui_print " "
+ui_print "Adicionando Alguns toques"
+sound
+ui_print " "
+ui_print "Adiconando Alguns BootAnimations"
+animation
+#\/BOOT
+
 
 
 #\/BOOT
@@ -502,6 +513,10 @@ set_progress 0.70
 
 #---------------------------------------------------------------------------------
 #Final do script
+
+## OS novos codigos
+
+
 
   LOGS=true
 case $LOGS in
