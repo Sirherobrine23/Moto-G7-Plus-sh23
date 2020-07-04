@@ -187,7 +187,7 @@ sleep 3
 #case $BETA in
 #  no ) ui_print "Continuando" ;;
 #  yes )  ui_print "Saindo" ; exit 1 ;;
-esac
+#esac
 
 sound() {
     #/\audio
