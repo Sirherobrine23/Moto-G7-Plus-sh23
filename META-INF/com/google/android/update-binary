@@ -176,20 +176,7 @@ ui_print " "
 
 ui_print "Esses aquivos se encontra de BETA ainda cuidado ao fleshear e tenha alguns backup do System e do Vendor"
 sleep 3
-#ui_print "Para continua usar as teclas de Volume"
-#ui_print "Up = Sim, estou Ciente"
-#ui_print "Down = Não, Não quero ariscar"
-#if $FUNCTION; then 
-#  BETA=yes
-#else 
-#  BETA=no
-#fi
-#case $BETA in
-#  no ) ui_print "Continuando" ;;
-#  yes )  ui_print "Saindo" ; exit 1 ;;
-#esac
-
-sound() {
+sound_sh23() {
     #/\audio
     if [ -d $SYSTEM/media/audio ];then
         ui_print "Audio no System"
@@ -497,7 +484,7 @@ sh23_remove
 system_i
 ui_print " "
 ui_print "Adicionando Alguns toques"
-sound
+sound_sh23
 ui_print " "
 ui_print "Adiconando Alguns BootAnimations"
 animation
