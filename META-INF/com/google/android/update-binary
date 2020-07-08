@@ -286,9 +286,6 @@ else
     elif [ -e /system/build.prop ]
         export SYSTEM="/system"
         export AS_ROOT="/system"
-    else
-        export SYSTEM=/system
-        export AS_ROOT="Não detectado, Padrão"
     fi
 
     #Product Detects
