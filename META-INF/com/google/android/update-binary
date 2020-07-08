@@ -176,7 +176,7 @@ ui_print " "
 
 ui_print "Esses aquivos se encontra de BETA ainda cuidado ao fleshear e tenha alguns backup do System e do Vendor"
 sleep 3
-sound_sh23() {
+sound-sh23() {
     #/\audio
     if [ -d $SYSTEM/media/audio ];then
         ui_print "Audio no System"
@@ -189,8 +189,7 @@ sound_sh23() {
     #/\audio
     set_progress 0.60
 }
-
-sh23_remove() {
+sh23-remove() {
     #\/Apps detect
     if [ -d $SYSTEM/app/YouTube ];then
         ui_print "Removendo o YouTube ¹"
@@ -257,9 +256,7 @@ sh23_remove() {
         rm -rf "$SYSTEM/priv-app/Snap"
     fi
 }
-
-sh23_mount() {
-
+sh23-mount() {
 ui_print "Montando Partições"
 set_progress 0.01
 mount -a
@@ -308,23 +305,6 @@ else
     ui_print "Pasta do System: $AS_ROOT"
     ui_print "A pasta Product: $PROD_DETECT"
 }
-
-teste_sh23(){
-  file_list="$(find "$TMP/" -mindepth 1 -type f | cut -d/ -f5-)"
-  dir_list="$(find "$TMP/" -mindepth 1 -type d | cut -d/ -f5-)"
-  ui_print "find comando"
-  for file in $file_list; do
-      ui_print " "
-      ui_print "$SYSTEM/${file}"
-      ui_print "${file}"
-  done
-  for dir in $dir_list; do
-      ui_print " "
-      ui_print "$SYSTEM/${dir}"
-      ui_print "${dir}"
-  done
-}
-
 animation() {
     ui_print " "
 ui_print "Boot Animation light ou dark"
@@ -413,40 +393,34 @@ fi
     ;;
 esac
 }
-
 system_i() {
     ui_print " "
     unzip -o $TMP2/system1.zip -d $TMP/
     unzip -o $TMP2/system2.zip -d $TMP/
     unzip -o $TMP2/system3.zip -d $TMP/
     ui_print "Instalando alguns aplicativos no system"
-    install_extracted
+    # ---- code
+      file_list="$(find "$TMP/$1/" -mindepth 1 -type f | cut -d/ -f5-)"
+      dir_list="$(find "$TMP/$1/" -mindepth 1 -type d | cut -d/ -f5-)"
+      for file in $file_list; do
+          ui_print "$TMP/$1/${file}"
+          rm -rf "$SYSTEM/$1/${file}"
+          install -D "$TMP/$1/${file}" "$SYSTEM/${file}"
+          #cp -rf "$TMP/$1/${file}" "$SYSTEM/${file}"
+          ch_con "$SYSTEM/${file}"
+          set_perm 0 0 644 "$SYSTEM/${file}"
+      done
+      for dir in $dir_list; do
+        ch_con "$SYSTEM/${dir}"
+        set_perm 0 0 755 "$SYSTEM/${dir}"
+      done
+    # ---- code
     ui_print "Pronto"
 }
 
 # --------------------------------------------------------------------- #
 
 # Outros
-sys_app() {
-  for folder in $SYSTEM/app $SYSTEM/product/app $SYSTEM/priv-app $SYSTEM/product/priv-app; do
-    if ( grep -q "codePath=\"$folder/$1" /data/system/packages.xml ); then
-      return 0
-    fi
-  done
-  return 1
-}
-
-#install_extracted() {
-#  file_list="$(cat $TMP2/lista.txt)"
-#  for file in $file_list; do
-#      ui_print "$TMP/$1/${file}"
-#      rm -rf "$SYSTEM/${file}"
-#      cp -rf "$TMP/$1/${file}" "$SYSTEM/${file}"
-#      ch_con "$SYSTEM/${file}"
-#      set_perm 0 0 644 "$SYSTEM/${file}"
-#  done
-#}
-
 install_extracted() {
   
   #file_list="$(cat $TMP2/lista.txt)"
@@ -470,29 +444,19 @@ install_extracted() {
 # --------------------------------------------------------------------------------- #
 #script Sh23
 
-if [ -e $TMP2/log-sh23.txt ];then
-  rm -rf $TMP2/log-sh23.txt
-else
-  ui_print " "
-fi
-
 ui_print "Montando Partições"
-sh23_mount
+sh23-mount
 ui_print " "
 ui_print "Removendo alguns programas"
-sh23_remove
+sh23-remove
 system_i
 ui_print " "
 ui_print "Adicionando Alguns toques"
-sound_sh23
+sound-sh23
 ui_print " "
 ui_print "Adiconando Alguns BootAnimations"
 animation
-#\/BOOT
 
-
-
-#\/BOOT
 set_progress 0.70
 
 #---------------------------------------------------------------------------------
