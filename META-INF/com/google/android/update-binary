@@ -277,16 +277,16 @@ else
     ui_print "Partições não montadas, saindo ..."
     umount_all
     exit
-    fi
+fi
     #//\\Mount
     #\/System detects
-    if [ -e /system_root/build.prop ];then
-        export SYSTEM="/system_root"
-        export AS_ROOT="/system_root"
-    elif [ -e /system/build.prop ]
-        export SYSTEM="/system"
-        export AS_ROOT="/system"
-    fi
+if [ -e /system_root/build.prop ];then
+    export SYSTEM="/system_root"
+    export AS_ROOT="/system_root"
+elif [ -e /system/build.prop ];then
+    export SYSTEM="/system"
+    export AS_ROOT="/system"
+fi
 
     #Product Detects
     if [ -d $SYSTEM/product ];then
@@ -395,6 +395,9 @@ system_i() {
     unzip -o $TMP2/system1.zip -d $TMP/
     unzip -o $TMP2/system2.zip -d $TMP/
     unzip -o $TMP2/system3.zip -d $TMP/
+    unzip -o $TMP2/system4.zip -d $TMP/
+    unzip -o $TMP2/system5.zip -d $TMP/
+    unzip -o $TMP2/system6.zip -d $TMP/
     ui_print "Instalando alguns aplicativos no system"
     # ---- code
       file_list="$(find "$TMP/$1/" -mindepth 1 -type f | cut -d/ -f5-)"
@@ -482,4 +485,3 @@ ui_print "Limpando arquivos lixos"
 limpando
 set_progress 0.99
 ui_print "pronto"
-exit
