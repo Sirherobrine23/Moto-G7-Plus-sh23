@@ -1,0 +1,9 @@
+app/As/As.apk
+app/AsUI/AsUI.apk
+app/microg.apk
+app/YouTube.apk
+etc/dolby/ds-default.xml
+lib/soundfx/libswdap-mod.so
+lib/soundfx/libv4a_fx_ics.so
+lib/libdlbdapstorage.so
+priv-app/GCam.apk
