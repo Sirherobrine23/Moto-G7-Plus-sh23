@@ -152,13 +152,11 @@ chooseold() {
     abort "   Use name change method in TWRP"
   fi
 }
-ui_print " "
   if keytest; then
     FUNCTION=choose
   else
     FUNCTION=chooseold
     ui_print "   ! Dispositivo legado detectado! Usando Metodo antigo"
-    ui_print " "
     ui_print "- Programando Botão de Volume -"
     ui_print "   Press Vol Up de novo:"
     $FUNCTION "UP"
@@ -175,20 +173,7 @@ ui_print " "
 # Script Sirherobrine23
 
 ui_print "Esses aquivos se encontra de BETA ainda cuidado ao fleshear e tenha alguns backup do System e do Vendor"
-sleep 3
-sound-sh23() {
-    #/\audio
-    if [ -d $SYSTEM/media/audio ];then
-        ui_print "Audio no System"
-        cp -rf $TMP2/audio/* $SYSTEM/media/audio
-    fi
-    if [ -d $PROD/media/audio ];then
-        ui_print "Audio no Product"
-        cp -rf $TMP2/audio/* $PROD/media/audio
-    fi
-    #/\audio
-    set_progress 0.60
-}
+
 sh23-remove() {
     #\/Apps detect
     if [ -d $SYSTEM/app/YouTube ];then
@@ -266,7 +251,6 @@ if [ -d /system/system ];then
   ui_print "Montande o system em um lugar diferente"
   mount --bind /system/system/ /system_root
 fi
-ui_print " "
 set_progress 10.0
 #//\\Mount
 if [ -d /system_root ];then
@@ -302,120 +286,29 @@ fi
     ui_print "Pasta do System: $AS_ROOT"
     ui_print "A pasta Product: $PROD_DETECT"
 }
-animation() {
-    ui_print " "
-ui_print "Boot Animation light ou dark"
-ui_print "Vol UP dark, Vol DOWN light"
-if $FUNCTION; then 
-  ANIMA=true
-else 
-  ANIMA=false
-fi
-case $ANIMA in
-  true ) 
-  ui_print "************************************************************************"
-    ui_print "Dark"
-    if [ -e $PROD/media/bootanimation.zip ];then
-        ui_print "Bootanimation no PRODUCT"
-        rm -rf $PROD/media/bootanimation.zip
-        cp -rf $TMP2/bootanimation/bootanimation-dark.zip $PROD/media/bootanimation.zip
-    fi
-    if [ -e $PROD/media/bootanimation-dark.zip ];then
-        ui_print "Bootanimation dark no PRODUCT"
-        rm -rf $PROD/media/bootanimation-dark.zip
-        cp -rf $TMP2/bootanimation/bootanimation-dark.zip $PROD/media/bootanimation-dark.zip
-    fi
-    if [ -e $SYSTEM/media/bootanimation.zip ];then
-        ui_print "Bootanimation no SYSTEM"
-        rm -rf $SYSTEM/media/bootanimation.zip
-        cp -rf $TMP2/bootanimation/bootanimation-dark.zip $SYSTEM/media/bootanimation.zip
-    fi
-    if [ -e $SYSTEM/media/bootanimation-dark.zip ];then
-        ui_print "Bootanimation DARK no SYSTEM"
-        rm -rf $SYSTEM/media/bootanimation-dark.zip
-        cp -rf $TMP2/bootanimation/bootanimation-dark.zip $SYSTEM/media/bootanimation-dark.zip
-    fi
-    if [ -d /dev/block/bootdevice/by-name ];then
-        ui_print " "
-        ui_print "/dev/block/bootdevice/by-name"
-        ui_print "Backup do logo_a na pasta /data/backup-sh23/"
-        mkdir /data/backup-sh23
-        cp -rf /dev/block/bootdevice/by-name/logo_a /data/backup-sh23/logo_a.img
-        cp -rf $TMP2/logo-dark.bin /dev/block/bootdevice/by-name/logo_a
-        ui_print " "
-        ui_print "Backup do logo_b na pasta /data/backup-sh23/"
-        mkdir /data/backup-sh23
-        cp -rf /dev/block/bootdevice/by-name/logo_b /data/backup-sh23/logo_b.img
-        cp -rf $TMP2/logo-dark.bin /dev/block/bootdevice/by-name/logo_b
-        ui_print "************************************************************************"
-fi
-    ;;
-  false ) 
-    ui_print "**************************************************************************"
-    ui_print "Light"
-    if [ -e $PROD/media/bootanimation.zip ];then
-        ui_print "Bootanimation no PRODUCT"
-        rm -rf $PROD/media/bootanimation.zip
-        cp -rf $TMP2/bootanimation/bootanimation.zip $PROD/media/bootanimation.zip
-    fi
-    if [ -e $PROD/media/bootanimation-dark.zip ];then
-        ui_print "Bootanimation dark no PRODUCT"
-        rm -rf $PROD/media/bootanimation-dark.zip
-        cp -rf $TMP2/bootanimation/bootanimation.zip $PROD/media/bootanimation-dark.zip
-    fi
-    if [ -e $SYSTEM/media/bootanimation.zip ];then
-        ui_print "Bootanimation no SYSTEM"
-        rm -rf $SYSTEM/media/bootanimation.zip
-        cp -rf $TMP2/bootanimation/bootanimation.zip $SYSTEM/media/bootanimation.zip
-    fi
-    if [ -e $SYSTEM/media/bootanimation-dark.zip ];then
-        ui_print "Bootanimation DARK no SYSTEM"
-        rm -rf $SYSTEM/media/bootanimation-dark.zip
-        cp -rf $TMP2/bootanimation/bootanimation.zip $SYSTEM/media/bootanimation-dark.zip
-    fi
-    if [ -d /dev/block/bootdevice/by-name ];then
-        ui_print " "
-        ui_print "/dev/block/bootdevice/by-name"
-        ui_print "Backup do logo_a na pasta /data/backup-sh23/"
-        mkdir /data/backup-sh23
-        cp -rf /dev/block/bootdevice/by-name/logo_a /data/backup-sh23/logo_a.img
-        cp -rf $TMP2/logo-light.bin /dev/block/bootdevice/by-name/logo_a
-        ui_print " "
-        ui_print "Backup do logo_b na pasta /data/backup-sh23/"
-        mkdir /data/backup-sh23
-        cp -rf /dev/block/bootdevice/by-name/logo_b /data/backup-sh23/logo_b.img
-        cp -rf $TMP2/logo-light.bin /dev/block/bootdevice/by-name/logo_b
-      ui_print "************************************************************************"
-    fi
-    ;;
-esac
-}
 system_i() {
-    ui_print " "
-    unzip -o $TMP2/system1.zip -d $TMP/
-    unzip -o $TMP2/system2.zip -d $TMP/
-    unzip -o $TMP2/system3.zip -d $TMP/
-    unzip -o $TMP2/system4.zip -d $TMP/
-    unzip -o $TMP2/system5.zip -d $TMP/
-    unzip -o $TMP2/system6.zip -d $TMP/
-    ui_print "Instalando alguns aplicativos no system"
-    # ---- code
-      file_list="$(find "$TMP/$1/" -mindepth 1 -type f | cut -d/ -f5-)"
-      dir_list="$(find "$TMP/$1/" -mindepth 1 -type d | cut -d/ -f5-)"
-      for file in $file_list; do
-          ui_print "$TMP/$1/${file}"
-          rm -rf "$SYSTEM/$1/${file}"
-          install -D "$TMP/$1/${file}" "$SYSTEM/${file}"
-          #cp -rf "$TMP/$1/${file}" "$SYSTEM/${file}"
-          ch_con "$SYSTEM/${file}"
-          set_perm 0 0 644 "$SYSTEM/${file}"
+  ui_print "Extraindo o arquivos core"
+  # Core apps and mods
+    for extract_core in $(find $TMP2/core/ -name *.zip)
+    do
+      unzip -o $extract_core -d $TMP/
+    done
+
+    #device codename
+     device="$(getprop ro.product.vendor.device)"
+
+  if [ -d $TMP2/devices/$device ]
+  then
+    # For devices
+    ui_print "Seu dispositivo é: $device"
+      for extract_device in $(find $TMP2/devices/$device -name *.zip)
+      do
+        unzip -o $TMP2/system6.zip -d $TMP/
       done
-      for dir in $dir_list; do
-        ch_con "$SYSTEM/${dir}"
-        set_perm 0 0 755 "$SYSTEM/${dir}"
-      done
-    # ---- code
-    ui_print "Pronto"
+  else
+    ui_print "Seu dispositivo não tem arquivos para essa instalação agora"
+  fi
+install_extracted
 }
 
 # --------------------------------------------------------------------- #
@@ -428,7 +321,6 @@ install_extracted() {
   file_list="$(find "$TMP/$1/" -mindepth 1 -type f | cut -d/ -f5-)"
   dir_list="$(find "$TMP/$1/" -mindepth 1 -type d | cut -d/ -f5-)"
   for file in $file_list; do
-      ui_print "$TMP/$1/${file}"
       rm -rf "$SYSTEM/$1/${file}"
       install -D "$TMP/$1/${file}" "$SYSTEM/${file}"
       #cp -rf "$TMP/$1/${file}" "$SYSTEM/${file}"
@@ -441,19 +333,100 @@ install_extracted() {
   done
 }
 
+animation() {
+ui_print "Boot Animation light ou dark"
+ui_print "Vol UP dark, Vol DOWN light"
+BOOTDATEDIRBACLUP="/data/bootanimation-backup/$(date +"%d_%m_%Y-%H-%M-%S")"
+mkdir -p "$BOOTDATEDIRBACLUP"
+if $FUNCTION; then 
+  ANIMA=true
+else 
+  ANIMA=false
+fi
+case $ANIMA in
+  true ) 
+  ui_print "************************************************************************"
+    ui_print "Dark"
+    if [ -e $PROD/media/bootanimation.zip ];then
+        ui_print "Bootanimation no PRODUCT"
+        mv -f $PROD/media/bootanimation.zip $BOOTDATEDIRBACLUP
+        cp -rf $TMP2/bootanimation/bootanimation-dark.zip $PROD/media/bootanimation.zip
+    fi
+    if [ -e $PROD/media/bootanimation-dark.zip ];then
+        ui_print "Bootanimation dark no PRODUCT"
+        mv -f $PROD/media/bootanimation-dark.zip $BOOTDATEDIRBACLUP
+        cp -rf $TMP2/bootanimation/bootanimation-dark.zip $PROD/media/bootanimation-dark.zip
+    fi
+    if [ -e $SYSTEM/media/bootanimation.zip ];then
+        ui_print "Bootanimation no SYSTEM"
+        mv -f $SYSTEM/media/bootanimation.zip $BOOTDATEDIRBACLUP
+        cp -rf $TMP2/bootanimation/bootanimation-dark.zip $SYSTEM/media/bootanimation.zip
+    fi
+    if [ -e $SYSTEM/media/bootanimation-dark.zip ];then
+        ui_print "Bootanimation DARK no SYSTEM"
+        mv -f $SYSTEM/media/bootanimation-dark.zip $BOOTDATEDIRBACLUP
+        cp -rf $TMP2/bootanimation/bootanimation-dark.zip $SYSTEM/media/bootanimation-dark.zip
+    fi
+    if [ -d /dev/block/bootdevice/by-name ];then
+        ui_print "/dev/block/bootdevice/by-name"
+        ui_print "Backup do logo_a na pasta /data/backup-sh23/"
+        mkdir /data/backup-sh23
+        cp -rf /dev/block/bootdevice/by-name/logo_a $BOOTDATEDIRBACLUP/logo_a.img
+        cp -rf $TMP2/logo-dark.bin /dev/block/bootdevice/by-name/logo_a
+        ui_print "Backup do logo_b na pasta /data/backup-sh23/"
+        mkdir /data/backup-sh23
+        cp -rf /dev/block/bootdevice/by-name/logo_b $BOOTDATEDIRBACLUP/logo_b.img
+        cp -rf $TMP2/logo-dark.bin /dev/block/bootdevice/by-name/logo_b
+        ui_print "************************************************************************"
+fi
+    ;;
+  false ) 
+    ui_print "**************************************************************************"
+    ui_print "Light"
+    if [ -e $PROD/media/bootanimation.zip ];then
+        ui_print "Bootanimation no PRODUCT"
+        mv -f $PROD/media/bootanimation.zip $BOOTDATEDIRBACLUP
+        cp -rf $TMP2/bootanimation/bootanimation.zip $PROD/media/bootanimation.zip
+    fi
+    if [ -e $PROD/media/bootanimation-dark.zip ];then
+        ui_print "Bootanimation dark no PRODUCT"
+        mv -f $PROD/media/bootanimation-dark.zip $BOOTDATEDIRBACLUP
+        cp -rf $TMP2/bootanimation/bootanimation.zip $PROD/media/bootanimation-dark.zip
+    fi
+    if [ -e $SYSTEM/media/bootanimation.zip ];then
+        ui_print "Bootanimation no SYSTEM"
+        mv -f $SYSTEM/media/bootanimation.zip $BOOTDATEDIRBACLUP
+        cp -rf $TMP2/bootanimation/bootanimation.zip $SYSTEM/media/bootanimation.zip
+    fi
+    if [ -e $SYSTEM/media/bootanimation-dark.zip ];then
+        ui_print "Bootanimation DARK no SYSTEM"
+        mv -f $SYSTEM/media/bootanimation-dark.zip $BOOTDATEDIRBACLUP
+        cp -rf $TMP2/bootanimation/bootanimation.zip $SYSTEM/media/bootanimation-dark.zip
+    fi
+    if [ -d /dev/block/bootdevice/by-name ];then
+        ui_print "/dev/block/bootdevice/by-name"
+        mkdir /data/backup-sh23
+        cp -rf /dev/block/bootdevice/by-name/logo_a /data/backup-sh23/logo_a.img
+        cp -rf $TMP2/logo-light.bin /dev/block/bootdevice/by-name/logo_a
+        mkdir /data/backup-sh23
+        cp -rf /dev/block/bootdevice/by-name/logo_b /data/backup-sh23/logo_b.img
+        cp -rf $TMP2/logo-light.bin /dev/block/bootdevice/by-name/logo_b
+      ui_print "************************************************************************"
+    fi
+    ;;
+esac
+}
+
 # --------------------------------------------------------------------------------- #
 #script Sh23
 
 ui_print "Montando Partições"
 sh23-mount
-ui_print " "
 ui_print "Removendo alguns programas"
 sh23-remove
 system_i
-ui_print " "
 ui_print "Adicionando Alguns toques"
 sound-sh23
-ui_print " "
 ui_print "Adiconando Alguns BootAnimations"
 animation
 
@@ -472,12 +445,8 @@ case $LOGS in
   true ) ui_print "Copiando os logs"
     cp -rf $TMP2/log-sh23.txt /sdcard/Log-SH23.txt;;
 esac
-ui_print " "
 ui_print "- Completo!"
 ui_print "- © Sirherobrine23"
-ui_print " "
-ui_print " "
-ui_print " "
 set_progress 0.80
 ui_print "Desmontando partições"
 umount_all
